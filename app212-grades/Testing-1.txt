@@ -1,0 +1,32 @@
+Student student1 = new Student("Liam Smith", 22011764);
+student1.print();
+ Student ID: 22011764, Liam Smith
+Course course1 = new Course("MT1CYS1", "Cyber Security");
+student1.enrol(course1);
+student1.printCourse();
+ Student ID: 22011764, Liam Smith
+
+ Course MT1CYS1: Cyber Security
+
+Module module1 = new Module("CO452", "Programming Concepts");
+course1.addModule(module1);
+ModuleMark moduleMa1 = new ModuleMark(module1);
+moduleMa1.setMark(100);
+student1.addMark(moduleMa1);
+student1.printTranscript();
+ ------------------------------------
+ App21-02: Exam Board Transcript 2021
+        by student name
+ ------------------------------------
+ Student ID: 22011764, Liam Smith
+
+ Course MT1CYS1: Cyber Security
+
+
+
+ ---- 	 -------------------- 	 ------	 ---- 	 -----
+ Code 	 Module 		Credit	 Mark 	 Grade
+ ---- 	 -------------------- 	 ------	 ---- 	 -----
+
+
+ No Final Course Grade Yet!
