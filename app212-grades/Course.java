@@ -12,6 +12,8 @@ public class Course
     
     public ArrayList<Module> modules;
     
+    public ArrayList<ModuleMark> marks;
+    
     public String code;
     private String title;
     
@@ -76,10 +78,34 @@ public class Course
     }
     
     /**
-     * 
+     * Checks how the marks compare to the values associated in the Grades Enum.
      */
     public Grades convertToGrade(int mark)
     {
+        if(mark == Grades.NS.getValue()){
+            return Grades.NS;
+        }
+        
+        else if(mark > Grades.NS.getValue() && mark <= Grades.F.getValue()){
+            return Grades.F;
+        }
+        
+        else if(mark > Grades.F.getValue() && mark <= Grades.D.getValue()){
+            return Grades.D;
+        }
+        
+        else if(mark > Grades.D.getValue() && mark <= Grades.C.getValue()){
+            return Grades.C;
+        }
+        
+        else if(mark > Grades.C.getValue() && mark <= Grades.B.getValue()){
+            return Grades.B;
+        }
+        
+        else if(mark > Grades.B.getValue() && mark <= Grades.A.getValue()){
+            return Grades.A;
+        }
+        
         return Grades.NS;
     }
     
@@ -89,7 +115,20 @@ public class Course
      */
     public Grades calculateGrade(ArrayList<ModuleMark> marks)
     {
-        return Grades.NS;
+        int averageMark = 0;
+        Grades grade;
+        
+        for(int i=0; i < marks.size(); i++){
+            averageMark = averageMark + marks.get(i).mark;
+        }
+        
+        averageMark = averageMark / marks.size();
+        
+        grade = convertToGrade(averageMark);
+        
+        System.out.println(averageMark);
+        
+        return grade;
     }
     
     /**

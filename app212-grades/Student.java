@@ -16,7 +16,7 @@ public class Student
     // The course the student is enrolled on
     public Course course;
     // The marks awarded for the modules on the course
-    private ArrayList<ModuleMark> marks;
+    protected ArrayList<ModuleMark> marks;
     
     public String moduleCode;
     public String moduleTitle;
@@ -164,14 +164,12 @@ public class Student
         System.out.println();
         System.out.println();
         System.out.println(" ---- \t -------------------- \t ------\t ---- \t -----");
-        System.out.println(" Code \t Module \t\tCredit\t Mark \t Grade");
+        System.out.println(" Code \t Module \t\t Credit  Mark \t Grade");
         System.out.println(" ---- \t -------------------- \t ------\t ---- \t -----");
-        System.out.println(course.modules.get(0).code);
-        System.out.println(course.modules.get(1).code);
-        System.out.println(course.modules.get(2).code);
-        System.out.println(course.modules.get(3).code);
-        
-       
+        for(int i=0; i < course.modules.size(); i++){
+            System.out.println(" " + course.modules.get(i).code + " \t " + course.modules.get(i).title + " \t\t\t " + course.modules.get(i).CREDIT + " \t " + marks.get(i).mark + " \t " + course.convertToGrade(marks.get(i).mark));
+        }
+
         Grades finalGrade = course.calculateGrade(marks);
         
         System.out.println();
