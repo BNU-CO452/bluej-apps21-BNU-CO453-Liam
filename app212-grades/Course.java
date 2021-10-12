@@ -12,10 +12,19 @@ public class Course
     
     public ArrayList<Module> modules;
     
-    private String code;
+    public String code;
     private String title;
     
     private Grades finalGrade;
+    
+    private Module module;
+    public Module module1;
+    private Module module2;
+    private Module module3;
+    private Module module4;
+
+    
+
      
     public Course()
     {
@@ -32,8 +41,7 @@ public class Course
         this.title = title;
         
         modules  = new ArrayList<Module>();
-        
-        createModules();
+        //createModules();
     }
 
     /**
@@ -42,8 +50,21 @@ public class Course
      * must be your four modules.
      */
     public void createModules()
-    {
-
+    {    
+        Module module1 = new Module("CO450", "Computer Architectures");
+        Module module2 = new Module("CO452", "Programming Concepts");
+        Module module3 = new Module("CO454", "Digital Technologies and Professional Practice");
+        Module module4 = new Module("CO456", "Web Development");
+        
+        this.module1 = module1;
+        this.module2 = module2;
+        this.module3 = module3;
+        this.module4 = module4;
+        
+        modules.add(module1);
+        modules.add(module2);
+        modules.add(module3);
+        modules.add(module4);
     }
     
     public void addModule(Module module)
@@ -78,8 +99,9 @@ public class Course
     public void print()
     {
         System.out.println();
-        System.out.println(" Course " + code + ": " + title);
-        //System.out.println();
+        System.out.println(" Course Code: " + this.code);
+        System.out.println(" Title: " +  this.title);
+        System.out.println();
         
         printModules();
     }
@@ -89,6 +111,11 @@ public class Course
      */
     public void printModules()
     {
-        System.out.println();
+        int j=1;
+        for(int i=0; i < modules.size(); i++){
+        System.out.println(" Module " + j + ": " + modules.get(i).code
+        + ": " + modules.get(i).title);
+        j++;
+    }
     }
 }

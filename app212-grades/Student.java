@@ -4,19 +4,26 @@ import java.util.*;
  * It holds the student details relevant in our context.
  * 
  * @author Michael Kölling and David Barnes
- * Modified by Derek Peacock & Nicholas Day
- * @version 2021-08-18
+ * Modified by Liam Smith
+ * @version 1.0 06/10/2021
  */
 public class Student
 {
     // the student ID
-    private int id;
+    public int id;
     // the student's full name
-    private String name;
+    public String name;
     // The course the student is enrolled on
-    private Course course;
+    public Course course;
     // The marks awarded for the modules on the course
     private ArrayList<ModuleMark> marks;
+    
+    public String moduleCode;
+    public String moduleTitle;
+    public int value;
+    public Module module;
+    
+    public ModuleMark moduleMark;
     
     /**
      * This constructor creates a new student with a
@@ -24,7 +31,7 @@ public class Student
      */
     public Student()
     {
-        this("Derek", 12345678);
+        this("Liam", 22011764);
     }
     
     /**
@@ -36,11 +43,13 @@ public class Student
         this.id = id;
         
         marks = new ArrayList<ModuleMark>();
+        
     }
 
     public void addMark(ModuleMark mark)
     {
-        marks.add(mark);
+        this.marks.add(mark);
+        
     }
     
     /**
@@ -49,7 +58,31 @@ public class Student
      */
     public void awardMark(String moduleCode, int value)
     {
+        for(int i=0; i < course.modules.size(); i++){
+            if(moduleCode.equals(course.modules.get(i).code)){
+                
+                this.module = course.modules.get(i);
+                
+                this.moduleTitle = course.modules.get(i).title;
+                
+                //Find the module in course.models array
+                
+                for(int k=0; k < marks.size(); k++){
+                    if(marks.get(k).module.title.equals(this.module.title)){
 
+                        this.moduleMark = marks.get(k);
+                        
+                        marks.remove(marks.get(k));
+                        
+                        moduleMark.setMark(value);
+                        
+                        addMark(this.moduleMark);
+                        
+                        //Find module in marks added array. remove old mark. add new mark.  
+                    }
+                }
+            }
+        }
     }
     
     /**
@@ -58,18 +91,25 @@ public class Student
     public void enrol(Course course)
     {
         this.course = course;
-        awardTestMarks();
+        //awardTestMarks();
     }
     
     /**
      * Award a different pass mark for each of the
      * modules on the enrolled course
      */
-    public void awardTestMarks()
+    public void awardTestMarks(ModuleMark module, int value)
     {
-        
+        for(int i=0; i < course.modules.size(); i++){
+            ModuleMark moduleMark = new ModuleMark(course.modules.get(i));
+            moduleMark.setMark(value);
+            }
+        //if(module1 == course.modules.get(0)){
+            //ModuleMark moduleMark = new ModuleMark(course.modules.get(i));
+            //moduleMark.setMark(value);
+            //} 
     }
-    
+      
     /**
      * Return the full name of this student.
      */
@@ -102,9 +142,14 @@ public class Student
         course.print();
     }
     
-    private void printModules()
+    public void printModules()
     {
-
+        int j=1;
+        for(int i=0; i < course.modules.size(); i++){
+        System.out.println(" Module " + j + ": " + course.modules.get(i).code
+        + ": " + course.modules.get(i).title);
+        j++;
+    }
     }
     
     public void printTranscript()
@@ -121,6 +166,10 @@ public class Student
         System.out.println(" ---- \t -------------------- \t ------\t ---- \t -----");
         System.out.println(" Code \t Module \t\tCredit\t Mark \t Grade");
         System.out.println(" ---- \t -------------------- \t ------\t ---- \t -----");
+        System.out.println(course.modules.get(0).code);
+        System.out.println(course.modules.get(1).code);
+        System.out.println(course.modules.get(2).code);
+        System.out.println(course.modules.get(3).code);
         
        
         Grades finalGrade = course.calculateGrade(marks);
