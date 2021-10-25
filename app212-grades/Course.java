@@ -4,7 +4,8 @@ import java.util.ArrayList;
  * that enrolled students may want to complete
  *
  * @author Derek Peacock and Nicholas Day
- * @version 0.1 11/Sep/2020
+ * Modified by Liam Smith
+ * version 1.1 16/10/2021
  */
 public class Course
 {
@@ -14,23 +15,28 @@ public class Course
     
     public ArrayList<ModuleMark> marks;
     
+    public ArrayList<Student> students;
+    
+    public Student student;
+    public Student student1;
+    public Student student2;
+    public Student student3;
+    public Student student4;
+    
     public String code;
     private String title;
     
     private Grades finalGrade;
     
     private Module module;
-    public Module module1;
+    private Module module1;
     private Module module2;
     private Module module3;
     private Module module4;
 
-    
-
-     
     public Course()
     {
-        this("G400", "BSc Computing");
+        this("MT1CYS1", "BSc Cyber Security");
     }
     
     /**
@@ -43,7 +49,7 @@ public class Course
         this.title = title;
         
         modules  = new ArrayList<Module>();
-        //createModules();
+        students = new ArrayList<Student>();
     }
 
     /**
@@ -55,13 +61,8 @@ public class Course
     {    
         Module module1 = new Module("CO450", "Computer Architectures");
         Module module2 = new Module("CO452", "Programming Concepts");
-        Module module3 = new Module("CO454", "Digital Technologies and Professional Practice");
+        Module module3 = new Module("CO454", "Digital Technologies");
         Module module4 = new Module("CO456", "Web Development");
-        
-        this.module1 = module1;
-        this.module2 = module2;
-        this.module3 = module3;
-        this.module4 = module4;
         
         modules.add(module1);
         modules.add(module2);
@@ -69,11 +70,50 @@ public class Course
         modules.add(module4);
     }
     
+    /**
+     * Adds a module to the course unless maximum number of modules has been reached.
+     * 
+     */
     public void addModule(Module module)
     {
         if(modules.size() < MAXN_MODULES)
         {
             modules.add(module);
+        }
+        
+        else {
+            System.out.println("The maximum number of modules have been added");
+            // displays error message
+        }
+    }
+    
+    /**
+     * Add a list of students to the course.
+     * 
+     */
+    
+    public void addStudents()
+    {
+        student1 = new Student("Adam", 11111111);
+        student2 = new Student("Becky", 11111112);
+        student3 = new Student("Chad", 11111113);
+        student4 = new Student("David", 11111114);
+        
+        students.add(student1);
+        students.add(student2);
+        students.add(student3);
+        students.add(student4);
+    }
+    
+    /**
+     * Prints an enrolment list for the course
+     */
+    
+    public void printEnrolled()
+    {
+        for (int i = 0; i < students.size() ; i++)
+        {
+            System.out.println(students.get(i).name + " " + students.get(i).id);
         }
     }
     
@@ -126,8 +166,6 @@ public class Course
         
         grade = convertToGrade(averageMark);
         
-        System.out.println(averageMark);
-        
         return grade;
     }
     
@@ -150,11 +188,18 @@ public class Course
      */
     public void printModules()
     {
-        int j=1;
-        for(int i=0; i < modules.size(); i++){
-        System.out.println(" Module " + j + ": " + modules.get(i).code
-        + ": " + modules.get(i).title);
-        j++;
+        //checks that the modules array is not empty
+        if(modules.size() == 0){
+            System.out.println("No modules have been added to this course");
+        }
+        else {
+            int j=1;
+            for(int i=0; i < modules.size(); i++){
+            System.out.println(" Module " + j + ": " + modules.get(i).code
+            + ": " + modules.get(i).title);
+            j++;
+        }
+        
     }
     }
 }
