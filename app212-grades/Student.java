@@ -111,20 +111,17 @@ public class Student
                 System.out.println(" No marks have been added for this course");
         }
             
-            for(int i = 0; i < marks.size(); i++){
-                if(marks.get(i).equals(module)){  
+        for(int i = 0; i < marks.size(); i++){
+                
+            if(marks.get(i).equals(module)){  
                     
-                this.moduleMark = marks.get(i);
+            this.moduleMark = marks.get(i);
 
-                moduleMark.setMark(value);
+            moduleMark.setMark(value);
                 
-                }
-                
-                //else {
-                //    System.out.println(" The marks for this module have not been added yet");
-                //}
-    }   
-}
+            }
+        }   
+    }
       
     /**
      * Return the full name of this student.

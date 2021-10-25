@@ -9,26 +9,29 @@ import java.util.ArrayList;
  */
 public class Course
 {
+    // maximum number of modules
     public final static int MAXN_MODULES = 4;
-    
+    // array of modules
     public ArrayList<Module> modules;
-    
+    // array of marks
     public ArrayList<ModuleMark> marks;
-    
+    // array of enrolled students
     public ArrayList<Student> students;
     
-    public Student student;
+    // instances of students
     public Student student1;
     public Student student2;
     public Student student3;
     public Student student4;
     
+    // course code
     public String code;
+    // course title
     private String title;
-    
+    // final grade for course
     private Grades finalGrade;
     
-    private Module module;
+    // instances of course modules
     private Module module1;
     private Module module2;
     private Module module3;
@@ -48,7 +51,9 @@ public class Course
         this.code = code;
         this.title = title;
         
+        // creates modules array
         modules  = new ArrayList<Module>();
+        // creates students array
         students = new ArrayList<Student>();
     }
 
@@ -64,6 +69,7 @@ public class Course
         Module module3 = new Module("CO454", "Digital Technologies");
         Module module4 = new Module("CO456", "Web Development");
         
+        // adds modules to array
         modules.add(module1);
         modules.add(module2);
         modules.add(module3);
@@ -99,6 +105,7 @@ public class Course
         student3 = new Student("Chad", 11111113);
         student4 = new Student("David", 11111114);
         
+        // adds students to array
         students.add(student1);
         students.add(student2);
         students.add(student3);
@@ -193,6 +200,7 @@ public class Course
             System.out.println("No modules have been added to this course");
         }
         else {
+            // j will display the correct index for each module
             int j=1;
             for(int i=0; i < modules.size(); i++){
             System.out.println(" Module " + j + ": " + modules.get(i).code
