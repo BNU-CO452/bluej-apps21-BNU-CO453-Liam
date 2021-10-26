@@ -1,0 +1,136 @@
+StockList stock = new StockList();
+StockDemo stockDem1 = new StockDemo(stock);
+stockDem1.runDemo();
+
+ Liam's Stock List
+ ====================
+
+ ID 101: Sony Playstation 5 stock level: 0
+ ID 102: Apple iPhone 13 stock level: 0
+ ID 103: Microsoft Xbox Series X stock level: 0
+ ID 104: Apple iMac stock level: 0
+ ID 105: Optoma UHD42 stock level: 0
+ ID 106: Korg Prologue stock level: 0
+ ID 107: Korg Minilogue XD stock level: 0
+ ID 108: Samsung G95T stock level: 0
+ ID 109: Microsoft Xbox Series S stock level: 0
+ ID 110: Microsoft Flight Simulator stock level: 0
+
+
+ Item purchased: Sony Playstation 5
+ Quantity: 5
+
+ Item purchased: Apple iPhone 13
+ Quantity: 6
+
+ Item purchased: Microsoft Xbox Series X
+ Quantity: 7
+
+ Item purchased: Apple iMac
+ Quantity: 8
+
+ Item purchased: Optoma UHD42
+ Quantity: 9
+
+ Item purchased: Korg Prologue
+ Quantity: 3
+
+ Item purchased: Korg Minilogue XD
+ Quantity: 4
+
+ Item purchased: Samsung G95T
+ Quantity: 1
+
+ Item purchased: Microsoft Xbox Series S
+ Quantity: 2
+
+ Item purchased: Microsoft Flight Simulator
+ Quantity: 5
+
+ Liam's Stock List
+ ====================
+
+ ID 101: Sony Playstation 5 stock level: 5
+ ID 102: Apple iPhone 13 stock level: 6
+ ID 103: Microsoft Xbox Series X stock level: 7
+ ID 104: Apple iMac stock level: 8
+ ID 105: Optoma UHD42 stock level: 9
+ ID 106: Korg Prologue stock level: 3
+ ID 107: Korg Minilogue XD stock level: 4
+ ID 108: Samsung G95T stock level: 1
+ ID 109: Microsoft Xbox Series S stock level: 2
+ ID 110: Microsoft Flight Simulator stock level: 5
+
+
+ Error: insufficient stock available
+ ID 101: Sony Playstation 5 stock level: 5 quantity to sell: 10
+
+ Item sold: Apple iPhone 13
+ Quantity: 4
+
+ Item sold: Microsoft Xbox Series X
+ Quantity: 3
+
+ Item sold: Apple iMac
+ Quantity: 2
+
+ Item sold: Optoma UHD42
+ Quantity: 1
+
+ No products match: 1066
+
+ Item sold: Korg Minilogue XD
+ Quantity: 2
+
+ Item sold: Samsung G95T
+ Quantity: 1
+
+ Item sold: Microsoft Xbox Series S
+ Quantity: 1
+
+ Item sold: Microsoft Flight Simulator
+ Quantity: 4
+
+ Liam's Stock List
+ ====================
+
+ ID 101: Sony Playstation 5 stock level: 5
+ ID 102: Apple iPhone 13 stock level: 2
+ ID 103: Microsoft Xbox Series X stock level: 4
+ ID 104: Apple iMac stock level: 6
+ ID 105: Optoma UHD42 stock level: 8
+ ID 106: Korg Prologue stock level: 3
+ ID 107: Korg Minilogue XD stock level: 2
+ ID 108: Samsung G95T stock level: 0
+ ID 109: Microsoft Xbox Series S stock level: 1
+ ID 110: Microsoft Flight Simulator stock level: 1
+
+Product with ID 104 has been removed
+
+ Liam's Stock List
+ ====================
+
+ ID 101: Sony Playstation 5 stock level: 5
+ ID 102: Apple iPhone 13 stock level: 2
+ ID 103: Microsoft Xbox Series X stock level: 4
+ ID 105: Optoma UHD42 stock level: 8
+ ID 106: Korg Prologue stock level: 3
+ ID 107: Korg Minilogue XD stock level: 2
+ ID 108: Samsung G95T stock level: 0
+ ID 109: Microsoft Xbox Series S stock level: 1
+ ID 110: Microsoft Flight Simulator stock level: 1
+
+ Searching for: Korg
+
+ ID 106: Korg Prologue stock level: 3
+ ID 107: Korg Minilogue XD stock level: 2
+
+ Low stock items:
+
+ ID 102: Apple iPhone 13 stock level: 2
+ ID 103: Microsoft Xbox Series X stock level: 4
+ ID 106: Korg Prologue stock level: 3
+ ID 107: Korg Minilogue XD stock level: 2
+ ID 108: Samsung G95T stock level: 0
+ ID 109: Microsoft Xbox Series S stock level: 1
+ ID 110: Microsoft Flight Simulator stock level: 1

@@ -29,7 +29,7 @@ public class Product
         
         quantity = 0;
     }
-
+    
     /**
      * @return The product's id.
      */

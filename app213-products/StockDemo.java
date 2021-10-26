@@ -1,4 +1,4 @@
-
+import java.util.*;
 /**
  * Demonstrate the StockManager and Product classes.
  * The demonstration becomes properly functional as
@@ -14,6 +14,8 @@ public class StockDemo
 {
     // The stock manager.
     public StockList stock;
+    // for creating a new product
+    public Product product;
 
     /**
      * Create a StockManager and populate it with at least
@@ -48,44 +50,49 @@ public class StockDemo
     public void runDemo()
     {
         // Show details of all of the products before delivery.
-        
         stock.print();
-
+        // add 10 unique products
         buyProducts();
-        stock.print();        
-
+        stock.print();
+        // sell 10 unique products
         sellProducts();
         stock.print();
-        
-        
+        // remove a product
+        stock.remove(104);
+        stock.print();
+        // list all products that start with a phrase
+        stock.searchProducts("Korg");
+        // list all products with stock below a set level
+        stock.printLowStock();
     }
     
     private void buyProducts()
     {
-        stock.buyProduct(101, 50);
-        stock.buyProduct(102, 60);
-        stock.buyProduct(103, 70);
-        stock.buyProduct(104, 80);
-        stock.buyProduct(105, 90);
-        stock.buyProduct(106, 30);
-        stock.buyProduct(107, 40);
-        stock.buyProduct(108, 12);
-        stock.buyProduct(109, 55);
-        stock.buyProduct(110, 35);
+        stock.buyProduct(101, 5);
+        stock.buyProduct(102, 6);
+        stock.buyProduct(103, 7);
+        stock.buyProduct(104, 8);
+        stock.buyProduct(105, 9);
+        stock.buyProduct(106, 3);
+        stock.buyProduct(107, 4);
+        stock.buyProduct(108, 1);
+        stock.buyProduct(109, 2);
+        stock.buyProduct(110, 5);
     }
 
     private void sellProducts()
     {
-        stock.sellProduct(101, 30);
-        stock.sellProduct(102, 70);
-        stock.sellProduct(103, 80);
-        stock.sellProduct(104, 99);
-        stock.sellProduct(105, 18);
-        stock.sellProduct(1066, 30);
-        stock.sellProduct(107, 22);
-        stock.sellProduct(108, 13);
-        stock.sellProduct(109, 3);
-        stock.sellProduct(110, 30);
+        stock.sellProduct(101, 10);
+        stock.sellProduct(102, 4);
+        stock.sellProduct(103, 3);
+        stock.sellProduct(104, 2);
+        stock.sellProduct(105, 1);
+        // error handling accounts for incorrect id input 1066
+        stock.sellProduct(1066, 10);
+        stock.sellProduct(107, 2);
+        stock.sellProduct(108, 1);
+        stock.sellProduct(109, 1);
+        stock.sellProduct(110, 4);
     }
     
 }

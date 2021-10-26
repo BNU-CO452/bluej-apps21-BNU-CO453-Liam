@@ -29,7 +29,14 @@ public class StockList
      */
     public void add(Product item)
     {
-        stock.add(item);
+        // limitation - cannot duplicate stock items
+        if(stock.contains(item)){
+            System.out.println(" Error: item already added: " + item);
+        }
+        else {
+            stock.add(item);
+        }
+        
     }
     
     /**
@@ -38,17 +45,16 @@ public class StockList
      */
     public void remove(int productID)
     {
-            Product product = findProduct(productID);
+        Product product = findProduct(productID);
             
-            if(product != null){
-                stock.remove(product);              
-            }
+        if(product != null){
+        stock.remove(product);
+        System.out.println("Product with ID " + productID + " has been removed");
+        }
             
-            else{
-                System.out.println("No product match found");
-            }
-        
-        
+        else{
+            System.out.println(" No product match found");
+        }     
     }
     
     /**
@@ -74,11 +80,11 @@ public class StockList
             product.setQuantity(amount);
             // improvement
             System.out.println();
-            System.out.println("Item purchased: " + product.name);
-            System.out.println("Quantity: " + amount);
+            System.out.println(" Item purchased: " + product.name);
+            System.out.println(" Quantity: " + amount);
         }
         else{
-            System.out.println("No products match: " + productID);
+            System.out.println(" No products match: " + productID);
             }
     }
     
@@ -117,8 +123,8 @@ public class StockList
         if(product != null) 
         {
             // status before
-            System.out.println("product: " + product.name);
-            System.out.println("product quantity: " + product.quantity);
+            System.out.println(" product: " + product.name);
+            System.out.println(" product quantity: " + product.quantity);
         
             if(product.getQuantity() > 0)
             {
@@ -126,22 +132,22 @@ public class StockList
                 
                 // printout message
                 System.out.println();
-                System.out.println("product: " + product.name);
-                System.out.println("product quantity: " + product.quantity);
+                System.out.println(" product: " + product.name);
+                System.out.println(" product quantity: " + product.quantity);
             }
             else
             {
                 // printout message
                 System.out.println();
-                System.out.println("Error: insufficient stock available");
-                System.out.println("product: " + product.name);
-                System.out.println("product quantity: " + product.quantity);
+                System.out.println(" Error: insufficient stock available");
+                System.out.println(" product: " + product.name);
+                System.out.println(" product quantity: " + product.quantity);
             }
         }
         else
         {
             // printout message
-            System.out.println("No product found with ID: " + productID);
+            System.out.println(" No product found with ID: " + productID);
         }
     }    
     
@@ -157,20 +163,20 @@ public class StockList
                 
                 // improvement
                 System.out.println();
-                System.out.println("Item sold: " + product.name);
-                System.out.println("Quantity: " + amount);
+                System.out.println(" Item sold: " + product.name);
+                System.out.println(" Quantity: " + amount);
             }
             
             else{
                 System.out.println();
-                System.out.println("Error: insufficient stock available");
-                product.toString();
-                System.out.println("quantity to sell: " + amount);
+                System.out.println(" Error: insufficient stock available");
+                System.out.print(product.toString());
+                System.out.println(" quantity to sell: " + amount);
             }
         }
         else{
             System.out.println();
-            System.out.println("No products match: " + productID);
+            System.out.println(" No products match: " + productID);
             }
     }
     
@@ -228,6 +234,10 @@ public class StockList
      * Print out a list of products that are low in stock
      */
     public void printLowStock(){
+        System.out.println();
+        System.out.println(" Low stock items:");
+        System.out.println();
+        
         for(Product product : stock){
             if(product.getQuantity() < MINIMUM_QUANTITY){
                 product.print();
@@ -253,7 +263,7 @@ public class StockList
             while(i < MINIMUM_QUANTITY);
         }
         
-        System.out.println("All stock has been relenished to minimum levels");
+        System.out.println(" All stock has been relenished to minimum levels");
     }
     
     /**
@@ -261,13 +271,13 @@ public class StockList
      */
     
     public void sellAllStock(){
+        // extension added
         for(Product product : stock){
             sellProduct(product.id, product.quantity);
 
             System.out.println();
         }
-        System.out.println("All stock has been sold");
-        // extension
+        System.out.println(" All stock has been sold");
     }
     
     /**
@@ -275,6 +285,9 @@ public class StockList
      */
     
     public void searchProducts(String name){
+        System.out.println(" Searching for: " + name);
+        System.out.println();
+        
         for(Product product : stock){
             if(product.getName().toUpperCase().contains(name.toUpperCase())){
                 System.out.println(product.toString());

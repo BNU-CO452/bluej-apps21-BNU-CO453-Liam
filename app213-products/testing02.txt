@@ -1,0 +1,13 @@
+StockList stock = new StockList();
+Product product1 = new Product(106, "Korg Prologue");
+Product product2 = new Product(108, "Samsung G95T");
+stock.add(product1);
+stock.add(product2);
+stock.print();
+
+ Liam's Stock List
+ ====================
+
+ ID 106: Korg Prologue stock level: 0
+ ID 108: Samsung G95T stock level: 0
+

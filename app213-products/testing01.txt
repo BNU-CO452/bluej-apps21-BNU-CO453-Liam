@@ -1,0 +1,24 @@
+Product s21 = new Product(100, "Xfer Serum");
+s21.print();
+ ID 100: Xfer Serum stock level: 0
+s21.decreaseQuantity(1);
+s21.print();
+ ID 100: Xfer Serum stock level: 0
+s21.increaseQuantity(5);
+s21.print();
+ ID 100: Xfer Serum stock level: 5
+s21.decreaseQuantity(3);
+s21.print();
+ ID 100: Xfer Serum stock level: 2
+StockList stock = new StockList();
+Product product1 = new Product(111, "Native Instruments Massive");
+stock.add(s21);
+stock.add(product1);
+stock.print();
+
+ Liam's Stock List
+ ====================
+
+ ID 100: Xfer Serum stock level: 2
+ ID 111: Native Instruments Massive stock level: 0
+
