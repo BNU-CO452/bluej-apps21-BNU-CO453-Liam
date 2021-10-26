@@ -270,6 +270,18 @@ public class StockList
         // extension
     }
     
+    /**
+     * Search products for a partial match of a string
+     */
+    
+    public void searchProducts(String name){
+        for(Product product : stock){
+            if(product.getName().toUpperCase().contains(name.toUpperCase())){
+                System.out.println(product.toString());
+            }
+        }
+    }
+    
     public void printHeading()
     {
         System.out.println();
