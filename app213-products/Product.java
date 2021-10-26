@@ -3,15 +3,18 @@
  * 
  * @author David J. Barnes and Michael Kölling.
  * @version 2016.02.29
+ * 
+ * Modified by Liam Smith
+ * version 26.10.21
  */
 public class Product
 {
     // An identifying number for this product.
-    private int id;
+    public int id;
     // The name of this product.
-    private String name;
+    public String name;
     // The quantity of this product in stock.
-    private int quantity;
+    public int quantity;
 
     /**
      * Constructor for objects of class Product.

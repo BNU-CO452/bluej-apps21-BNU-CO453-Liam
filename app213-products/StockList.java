@@ -4,13 +4,16 @@ import java.util.ArrayList;
  * Manage the stock in a business.
  * The stock is described by zero or more Products.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Liam Smith 
+ * @version 26.10.21
  */
 public class StockList
 {
+    // the minimum amount of stock to be considered as low
+    public final int MINIMUM_QUANTITY = 5;
+    
     // A list of the products.
-    private ArrayList<Product> stock;
+    public ArrayList<Product> stock;
 
     /**
      * Initialise the stock manager.
@@ -30,6 +33,25 @@ public class StockList
     }
     
     /**
+     * remove a product from the list.
+     * @param item The product item to be added.
+     */
+    public void remove(int productID)
+    {
+            Product product = findProduct(productID);
+            
+            if(product != null){
+                stock.remove(product);              
+            }
+            
+            else{
+                System.out.println("No product match found");
+            }
+        
+        
+    }
+    
+    /**
      * A method to buy a single quantity of the product
      */
     public void buyProduct(int productID)
@@ -46,6 +68,18 @@ public class StockList
      */
     public void buyProduct(int productID, int amount)
     {
+        Product product = findProduct(productID);
+        
+        if(product != null){
+            product.setQuantity(amount);
+            // improvement
+            System.out.println();
+            System.out.println("Item purchased: " + product.name);
+            System.out.println("Quantity: " + amount);
+        }
+        else{
+            System.out.println("No products match: " + productID);
+            }
     }
     
     /**
@@ -54,7 +88,20 @@ public class StockList
      */
     public Product findProduct(int productID)
     {
-        return null;
+        Product x = null;
+        
+        for(Product product : stock){
+            if(productID == product.id){
+                x = product;
+                return x;
+            }
+            
+            else {
+                x = null;
+            }
+        }
+        
+        return x; 
     }
     
     
@@ -69,23 +116,63 @@ public class StockList
         
         if(product != null) 
         {
+            // status before
+            System.out.println("product: " + product.name);
+            System.out.println("product quantity: " + product.quantity);
+        
             if(product.getQuantity() > 0)
             {
                 product.decreaseQuantity(1);
                 
                 // printout message
+                System.out.println();
+                System.out.println("product: " + product.name);
+                System.out.println("product quantity: " + product.quantity);
             }
             else
             {
                 // printout message
+                System.out.println();
+                System.out.println("Error: insufficient stock available");
+                System.out.println("product: " + product.name);
+                System.out.println("product quantity: " + product.quantity);
             }
         }
         else
         {
             // printout message
+            System.out.println("No product found with ID: " + productID);
         }
     }    
-
+    
+    /**
+     * Sell specific quantities of a product
+     */
+    public void sellProduct(int productID, int amount){
+        Product product = findProduct(productID);
+        
+        if(product != null){
+            if(product.quantity >= amount){
+                product.decreaseQuantity(amount);
+                
+                // improvement
+                System.out.println();
+                System.out.println("Item sold: " + product.name);
+                System.out.println("Quantity: " + amount);
+            }
+            
+            else{
+                System.out.println();
+                System.out.println("Error: insufficient stock available");
+                product.toString();
+                System.out.println("quantity to sell: " + amount);
+            }
+        }
+        else{
+            System.out.println();
+            System.out.println("No products match: " + productID);
+            }
+    }
     
     /**
      * Locate a product with the given ID, and return how
@@ -96,7 +183,14 @@ public class StockList
      */
     public int numberInStock(int productID)
     {
-        return 0;
+        Product product = findProduct(productID);
+        if(product != null){
+            return product.quantity;
+        }
+        
+        else{
+            return 0;
+        }
     }
 
     /**
@@ -130,10 +224,56 @@ public class StockList
         System.out.println();
     }
     
+    /**
+     * Print out a list of products that are low in stock
+     */
+    public void printLowStock(){
+        for(Product product : stock){
+            if(product.getQuantity() < MINIMUM_QUANTITY){
+                product.print();
+            }
+        }
+    }
+    
+    /**
+     * Automatically re-stock items below minimum stock level
+     */
+    public void autoReStock(){
+        int i = 0;
+        for(Product product : stock){
+            
+            i = product.quantity;
+            
+            do{
+                buyProduct(product.id, 1);
+                product.increaseQuantity(i);
+                i++;
+            }
+            
+            while(i < MINIMUM_QUANTITY);
+        }
+        
+        System.out.println("All stock has been relenished to minimum levels");
+    }
+    
+    /**
+     * Sell all available stock
+     */
+    
+    public void sellAllStock(){
+        for(Product product : stock){
+            sellProduct(product.id, product.quantity);
+
+            System.out.println();
+        }
+        System.out.println("All stock has been sold");
+        // extension
+    }
+    
     public void printHeading()
     {
         System.out.println();
-        System.out.println(" Peacock's Stock List");
+        System.out.println(" Liam's Stock List");
         System.out.println(" ====================");
         System.out.println();
     }
