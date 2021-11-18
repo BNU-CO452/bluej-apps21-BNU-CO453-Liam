@@ -1,0 +1,48 @@
+stockApp1.run();
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > print
+
+ Liam's Stock List
+ ====================
+
+ ID 100: Sony Playstation 5 stock level: 1
+ ID 101: Apple iPhone 13 stock level: 6
+ ID 102: Microsoft Xbox Series X stock level: 7
+ ID 103: Apple iMac stock level: 8
+ ID 104: Optoma UHD42 stock level: 9
+ ID 105: Korg Prologue stock level: 3
+ ID 106: Korg Minilogue XD stock level: 4
+ ID 107: Samsung G95T stock level: 1
+ ID 108: Microsoft Xbox Series S stock level: 2
+ ID 109: Microsoft Flight Simulator stock level: 5
+
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > quit
