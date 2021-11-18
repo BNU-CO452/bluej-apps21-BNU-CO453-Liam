@@ -20,6 +20,7 @@ public class StockDemo
     /**
      * Create a StockManager and populate it with at least
      * 10 sample products.
+     * @param stock The stock list.
      */
     public StockDemo(StockList stock)
     {
@@ -66,6 +67,9 @@ public class StockDemo
         stock.printLowStock();
     }
     
+    /**
+     * Buy 10 products.
+     */
     private void buyProducts()
     {
         stock.buyProduct(101, 5);
@@ -80,6 +84,9 @@ public class StockDemo
         stock.buyProduct(110, 5);
     }
 
+    /**
+     * Sell 10 products.
+     */
     private void sellProducts()
     {
         stock.sellProduct(101, 10);
