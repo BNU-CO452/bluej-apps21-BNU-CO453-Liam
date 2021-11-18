@@ -1,3 +1,20 @@
+StockApp stockApp1 = new StockApp();
+ Purchased: 5 X Sony Playstation 5
+ Purchased: 6 X Apple iPhone 13
+ Purchased: 7 X Microsoft Xbox Series X
+ Purchased: 8 X Apple iMac
+ Purchased: 9 X Optoma UHD42
+ Purchased: 3 X Korg Prologue
+ Purchased: 4 X Korg Minilogue XD
+ Purchased: 1 X Samsung G95T
+ Purchased: 2 X Microsoft Xbox Series S
+ Purchased: 5 X Microsoft Flight Simulator
+Demo products added
+
+stockApp1.run();
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
 ********************************
 
     Add:        Add a new product
