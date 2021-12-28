@@ -11,7 +11,7 @@
  */
 public class DropCommand extends ZuulCommand
 {
-    String item = null;
+    String item;
     
     /**
      * Take an item from a location and add it

@@ -1,3 +1,6 @@
+import java.time.Duration;
+import java.time.Instant;
+
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -32,7 +35,6 @@ public class Game
         MAP = new Map();
         reader = new CommandReader(this);
         player = new Player();
-        //inventory = new ArrayList<Item>();
     }
     
     /**
@@ -52,6 +54,9 @@ public class Game
         printWelcome();
         gameOver = false;
 
+        // Get time game starts
+        Instant start = Instant.now();   
+
         // Enter the main command loop.  Here we repeatedly 
         // read commands and execute them until the game is over.
                 
@@ -59,8 +64,18 @@ public class Game
         {
             gameOver = reader.getCommand();
         }
-        
-        System.out.println("Thank you for playing.  Good bye.");
+
+        // Get time game ends
+        Instant end = Instant.now();
+
+        // Calculate difference between start time and end time
+        Duration timeElapsed = Duration.between(start, end); 
+
+        // Print end game message
+        System.out.println("\nThank you for playing.  Good bye.");
+
+        // Print time elapsed
+        System.out.println("Time: " + timeElapsed.toMinutes() + ":" + timeElapsed.toSeconds());
     }
 
     /**
@@ -69,8 +84,8 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println(" Welcome to the 4-D Grid!");
-        System.out.println(" 4-D Grid is a new game, incredibly similar to a well known film.");
+        System.out.println(" Welcome to the Solo Royale!");
+        System.out.println(" Solo Royale is a new game, incredibly boring.");
         System.out.println(" Type 'help' if you need help.");
         System.out.println();
         System.out.println(MAP.getCurrentLocation().getLongDescription());

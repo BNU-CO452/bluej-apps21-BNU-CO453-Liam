@@ -1,4 +1,5 @@
-
+import java.util.Timer;
+import java.util.TimerTask;
 /**
  * This class is reponsible for creating and
  * linking all the Locations in the game to
@@ -52,11 +53,20 @@ public class Map
      */
     private void createOutside()
     {
-        outside = new Location("outside the main entrance of the university");
-        outside.setItem(new Item("key"));
-        
+        outside = new Location("There is gas everywhere. You are suffocating");
+        outside.setItem(new Item("gasmask"));
+
+        TimerTask task = new TimerTask() {
+
+            public void run() {
+                System.out.println("x");
+            }
+        };
+
+        new Timer().scheduleAtFixedRate(task, 0, 10000);
+
     }
-    
+
     /**
      * Create the pub and link it to the outside
      */
@@ -112,4 +122,5 @@ public class Map
     {
         currentLocation = nextLocation;
     }
+
 }

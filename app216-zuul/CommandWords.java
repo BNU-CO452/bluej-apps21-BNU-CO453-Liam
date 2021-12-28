@@ -14,6 +14,8 @@ public enum CommandWords
     GO   ("go","Exit location in <direction>"),
     TAKE ("take", "Take <item> from location"),
     DROP ("drop", "Drop <item> from inventory"),
+    USE ("use", "Use <item> in inventory"),
+    STATUS ("status", "Show Player status"),
     INVENTORY ("inventory", "Show inventory"),
     HELP ("help", "List all available commands"),
     QUIT ("quit", "End the game");

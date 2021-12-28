@@ -18,8 +18,8 @@ public class HelpCommand extends ZuulCommand
      */
     public void execute()
     {
-        System.out.println(" You are lost. You are alone. You wander");
-        System.out.println(" around at the university.");        
+        System.out.println(" You are lost. You are alone. There is poisonous gas in the air " +
+        "You are dying.");      
         System.out.println();
         System.out.println(" Your command words are:");
         System.out.println();
@@ -30,7 +30,7 @@ public class HelpCommand extends ZuulCommand
                                "\t  : " + command.description);                        
         }   
         System.out.println();
-        System.out.println(" e.g. go west, take gold");
+        System.out.println(" e.g. go west, take key");
         System.out.println();
         System.out.println(zuul.MAP.getCurrentLocation().getLongDescription());
     }

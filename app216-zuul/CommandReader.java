@@ -76,6 +76,16 @@ public class CommandReader
             DropCommand drop = new DropCommand(game, word2);
             drop.execute();
         }
+        else if(commandWord.equals(CommandWords.USE.word))
+        {
+            UseCommand use = new UseCommand(game, word2);
+            use.execute();
+        }
+        else if(commandWord.equals(CommandWords.STATUS.word))
+        {
+            StatusCommand status = new StatusCommand(game);
+            status.execute();
+        }
         else if(commandWord.equals(CommandWords.INVENTORY.word))
         {
             InventoryCommand inventory = new InventoryCommand(game);
