@@ -1,6 +1,6 @@
 import java.util.Set;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 /**
  * Class Location - a location on the map of an adventure game.
@@ -13,14 +13,15 @@ import java.util.Iterator;
  * location stores a reference to the neighboring locations.
  * 
  * @author  Michael Kölling and David J. Barnes
- * Modified by Derek Peacock & Nicholas Day
- * @version 2016.02.29
+ * 
+ * Modified and extended by Liam Smith 27/12/21
  */
 
 public class Location 
 {
     private String description;
     private HashMap<String, Location> exits;        // stores exits of this room.
+    public ArrayList<Item> items;
 
     /**
      * Create a location described "description". Initially, it has
@@ -31,6 +32,7 @@ public class Location
     {
         this.description = description;
         exits = new HashMap<>();
+        items = new ArrayList<Item>();
     }
 
     /**
@@ -76,6 +78,9 @@ public class Location
         {
             returnString += " " + exit;
         }
+
+        returnString += "\n Items in the area:\n ";
+        returnString += getRoomItems();
         return returnString;
     }
 
@@ -89,5 +94,61 @@ public class Location
     {
         return exits.get(direction);
     }
+
+    /**
+     * Get an item from the room by index.
+     */
+    public Item getItem(int index)
+    {
+        return items.get(index);
+    }
+
+    /**
+     * Get an item from the room by string.
+     */
+    public Item getItem(String itemName)
+    {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getDescription().equals(itemName)) {
+                return items.get(i);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Remove an item from the room.
+     */
+    public void removeItem(String itemName)
+    {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getDescription().equals(itemName)) {
+                items.remove(i);
+            }
+        }
+    }
+
+    /**
+     * Set an item in the room.
+     */
+    public void setItem(Item newItem)
+    {
+        items.add(newItem);
+    }
+
+    /**
+     * Get items in the room
+     */
+    public String getRoomItems()
+    {
+        String output = "";
+
+        for(int i = 0; i < items.size(); i++)
+        {
+            output += items.get(i).getDescription() + " ";                   
+        }
+        return output;
+    }
+
 }
 

@@ -10,6 +10,8 @@
  *             
  * @author Derek Peacock and Nicholas Day
  * @version 2021-08-22
+ * 
+ * Modified and extended by Liam Smith 27/12/21
  */
 public class Map
 {
@@ -51,6 +53,7 @@ public class Map
     private void createOutside()
     {
         outside = new Location("outside the main entrance of the university");
+        outside.setItem(new Item("key"));
         
     }
     

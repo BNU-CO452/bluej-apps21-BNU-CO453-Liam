@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.ArrayList;
 /**
  * This class is part of the "World of Zuul" application. 
  * "World of Zuul" is a very simple, text based adventure game.  
@@ -56,7 +55,7 @@ public class CommandReader
             }
             else word2 = null;
         }
-
+        tokenizer.close();
         return executeCommand();
     }
 
@@ -71,7 +70,17 @@ public class CommandReader
         {
             TakeCommand take = new TakeCommand(game, word2);
             take.execute();
-        }        
+        }
+        else if(commandWord.equals(CommandWords.DROP.word))
+        {
+            DropCommand drop = new DropCommand(game, word2);
+            drop.execute();
+        }
+        else if(commandWord.equals(CommandWords.INVENTORY.word))
+        {
+            InventoryCommand inventory = new InventoryCommand(game);
+            inventory.execute();
+        }  
         else if(commandWord.equals(CommandWords.HELP.word))
         {
             HelpCommand help = new HelpCommand(game);

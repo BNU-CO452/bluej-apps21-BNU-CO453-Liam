@@ -13,7 +13,7 @@
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
  * 
- * Modified and extended by Student Name
+ * Modified and extended by Liam Smith 27/12/21
  */
 
 public class Game 
@@ -21,6 +21,8 @@ public class Game
     public final Map MAP;
     private CommandReader reader;
     private boolean gameOver;
+    public Player player;
+    //public ArrayList<Item> inventory;
         
     /**
      * Create the game and initialise its internal map.
@@ -29,6 +31,17 @@ public class Game
     {
         MAP = new Map();
         reader = new CommandReader(this);
+        player = new Player();
+        //inventory = new ArrayList<Item>();
+    }
+    
+    /**
+     * 
+     * Main method to run program
+     */
+    public static void main(String[] args) {
+        Game myGame = new Game();
+        myGame.play();
     }
 
     /**
@@ -56,8 +69,8 @@ public class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println(" Welcome to the World of Zuul!");
-        System.out.println(" World of Zuul is a new, incredibly boring adventure game.");
+        System.out.println(" Welcome to the 4-D Grid!");
+        System.out.println(" 4-D Grid is a new game, incredibly similar to a well known film.");
         System.out.println(" Type 'help' if you need help.");
         System.out.println();
         System.out.println(MAP.getCurrentLocation().getLongDescription());
