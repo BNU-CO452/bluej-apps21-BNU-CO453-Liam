@@ -13,7 +13,7 @@ public class Player
     int health;
     int armour;
     boolean gasMask;
-    boolean alive;
+    boolean isDead;
 
     // Constructor
     public Player()
@@ -23,7 +23,7 @@ public class Player
         this.health = 100;
         this.armour = 0;
         this.gasMask = false;
-        this.alive = true;
+        this.isDead = false;
     }
 
     // Show player status
@@ -31,6 +31,7 @@ public class Player
     {
         System.out.println(" Health: " + health + " | Armour: " + armour);
     }
+
 
     // get player health
     public int getHealth()
@@ -77,23 +78,39 @@ public class Player
             @Override
             public void run() {
 
-                if (getHealth() > 0 && checkGasMask() == false) {
+                if (checkGasMask() == false && health >= 10) {
                     inflictDamage(10);
-                    System.out.println(" You are coughing blood.");
-                    System.out.println(" > ");
+
+                    if (health == 50) {
+                        System.out.println(" Your health is at 50%. You are coughing blood...");
+                        System.out.print(" > ");              
+                    }
+                }
+
+                else if (checkGasMask() == true)
+                {
+                    System.out.println("Now you can breathe.");
+                    timer.cancel();
+                    System.out.print(" > ");  
                 }
                 
                 else
                 {
-                    System.out.println(" You are dead");
-                    alive = false;
+                    System.out.println("\n You are dead. Type \"quit\" and press Enter to end game.");
+                    System.out.print(" > ");  
+                    
+                    isDead = true;
                     timer.cancel();
                     // add lose game here
 
                 }
             } 
         };
-        timer.scheduleAtFixedRate(task, 1000, 1000);
-        return alive;
+
+        if(checkGasMask() == false && health >= 10)
+        {
+            timer.scheduleAtFixedRate(task, 0, 2000);
+        }
+        return isDead;
     }
 }

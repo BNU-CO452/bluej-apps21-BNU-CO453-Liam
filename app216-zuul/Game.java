@@ -1,5 +1,9 @@
+import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Timer;
+
+import javax.lang.model.util.ElementScanner14;
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -36,23 +40,25 @@ public class Game
         this.player = new Player();
     }
     
-    /**
-     * 
-     * Main method to run program
-     */
-    public static void main(String[] args) {
-        Game myGame = new Game();
-        myGame.play();
-    }
+    // /**
+    //  * 
+    //  * Main method to run program
+    //  */
+    // public static void main(String[] args)
+    // {
+    //     Game myGame = new Game();
+    //     myGame.play();
+    // }
 
     /**
      *  Main play routine.  Loops until end of play.
+     * @throws IOException
      */
-    public void play() 
+    public void play() throws IOException
     {            
         printWelcome();
-        // player.gasDamage();
         gameOver = false;
+        String message = "";
 
         // Get time game starts
         Instant start = Instant.now();   
@@ -60,20 +66,24 @@ public class Game
         // Enter the main command loop.  Here we repeatedly 
         // read commands and execute them until the game is over.
                 
-        while (! gameOver) 
+        while (! gameOver && player.health > 0) 
         {
-            if(player.gasDamage() == true)
-            {
-                gameOver = reader.getCommand();
-            }
+                //gameOver = player.isDead;
 
-            else {
-                //System.out.println("player is dead");
-                gameOver = true;
-            }
+                if(player.checkGasMask() == false)
+                {
+                    player.gasDamage();
+                }
 
-            
+                if(! player.isDead)
+                {
+                    gameOver = reader.getCommand();
+                }
+
         }
+
+        // cancel gas timer
+        //player.timer.cancel();
 
         // Get time game ends
         Instant end = Instant.now();
@@ -81,8 +91,13 @@ public class Game
         // Calculate difference between start time and end time
         Duration timeElapsed = Duration.between(start, end); 
 
-        // Print end game message
-        System.out.println("\nThank you for playing.  Good bye.");
+        // Print  winning end game message
+        // if(player.isDead)
+        // {
+        //     message = (" You died.");
+        // }
+
+        
 
         // time elapsed in minutes
         int minutes = timeElapsed.toMinutesPart();
@@ -90,20 +105,38 @@ public class Game
         // seconds remaining of time elapsed
         int seconds = timeElapsed.toSecondsPart() % 60;
 
-        // Print time elapsed
-        System.out.println("Time: " + minutes + ":" + seconds);
+        // leading zero if required
+        String zero = "";
+        if(seconds < 10)
+        {
+            zero = "0";
+        }
+        
+        // Print time elapsed & score
+        System.out.println("\n Time: " + minutes + ":" + zero + seconds + " | Score: " + player.score);
+
+        System.out.println(message + "\n Thank you for playing.  Good bye.\n");
     }
 
     /**
      * Print out the opening message for the player.
+     * @throws IOException
      */
     private void printWelcome()
     {
+        System.console().flush();
+        
         System.out.println();
-        System.out.println(" Welcome to the Solo Royale!");
-        System.out.println(" Solo Royale is a new game, incredibly boring.");
+        System.out.println("  ________    _____    _________    ___________ __________________     _____ _____________________");
+        System.out.println(" /  _____/   /  _  \\  /   _____/    \\_   _____//   _____/\\_   ___ \\   /  _  \\\\______   \\_   _____/");
+        System.out.println("/   \\  ___  /  /_\\  \\ \\_____  \\      |    __)_ \\_____  \\ /    \\  \\/  /  /_\\  \\|     ___/|    __)_ ");
+        System.out.println("\\    \\_\\  \\/    |    \\/        \\     |        \\/        \\\\     \\____/    |    \\    |    |        \\");
+        System.out.println(" \\______  /\\____|__  /_______  /    /_______  /_______  / \\______  /\\____|__  /____|   /_______  /");
+        System.out.println("        \\/         \\/        \\/             \\/        \\/         \\/         \\/                 \\/ ");
+        System.out.println(" Welcome to the Gas Escape!");
         System.out.println(" Type 'help' if you need help.");
         System.out.println();
+        System.out.println(" You have just woken up. There is gas everywhere. You cannot breathe.");
         System.out.println(MAP.getCurrentLocation().getLongDescription());
     }
 }

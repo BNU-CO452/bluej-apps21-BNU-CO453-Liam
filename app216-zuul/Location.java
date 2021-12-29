@@ -62,7 +62,7 @@ public class Location
      */
     public String getLongDescription()
     {
-        return " You are " + description + ".\n" + getExitString();
+        return " You are " + description + ".\n\n" + getExitString();
     }
 
     /**
@@ -79,8 +79,9 @@ public class Location
             returnString += " " + exit;
         }
 
-        returnString += "\n Items in the area:\n ";
+        returnString += "\n\n Items in the area:\n ";
         returnString += getRoomItems();
+        returnString += "\n";
         return returnString;
     }
 

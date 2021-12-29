@@ -54,7 +54,7 @@ public class Map
      */
     private void createOutside()
     {
-        outside = new Location("There is gas everywhere. You are suffocating");
+        outside = new Location("outside");
 
         // set gasmask
         outside.setItem(new Item("gasmask"));

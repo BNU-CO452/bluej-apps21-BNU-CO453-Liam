@@ -34,11 +34,12 @@ public class CommandReader
     /**
      * @return The next command from the user.
      */
-    public boolean getCommand() 
+    public boolean getCommand()
     {
         String inputLine;  
         
         System.out.print(" > ");
+        
         inputLine = reader.nextLine().toLowerCase();
 
         // Find up to two words on the line.
@@ -48,6 +49,11 @@ public class CommandReader
         {
             commandWord = tokenizer.next();      // get first word
         
+            if(commandWord == null)
+                {
+                commandWord = "";
+                }
+
             if(tokenizer.hasNext()) 
             {
                 word2 = tokenizer.next();      // get second word
@@ -61,7 +67,12 @@ public class CommandReader
 
     private boolean executeCommand()
     {
-        if(commandWord.equals(CommandWords.GO.word))
+        if(commandWord == "" || commandWord == null)
+        {
+            System.out.println("Type 'help' if you need help.");
+        }
+        else {
+            if(commandWord.equals(CommandWords.GO.word))
         {
             GoCommand go = new GoCommand(game, word2);
             go.execute();
@@ -81,15 +92,15 @@ public class CommandReader
             UseCommand use = new UseCommand(game, word2);
             use.execute();
         }
+        else if(commandWord.equals(CommandWords.REMOVE.word))
+        {
+            RemoveCommand remove = new RemoveCommand(game, word2);
+            remove.execute();
+        }
         else if(commandWord.equals(CommandWords.STATUS.word))
         {
             StatusCommand status = new StatusCommand(game);
             status.execute();
-        }
-        // dead player
-        if(! game.player.alive)
-        {
-            return true; // game over
         }
         else if(commandWord.equals(CommandWords.INVENTORY.word))
         {
@@ -105,6 +116,13 @@ public class CommandReader
         {
             return true;  // game over
         }
+        else if(commandWord.equals(HiddenCommandWords.HBOOST.word))
+        {
+            HBoostCommand hBoost = new HBoostCommand(game);
+            hBoost.execute();
+        }
+        }
+        
 
         // Return false means the game is not over
         return false;

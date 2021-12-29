@@ -2,14 +2,14 @@ import javax.lang.model.util.ElementScanner14;
 
 /**
  * This command allows the player to
- * use an item in the inventory
+ * remove an item that is equipped
  *
  * @author Derek Peacock & Nicholas Day
  * @version 2021-08-23
  * 
  * Modified and extended by Liam Smith 27/12/21
  */
-public class UseCommand extends ZuulCommand
+public class RemoveCommand extends ZuulCommand
 {
     String item;
     Item whatItem;
@@ -17,7 +17,7 @@ public class UseCommand extends ZuulCommand
     /**
      * Use an item
      */
-    public UseCommand(Game zuul, String item)
+    public RemoveCommand(Game zuul, String item)
     {
         super(zuul);
         this.item = item;
@@ -30,8 +30,8 @@ public class UseCommand extends ZuulCommand
 
         if(item == null) 
         {
-            // if there is no second word, we don't know what to use...
-            message = "Use what?";
+            // if there is no second word, we don't know what to remove...
+            message = "Remove what?";
         }
 
         else
@@ -50,43 +50,27 @@ public class UseCommand extends ZuulCommand
             {
                 switch(item)
                 {
-                    case "torch":
-                        message = " now you can see the exit";
-                        break;
-
-                    case "key":
-                        message = " you opened the door";
-                        break;
-
                     case "gasmask":
-                        if (zuul.player.gasMask == false) {
-                            zuul.player.equipGasMask();
-                            message = "gas mask equipped";
+                        if (zuul.player.gasMask == true) {
+                            zuul.player.removeGasMask();
+                            message = "gas mask removed";
                         }
                         
                         else
                         {
-                            message = "gas mask already equipped";
+                            message = "gas mask is not equipped";
                         }                        
                         break;
 
-                    case "gun":
-                        message = " you used the gun";
-                        break;
+                    // case "armour":
+                    //     message = " you have equipped armour";
 
-                    case "note":
-                        message = " the note reads: 1445";
-                        break;
+                    //     //increase player health
+                    //     zuul.player.armour += 50;
 
-                    case "armour":
-                        message = " you have equipped armour";
-
-                        //increase player health
-                        zuul.player.armour += 50;
-
-                        //remove from inventory
-                        zuul.player.inventory.remove(whatItem);
-                        break;
+                    //     //remove from inventory
+                    //     zuul.player.inventory.remove(whatItem);
+                    //     break;
 
                     default:
                         message = "";
@@ -96,7 +80,7 @@ public class UseCommand extends ZuulCommand
 
             else
             {
-                message = " you do not have this item";
+                message = " you do not have this item equipped";
             }
         }
         System.out.println(message);
