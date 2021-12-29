@@ -1,5 +1,3 @@
-import javax.lang.model.util.ElementScanner14;
-
 /**
  * This command allows the player to
  * remove an item that is equipped
@@ -62,15 +60,17 @@ public class RemoveCommand extends ZuulCommand
                         }                        
                         break;
 
-                    // case "armour":
-                    //     message = " you have equipped armour";
-
-                    //     //increase player health
-                    //     zuul.player.armour += 50;
-
-                    //     //remove from inventory
-                    //     zuul.player.inventory.remove(whatItem);
-                    //     break;
+                    case "armour":
+                        if (zuul.player.armour == true) {
+                            zuul.player.removeArmour();
+                            message = "armour removed";
+                        }
+                        
+                        else
+                        {
+                            message = "armour is not equipped";
+                        }   
+                        break;
 
                     default:
                         message = "";

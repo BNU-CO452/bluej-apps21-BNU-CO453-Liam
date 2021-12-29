@@ -8,7 +8,7 @@ public class Item {
 
     // Constructor
     public Item(String newDescription) {
-        description = newDescription;
+        this.description = newDescription;
     }
 
     // Returns description of item

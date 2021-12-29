@@ -92,6 +92,11 @@ public class CommandReader
             UseCommand use = new UseCommand(game, word2);
             use.execute();
         }
+        else if(commandWord.equals(CommandWords.EQUIP.word))
+        {
+            EquipCommand equip = new EquipCommand(game, word2);
+            equip.execute();
+        }
         else if(commandWord.equals(CommandWords.REMOVE.word))
         {
             RemoveCommand remove = new RemoveCommand(game, word2);

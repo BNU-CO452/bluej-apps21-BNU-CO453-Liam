@@ -7,7 +7,7 @@
  * 
  * Modified and extended by Liam Smith 27/12/21
  */
-public class UseCommand extends ZuulCommand
+public class EquipCommand extends ZuulCommand
 {
     String item;
     Item whatItem;
@@ -15,7 +15,7 @@ public class UseCommand extends ZuulCommand
     /**
      * Use an item
      */
-    public UseCommand(Game zuul, String item)
+    public EquipCommand(Game zuul, String item)
     {
         super(zuul);
         this.item = item;
@@ -29,7 +29,7 @@ public class UseCommand extends ZuulCommand
         if(item == null) 
         {
             // if there is no second word, we don't know what to use...
-            message = "Use what?";
+            message = "Equip what?";
         }
 
         else
@@ -48,14 +48,6 @@ public class UseCommand extends ZuulCommand
             {
                 switch(item)
                 {
-                    case "torch":
-                        message = " now you can see the exit";
-                        break;
-
-                    case "key":
-                        message = " you opened the door";
-                        break;
-
                     case "gasmask":
                         if (zuul.player.gasMask == false) {
                             zuul.player.equipGasMask();
@@ -68,13 +60,9 @@ public class UseCommand extends ZuulCommand
                         }                        
                         break;
 
-                    case "gun":
-                        message = " you used the gun";
-                        break;
-
-                    case "note":
-                        message = " the note reads: 1445";
-                        break;
+                    // case "gun":
+                    //     message = " you used the gun";
+                    //     break;
 
                     case "armour":
                         if (zuul.player.armour == false) {
@@ -82,7 +70,10 @@ public class UseCommand extends ZuulCommand
                             message = "armour equipped";
                         }
 
-                        message = " you have equipped armour";
+                        else
+                        {
+                            message = "armour already equipped";
+                        }   
 
                         // //increase player health
                         // zuul.player.armour += 50;
@@ -105,3 +96,4 @@ public class UseCommand extends ZuulCommand
         System.out.println(message);
     }
 }
+

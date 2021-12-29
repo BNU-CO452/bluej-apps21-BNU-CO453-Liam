@@ -1,9 +1,6 @@
 import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Timer;
-
-import javax.lang.model.util.ElementScanner14;
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -29,6 +26,7 @@ public class Game
     private CommandReader reader;
     private boolean gameOver;
     public Player player;
+    private SlowString slow = new SlowString();
         
     /**
      * Create the game and initialise its internal map.
@@ -39,22 +37,13 @@ public class Game
         reader = new CommandReader(this);
         this.player = new Player();
     }
-    
-    // /**
-    //  * 
-    //  * Main method to run program
-    //  */
-    // public static void main(String[] args)
-    // {
-    //     Game myGame = new Game();
-    //     myGame.play();
-    // }
 
     /**
      *  Main play routine.  Loops until end of play.
      * @throws IOException
+     * @throws InterruptedException
      */
-    public void play() throws IOException
+    public void play() throws InterruptedException
     {            
         printWelcome();
         gameOver = false;
@@ -75,10 +64,12 @@ public class Game
                     player.gasDamage();
                 }
 
-                if(! player.isDead)
-                {
-                    gameOver = reader.getCommand();
-                }
+                // if(! player.isDead )
+                // {
+                //     gameOver = reader.getCommand();
+                // }
+
+                gameOver = reader.getCommand();
 
         }
 
@@ -120,23 +111,38 @@ public class Game
 
     /**
      * Print out the opening message for the player.
+     * @throws InterruptedException
      * @throws IOException
      */
-    private void printWelcome()
+    private void printWelcome() throws InterruptedException
     {
-        System.console().flush();
         
         System.out.println();
-        System.out.println("  ________    _____    _________    ___________ __________________     _____ _____________________");
-        System.out.println(" /  _____/   /  _  \\  /   _____/    \\_   _____//   _____/\\_   ___ \\   /  _  \\\\______   \\_   _____/");
-        System.out.println("/   \\  ___  /  /_\\  \\ \\_____  \\      |    __)_ \\_____  \\ /    \\  \\/  /  /_\\  \\|     ___/|    __)_ ");
-        System.out.println("\\    \\_\\  \\/    |    \\/        \\     |        \\/        \\\\     \\____/    |    \\    |    |        \\");
-        System.out.println(" \\______  /\\____|__  /_______  /    /_______  /_______  / \\______  /\\____|__  /____|   /_______  /");
-        System.out.println("        \\/         \\/        \\/             \\/        \\/         \\/         \\/                 \\/ ");
-        System.out.println(" Welcome to the Gas Escape!");
-        System.out.println(" Type 'help' if you need help.");
+        slow.print( "  ________    _____    _________    ___________ __________________     _____ _____________________", 3);
+        System.out.print("\n");
+        slow.print(" /  _____/   /  _  \\  /   _____/    \\_   _____//   _____/\\_   ___ \\   /  _  \\\\______   \\_   _____/", 3);
+        System.out.print("\n");
+        slow.print("/   \\  ___  /  /_\\  \\ \\_____  \\      |    __)_ \\_____  \\ /    \\  \\/  /  /_\\  \\|     ___/|    __)_ ", 3);
+        System.out.print("\n");
+        slow.print("\\    \\_\\  \\/    |    \\/        \\     |        \\/        \\\\     \\____/    |    \\    |    |        \\", 3);
+        System.out.print("\n");
+        slow.print(" \\______  /\\____|__  /_______  /    /_______  /_______  / \\______  /\\____|__  /____|   /_______  /", 3);
+        System.out.print("\n");
+        slow.print("        \\/         \\/        \\/             \\/        \\/         \\/         \\/                 \\/ ", 3);
+        System.out.print("\n");
         System.out.println();
-        System.out.println(" You have just woken up. There is gas everywhere. You cannot breathe.");
-        System.out.println(MAP.getCurrentLocation().getLongDescription());
+        slow.print(" Welcome to Gas Escape!", 35);
+        Thread.sleep(1000);
+        slow.print(" Type 'help' if you need help.", 35);
+        System.out.println();
+        Thread.sleep(1000);
+
+        slow.print(" You have just woken up.", 35);
+        Thread.sleep(1000);
+        slow.print(" There is gas everywhere. ", 35);
+        Thread.sleep(1000);
+        slow.print("You cannot breathe.", 35);
+        Thread.sleep(1000);
+        slow.print(MAP.getCurrentLocation().getLongDescription(), 35);
     }
 }

@@ -17,9 +17,10 @@ public class RestartCommand
     /**
      * Restart game
      * @throws IOException
+     * @throws InterruptedException
      */
 
-    public void execute() throws IOException
+    public void execute() throws IOException, InterruptedException
     {
         game.play();
     }

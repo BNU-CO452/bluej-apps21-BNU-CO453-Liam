@@ -1,10 +1,8 @@
-import java.io.IOException;
-
 public class Program
 {
     private static Game game;
 
-    public static void main(String[] args) throws IOException
+    public static void main(String[] args) throws InterruptedException
     {
         game = new Game();
         game.play();
