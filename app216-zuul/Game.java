@@ -64,12 +64,7 @@ public class Game
         {
             if(player.gasDamage() == true)
             {
-                player.gasDamage();
                 gameOver = reader.getCommand();
-            }
-
-            else if (player.gasDamage() == false) {
-                gameOver = true;
             }
 
             else {
