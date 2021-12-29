@@ -14,7 +14,8 @@ public class Player
     public boolean armour;
     public boolean gasMask;
     public boolean isDead;
-    private SlowString slow = new SlowString();
+    //private SlowString slow = new SlowString();
+    public int i = 0;
 
     // Constructor
     public Player()
@@ -46,6 +47,10 @@ public class Player
     }
 
     // Heal player
+    public void healPlayer(int amount)
+    {
+        this.health += amount;
+    }
 
     // Equip gas mask on
     public boolean equipGasMask()
@@ -82,55 +87,62 @@ public class Player
         return this.gasMask;
     }
 
-    // Inflict damage to player every 5 seconds
+    // Inflict damage to player every x seconds
     // if not wearing gas mask
     public boolean gasDamage()
     {
+
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
 
             @Override
             public void run() {
-                int x = 0;
+
                 if (checkGasMask() == true)
                 {
-                    x++;
+                    // if(i == 1)
+                    // {
+                    //     System.out.println("\nNow you can breathe.");
+                    //     System.out.print(" > ");
+                    //     i++;
+                    // }
                     timer.cancel();
-                    System.out.println("\nNow you can breathe.");
-                    System.out.println(x);
-                    
-                    System.out.print(" > ");  
                 }
 
                 else if (checkGasMask() == false && getHealth() >= 10) {
                     inflictDamage(10);
+                    System.out.println(getHealth());
 
                     if (health == 50) {
 
                         System.out.println("Your health is at 50%. You are coughing blood...");
-                        System.out.print("\n > ");              
+                        System.out.print(" > ");              
                     }
                 }
                 
                 else
                 {
-                    try {
-                        slow.print("\n You are dead. Type \"quit\" and press Enter to end game.", 25);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-                    System.out.print("\n > ");  
+                    if(i == 0)
+                    {
+                        // try {
+                            System.out.println("You are dead. Type \"quit\" and press Enter to end game.");
+                            i++;
+                        // } catch (InterruptedException e) {
+                        //     //e.printStackTrace();
+                        // }
+                        System.out.print(" > "); 
+                    } 
                     
                     isDead = true;
                     timer.cancel();
                     // add lose game here
 
                 }
-            } 
+            }
         };
 
-        timer.scheduleAtFixedRate(task, 1000, 4000);
+        timer.scheduleAtFixedRate(task, 1000, 10000);
+        System.out.println(i);
 
         return isDead;
     }

@@ -11,6 +11,7 @@ public class UseCommand extends ZuulCommand
 {
     String item;
     Item whatItem;
+    int index;
     
     /**
      * Use an item
@@ -41,6 +42,7 @@ public class UseCommand extends ZuulCommand
                 {
                     carrying = true;
                     whatItem = zuul.player.inventory.get(i);
+                    index = i;
                 }
             }
 
@@ -56,18 +58,6 @@ public class UseCommand extends ZuulCommand
                         message = " you opened the door";
                         break;
 
-                    case "gasmask":
-                        if (zuul.player.gasMask == false) {
-                            zuul.player.equipGasMask();
-                            message = "gas mask equipped";
-                        }
-                        
-                        else
-                        {
-                            message = "gas mask already equipped";
-                        }                        
-                        break;
-
                     case "gun":
                         message = " you used the gun";
                         break;
@@ -76,19 +66,14 @@ public class UseCommand extends ZuulCommand
                         message = " the note reads: 1445";
                         break;
 
-                    case "armour":
-                        if (zuul.player.armour == false) {
-                            zuul.player.equipArmour();
-                            message = "armour equipped";
-                        }
+                    case "medkit":
+                        // player heal method
+                        zuul.player.healPlayer(whatItem.value);
+                        message = " you have healed " + whatItem.value + "%";
 
-                        message = " you have equipped armour";
+                        // remove from inventory
+                        zuul.player.inventory.remove(index);
 
-                        // //increase player health
-                        // zuul.player.armour += 50;
-
-                        // //remove from inventory
-                        // zuul.player.inventory.remove(whatItem);
                         break;
 
                     default:

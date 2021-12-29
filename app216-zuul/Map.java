@@ -4,9 +4,11 @@
  * linking all the Locations in the game to
  * form a 2D or 3D network
  *
- *  [Pub]<---->[Outside]<---->[Theatre]
- *                 |
- *          [Computer Lab]<---->[Office]
+ *     [Janitor Cupboard]<---->[Stairs]<---->[Ladder]<---->[Alley]
+ *                                 |
+ *       [Store Room]<---->[Hospital Ward]<---->[Operating Theatre]<---->[Laboratory]
+ *                                 |
+ *  [Reception Office]<---->[Waiting Room]<---->[Street]
  *             
  * @author Derek Peacock and Nicholas Day
  * @version 2021-08-22
@@ -17,11 +19,10 @@ public class Map
 {
     // Need to add a list of exits
     
-    private Location outside, theater, pub, lab, office;
+    private Location ward, theatre, storeRoom, lab, waitingRoom, reception, 
+    street, stairs, cupboard, roof, ladder, alley;
 
     private Location currentLocation;
-
-    //protected Game zuul = new Game();
 
     /**
      * Constructor for objects of class Map
@@ -39,80 +40,167 @@ public class Map
      */
     private void createLocations()
     {
-        createOutside();
+        createWard();
+        createStoreRoom();
         createTheatre();
-        createPub();
-        createOffice();
         createLab();
+        createWaitingRoom();
+        createReception();
+        createStreet();
+        createStairs();
+        createJanitorCupboard();
+        createRoof();
+        createLadder();
+        createAlley();
 
-        currentLocation = outside;  // start game outside
+        currentLocation = ward;  // start game in hospital ward
     }
     
     /**
-     * Create the outside and link it to the
-     * theatre, lab and pub
+     * Create the hospital ward and link it to the
+     * store room, waiting room and operating theatre
      */
-    private void createOutside()
+    private void createWard()
     {
-        outside = new Location("outside");
+        ward = new Location("in the hospital ward");
 
         // set gasmask
-        outside.setItem(new Item("gasmask"));
+        ward.setItem(new Item("gasmask"));
     }
 
     /**
-     * Create the pub and link it to the outside
+     * Create the store room and link it to the hospital ward
      */
-    private void createPub()
+    private void createStoreRoom()
     {
-        pub = new Location("in the campus pub");
-        
-        pub.setExit("east", outside);
-        outside.setExit("west", pub);
+        storeRoom = new Location("in the store room");
 
-
+        storeRoom.setExit("east", ward);
+        ward.setExit("west", storeRoom);
     }
-    
+
     /**
-     * Create the theatre linked to the outside
+     * Create the operating theatre linked to the ward and the lab
      */
     private void createTheatre()
     {
-        theater = new Location("in a lecture theater");
+        theatre = new Location("in the operating theater");
         
-        theater.setExit("west", outside);
-        outside.setExit("east", theater);
+        theatre.setExit("west", ward);
+        ward.setExit("east", theatre);
     }
-    
+
     /**
-     * Create the office linked to the lab
-     */
-    private void createOffice()
-    {
-        office = new Location("in the computing admin office");
-        
-    }
-    
-    /**
-     * Create the lab and link it to the outside and office
+     * Create the lab and link to the operating theatre
      */
     private void createLab()
     {
-        // create the Locations
-        lab = new Location("in a computing lab");
-        
-        lab.setExit("east", office);
-        office.setExit("west", lab);
-        
-        lab.setExit("north", outside);
-        outside.setExit("south", lab);
+        lab = new Location("in the laboratory");
+
+        lab.setExit("west", theatre);
+        theatre.setExit("east", lab);
     }
-    
+
+    /**
+     * Create the waiting room and link it to the ward
+     */
+    private void createWaitingRoom()
+    {
+        waitingRoom = new Location("in the waiting room");
+        
+        waitingRoom.setExit("north", ward);
+        ward.setExit("south", waitingRoom);
+    }
+
+    /**
+     * Create the reception and link to the waiting room
+     */
+    private void createReception()
+    {
+        reception = new Location("in the reception office");
+
+        waitingRoom.setExit("west", reception);
+        reception.setExit("east", waitingRoom);
+    }
+
+    /**
+     * Create street and link to the waiting room
+     */
+    private void createStreet()
+    {
+        street = new Location(" in the Street");
+
+        waitingRoom.setExit("east", street);
+        street.setExit("west", waitingRoom);
+    }
+
+    /**
+     * Create the stairs and link to the ward
+     */
+    private void createStairs()
+    {
+        stairs = new Location("at the stairs");
+
+        ward.setExit("north", stairs);
+        stairs.setExit("south", ward);
+    }
+
+    /**
+     * Create the janitor cupboard and link to the stairs
+     */
+    private void createJanitorCupboard()
+    {
+        cupboard = new Location("at the janitor cupboard");
+
+        cupboard.setExit("east", stairs);
+        stairs.setExit("west", cupboard);
+    }
+
+    /**
+     * Create the roof and link to the ladder
+     */
+    private void createRoof()
+    {
+        roof = new Location("at the roof");
+
+        roof.setExit("west", stairs);
+        stairs.setExit("east", roof);
+    }
+
+    /**
+     * Create the ladder and link to the roof
+     */
+    private void createLadder()
+    {
+        ladder = new Location("at the ladder");
+
+        ladder.setExit("west", roof);
+        roof.setExit("east", ladder);     
+    }
+
+    /**
+     * Create the alley and link to the ladder
+     */
+    private void createAlley()
+    {
+        alley = new Location("in the alley");
+
+        ladder.setExit("east", alley);
+        alley.setExit("west", ladder);
+    }
+
+    /**
+     * Get the current location
+     */
     public Location getCurrentLocation()
     {
         return currentLocation;
     }
     
+    /**
+     * Enter next location
+     * @param nextLocation entered location
+     */
     public void enterLocation(Location nextLocation)
     {
         currentLocation = nextLocation;

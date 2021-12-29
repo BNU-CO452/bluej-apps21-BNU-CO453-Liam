@@ -51,12 +51,12 @@ public class EquipCommand extends ZuulCommand
                     case "gasmask":
                         if (zuul.player.gasMask == false) {
                             zuul.player.equipGasMask();
-                            message = "gas mask equipped";
+                            message = " gas mask equipped\n Now you can breathe";
                         }
                         
                         else
                         {
-                            message = "gas mask already equipped";
+                            message = " gas mask already equipped";
                         }                        
                         break;
 
@@ -67,12 +67,12 @@ public class EquipCommand extends ZuulCommand
                     case "armour":
                         if (zuul.player.armour == false) {
                             zuul.player.equipArmour();
-                            message = "armour equipped";
+                            message = " armour equipped\n Now you can take extra damage";
                         }
 
                         else
                         {
-                            message = "armour already equipped";
+                            message = " armour already equipped";
                         }   
 
                         // //increase player health

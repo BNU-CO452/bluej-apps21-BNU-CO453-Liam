@@ -19,8 +19,8 @@ public class HBoostCommand extends ZuulCommand
 
     public void execute()
     {
-        //zuul.player.timer.cancel();
         zuul.player.health = 100;
+        zuul.player.i = 0;
         System.out.println("cheat activated: health boost to 100%");
     }
 }

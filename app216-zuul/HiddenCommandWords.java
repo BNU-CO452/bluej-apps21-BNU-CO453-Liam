@@ -8,10 +8,9 @@
 
 public enum HiddenCommandWords
 {
-    RESTART ("restart", "Restart the game"),
     HBOOST ("hboost", "reset health to 100%"),
-    ABOOST ("aboost", "reset armour to 100%"),
-    DEAD ("dead", "Player has died. End the game");
+    MBOOST ("mboost", "equip mask"),
+    ABOOST ("aboost", "equip full armour");
     
     public final String word;
     public final String description;

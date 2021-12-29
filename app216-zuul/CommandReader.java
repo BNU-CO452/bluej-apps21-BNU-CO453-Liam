@@ -71,8 +71,7 @@ public class CommandReader
         {
             System.out.println("Type 'help' if you need help.");
         }
-        else {
-            if(commandWord.equals(CommandWords.GO.word))
+        else if(commandWord.equals(CommandWords.GO.word))
         {
             GoCommand go = new GoCommand(game, word2);
             go.execute();
@@ -96,6 +95,11 @@ public class CommandReader
         {
             EquipCommand equip = new EquipCommand(game, word2);
             equip.execute();
+        }
+        else if(commandWord.equals(CommandWords.CHECK.word))
+        {
+            CheckCommand check = new CheckCommand(game, word2);
+            check.execute();
         }
         else if(commandWord.equals(CommandWords.REMOVE.word))
         {
@@ -125,9 +129,7 @@ public class CommandReader
         {
             HBoostCommand hBoost = new HBoostCommand(game);
             hBoost.execute();
-        }
-        }
-        
+        }   
 
         // Return false means the game is not over
         return false;
