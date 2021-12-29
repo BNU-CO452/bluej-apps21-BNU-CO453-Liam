@@ -1,5 +1,4 @@
-import java.util.Timer;
-import java.util.TimerTask;
+
 /**
  * This class is reponsible for creating and
  * linking all the Locations in the game to
@@ -21,6 +20,8 @@ public class Map
     private Location outside, theater, pub, lab, office;
 
     private Location currentLocation;
+
+    //protected Game zuul = new Game();
 
     /**
      * Constructor for objects of class Map
@@ -54,17 +55,9 @@ public class Map
     private void createOutside()
     {
         outside = new Location("There is gas everywhere. You are suffocating");
+
+        // set gasmask
         outside.setItem(new Item("gasmask"));
-
-        TimerTask task = new TimerTask() {
-
-            public void run() {
-                System.out.println("x");
-            }
-        };
-
-        new Timer().scheduleAtFixedRate(task, 0, 10000);
-
     }
 
     /**
@@ -76,6 +69,8 @@ public class Map
         
         pub.setExit("east", outside);
         outside.setExit("west", pub);
+
+
     }
     
     /**

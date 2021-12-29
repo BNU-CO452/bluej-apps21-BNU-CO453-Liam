@@ -25,7 +25,6 @@ public class Game
     private CommandReader reader;
     private boolean gameOver;
     public Player player;
-    //public ArrayList<Item> inventory;
         
     /**
      * Create the game and initialise its internal map.
@@ -34,7 +33,7 @@ public class Game
     {
         MAP = new Map();
         reader = new CommandReader(this);
-        player = new Player();
+        this.player = new Player();
     }
     
     /**
@@ -52,6 +51,7 @@ public class Game
     public void play() 
     {            
         printWelcome();
+        // player.gasDamage();
         gameOver = false;
 
         // Get time game starts
@@ -62,7 +62,22 @@ public class Game
                 
         while (! gameOver) 
         {
-            gameOver = reader.getCommand();
+            if(player.gasDamage() == true)
+            {
+                player.gasDamage();
+                gameOver = reader.getCommand();
+            }
+
+            else if (player.gasDamage() == false) {
+                gameOver = true;
+            }
+
+            else {
+                //System.out.println("player is dead");
+                gameOver = true;
+            }
+
+            
         }
 
         // Get time game ends
@@ -74,8 +89,14 @@ public class Game
         // Print end game message
         System.out.println("\nThank you for playing.  Good bye.");
 
+        // time elapsed in minutes
+        int minutes = timeElapsed.toMinutesPart();
+
+        // seconds remaining of time elapsed
+        int seconds = timeElapsed.toSecondsPart() % 60;
+
         // Print time elapsed
-        System.out.println("Time: " + timeElapsed.toMinutes() + ":" + timeElapsed.toSeconds());
+        System.out.println("Time: " + minutes + ":" + seconds);
     }
 
     /**

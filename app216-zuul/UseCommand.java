@@ -1,3 +1,5 @@
+import javax.lang.model.util.ElementScanner14;
+
 /**
  * This command allows the player to
  * use an item in the inventory
@@ -57,7 +59,16 @@ public class UseCommand extends ZuulCommand
                         break;
 
                     case "gasmask":
-                        message = " you have put on the gasmask";
+                        if (zuul.player.gasMask = false) {
+                            zuul.player.equipGasMask();
+                            message = "gas mask equipped";
+                        }
+                        
+                        else
+                        {
+                            zuul.player.removeGasMask();
+                            message = "gas mask removed";
+                        }                        
                         break;
 
                     case "gun":

@@ -86,6 +86,11 @@ public class CommandReader
             StatusCommand status = new StatusCommand(game);
             status.execute();
         }
+        // dead player
+        if(! game.player.alive)
+        {
+            return true; // game over
+        }
         else if(commandWord.equals(CommandWords.INVENTORY.word))
         {
             InventoryCommand inventory = new InventoryCommand(game);
