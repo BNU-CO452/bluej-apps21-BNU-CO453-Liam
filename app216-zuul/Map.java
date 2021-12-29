@@ -77,6 +77,9 @@ public class Map
 
         storeRoom.setExit("east", ward);
         ward.setExit("west", storeRoom);
+
+        // set room item(s)
+        storeRoom.setItem(new Item("torch"));
     }
 
     /**
@@ -88,6 +91,9 @@ public class Map
         
         theatre.setExit("west", ward);
         ward.setExit("east", theatre);
+
+        // set room item(s)
+        theatre.setItem(new Item("medkit", 50));
     }
 
     /**
@@ -99,6 +105,9 @@ public class Map
 
         lab.setExit("west", theatre);
         theatre.setExit("east", lab);
+
+        // set gasmask
+        lab.setItem(new Item("gasmask"));
     }
 
     /**
@@ -121,6 +130,9 @@ public class Map
 
         waitingRoom.setExit("west", reception);
         reception.setExit("east", waitingRoom);
+
+        // set room item(s)
+        reception.setItem(new Item("note"));
     }
 
     /**
@@ -154,6 +166,9 @@ public class Map
 
         cupboard.setExit("east", stairs);
         stairs.setExit("west", cupboard);
+
+        // set room item(s)
+        cupboard.setItem(new Item("fire extinguisher"));
     }
 
     /**
@@ -165,6 +180,7 @@ public class Map
 
         roof.setExit("west", stairs);
         stairs.setExit("east", roof);
+
     }
 
     /**

@@ -24,7 +24,7 @@ public class Player
         this.score = 0;
         this.health = 100;
         this.armour = false;
-        this.gasMask = false;
+        this.gasMask = true;
         this.isDead = false;
     }
 
