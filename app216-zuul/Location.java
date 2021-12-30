@@ -69,7 +69,7 @@ public class Location
      * Return a string describing the locations's exits, 
      * for example "Exits: north west".
      */
-    private String getExitString()
+    public String getExitString()
     {
         String returnString = " Exits:";
         Set<String> keys = exits.keySet();
@@ -144,10 +144,20 @@ public class Location
     {
         String output = "";
 
-        for(int i = 0; i < items.size(); i++)
+        if(items.size() > 0)
         {
+            for(int i = 0; i < items.size(); i++)
+            {
             output += items.get(i).getDescription() + " ";                   
+            }
         }
+
+        else {
+            output = " no items";
+        }
+
+
+        
         return output;
     }
 }

@@ -10,6 +10,7 @@
 public class GoCommand extends ZuulCommand
 {
     String direction;
+    String message = "";
     
     public GoCommand(Game zuul, String direction)
     {
@@ -22,7 +23,8 @@ public class GoCommand extends ZuulCommand
         if(direction == null) 
         {
             // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
+            message = "Go where?";
+            zuul.lastLine = message;
             return;
         }
 
@@ -34,12 +36,16 @@ public class GoCommand extends ZuulCommand
 
         if (nextLocation == null) 
         {
-            System.out.println("There is no exit in this direction!");
+            message = "There is no exit in this direction!";
+            zuul.lastLine = message;
         }
+        
         else 
         {
             map.enterLocation(nextLocation);
-            System.out.println(map.getCurrentLocation().getLongDescription());
+            message = map.getCurrentLocation().getLongDescription();
         }
+
+        System.out.println(message);
     }
 }

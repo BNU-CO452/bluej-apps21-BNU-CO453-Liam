@@ -8,6 +8,7 @@
 public class InventoryCommand extends ZuulCommand
 {
     public String output = "";
+    public String message = "";
 
     public InventoryCommand(Game zuul)
     {
@@ -23,8 +24,10 @@ public class InventoryCommand extends ZuulCommand
         {
             output += zuul.player.inventory.get(i).getDescription() + " ";                   
         }
-        System.out.println(" You are carrying:");
-        System.out.println(" " + output + "\n");
+        message += " You are carrying:\n";
+        message += " " + output + "\n";
+        System.out.println(message);
+        zuul.lastLine = message;
     }
 }
 

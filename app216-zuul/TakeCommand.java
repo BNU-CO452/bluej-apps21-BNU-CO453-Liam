@@ -64,5 +64,6 @@ public class TakeCommand extends ZuulCommand
             }
         }
         System.out.println(message);
+        zuul.lastLine = message;
     }
 }

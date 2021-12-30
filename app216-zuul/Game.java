@@ -1,7 +1,8 @@
 import java.time.Duration;
 import java.time.Instant;
-import java.io.*;
+import java.util.Scanner;
 import java.lang.System;
+import java.io.*;
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -32,6 +33,9 @@ public class Game
     private SlowString slow = new SlowString();
     private int escapeBonus;
     private final String escapeLocation = " in the Street";
+    private int count = 0;
+    String lastLine = "";
+    private Scanner sc;
         
     /**
      * Create the game and initialise its internal map.
@@ -41,6 +45,7 @@ public class Game
         MAP = new Map();
         reader = new CommandReader(this);
         this.player = new Player();
+        sc = new Scanner(System.in);
     }
 
     /**
@@ -61,15 +66,34 @@ public class Game
                 
         while (! gameOver && player.health > 0) 
         {
-                if(player.checkGasMask() == false)
-                {
-                    player.gasDamage();
-                }
+            count++;
 
-                checkWin();
+            if(player.checkGasMask() == false)
+            {
+                player.gasDamage();
+            }
 
-                gameOver = reader.getCommand();
-                //System.console().writer().write("clear");
+            checkWin();
+
+            if(count == 1)
+            {
+                Thread.sleep(5000);
+            }
+
+            try {
+                clearConsole();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            System.console().flush();
+
+            showHud();
+
+            // show last line of output
+            //lastLine = sc.nextLine().toString();
+
+            gameOver = reader.getCommand();
         }
 
         // Get time game ends
@@ -161,5 +185,26 @@ public class Game
         // slow.print("You cannot breathe.", 35);
         // Thread.sleep(1000);
         slow.print(MAP.getCurrentLocation().getLongDescription(), 35);
+    }
+
+    private void showHud()
+    {
+        System.out.println("health: " +  player.health + " | armour: " + player.armour + " | gas mask: " );
+        System.out.println(MAP.getCurrentLocation().getLongDescription());
+
+        System.out.println(lastLine);
+        lastLine = "";
+    }
+
+    private void clearConsole() throws IOException
+    {
+        ProcessBuilder pb = new ProcessBuilder("clear");
+        Process startProcess = pb.inheritIO().start();
+
+        try {
+            startProcess.waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
