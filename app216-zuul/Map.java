@@ -53,7 +53,7 @@ public class Map
         createLadder();
         createAlley();
 
-        currentLocation = ward;  // start game in hospital ward
+        currentLocation = ward;     // start game in hospital ward
     }
     
     /**
@@ -63,9 +63,6 @@ public class Map
     private void createWard()
     {
         ward = new Location("in the hospital ward");
-
-        // set gasmask
-        ward.setItem(new Item("gasmask"));
     }
 
     /**
@@ -75,6 +72,7 @@ public class Map
     {
         storeRoom = new Location("in the store room");
 
+        // set room exit(s)
         storeRoom.setExit("east", ward);
         ward.setExit("west", storeRoom);
 
@@ -89,6 +87,7 @@ public class Map
     {
         theatre = new Location("in the operating theater");
         
+        // set room exit(s)
         theatre.setExit("west", ward);
         ward.setExit("east", theatre);
 
@@ -103,6 +102,7 @@ public class Map
     {
         lab = new Location("in the laboratory");
 
+        // set room exit(s)
         lab.setExit("west", theatre);
         theatre.setExit("east", lab);
 
@@ -128,6 +128,7 @@ public class Map
     {
         reception = new Location("in the reception office");
 
+        // set room exit(s)
         waitingRoom.setExit("west", reception);
         reception.setExit("east", waitingRoom);
 
@@ -142,6 +143,7 @@ public class Map
     {
         street = new Location(" in the Street");
 
+        // set room exit(s)
         waitingRoom.setExit("east", street);
         street.setExit("west", waitingRoom);
     }
@@ -153,6 +155,7 @@ public class Map
     {
         stairs = new Location("at the stairs");
 
+        // set room exit(s)
         ward.setExit("north", stairs);
         stairs.setExit("south", ward);
     }
@@ -164,6 +167,7 @@ public class Map
     {
         cupboard = new Location("at the janitor cupboard");
 
+        // set room exit(s)
         cupboard.setExit("east", stairs);
         stairs.setExit("west", cupboard);
 
@@ -178,6 +182,7 @@ public class Map
     {
         roof = new Location("at the roof");
 
+        // set room exit(s)
         roof.setExit("west", stairs);
         stairs.setExit("east", roof);
 
@@ -190,6 +195,7 @@ public class Map
     {
         ladder = new Location("at the ladder");
 
+        // set room exit(s)
         ladder.setExit("west", roof);
         roof.setExit("east", ladder);     
     }
@@ -201,6 +207,7 @@ public class Map
     {
         alley = new Location("in the alley");
 
+        // set room exit(s)
         ladder.setExit("east", alley);
         alley.setExit("west", ladder);
     }
@@ -222,4 +229,11 @@ public class Map
         currentLocation = nextLocation;
     }
 
+    /**
+     * teleport to end of game
+     */
+    public void teleport()
+    {
+        enterLocation(street);
+    }
 }

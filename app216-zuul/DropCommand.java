@@ -1,17 +1,20 @@
 /**
  * This command allows the player to
- * take or pickup an item from a room
- * and carry it around to use somewhere
- * else
+ * drop an item and leave it in the
+ * current room
  *
- * @author Derek Peacock & Nicholas Day
- * @version 2021-08-23
+ * @author Liam Smith
+ * @version 30/12/21
  * 
- * Modified and extended by Liam Smith 27/12/21
  */
 public class DropCommand extends ZuulCommand
 {
+    Map map = zuul.MAP;
+    Item whatItem;
     String item;
+    String message;
+    int index;
+    boolean carrying = false;
     
     /**
      * Take an item from a location and add it
@@ -25,30 +28,40 @@ public class DropCommand extends ZuulCommand
 
     public void execute()
     {
-        Map map = zuul.MAP;
-        String message;
-        int index = 0;
 
         if(item == null) 
         {
             // if there is no second word, we don't know what to drop...
             message = "Drop what?";
         }
+
         else
         {
-            // remove item from the player's inventory
-
+            // check item is in the player's inventory
             for (int i = 0; i < zuul.player.inventory.size(); i++) {
                 if (zuul.player.inventory.get(i).getDescription().equals(item)) {
+                    carrying = true;
                     index = i;
                 }
             }
 
-            zuul.player.inventory.remove(index);
-            message = " " + item + " dropped";
+            if (carrying == true)
+            {
+                // remove item from player's inventory
+                zuul.player.inventory.remove(index);
 
-            // add the item to the current room
-            map.getCurrentLocation().setItem(new Item(item));
+                // add the item to the current room
+                map.getCurrentLocation().setItem(new Item(item));
+
+                // set message
+                message = " ";
+                message += item + " dropped";
+            }
+
+            else
+            {
+                message = " you do not have this item";
+            }
         }
 
         // Print out a suitable message.

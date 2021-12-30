@@ -1,11 +1,12 @@
 /**
  * This command allows the player to
- * use an item in the inventory
+ * check an item in the inventory or
+ * surrounding area
  *
  * @author Derek Peacock & Nicholas Day
  * @version 2021-08-23
  * 
- * Modified and extended by Liam Smith 27/12/21
+ * Modified and extended by Liam Smith 30/12/21
  */
 public class CheckCommand extends ZuulCommand
 {
@@ -13,7 +14,7 @@ public class CheckCommand extends ZuulCommand
     Item whatItem;
     
     /**
-     * Use an item
+     * Constructor
      */
     public CheckCommand(Game zuul, String item)
     {
@@ -21,8 +22,12 @@ public class CheckCommand extends ZuulCommand
         this.item = item;
     }    
 
+    /**
+     * Check an item
+     */
     public void execute()
     {
+        // message to be displayed to player
         String message;
 
         if(item == null) 
@@ -36,6 +41,7 @@ public class CheckCommand extends ZuulCommand
             switch(item)
             {
                 case "map":
+                    // check if player is in correct location to check this item
                     if (zuul.MAP.getCurrentLocation().getShortDescription() == "at the stairs") {
 
                         System.out.println();
@@ -56,6 +62,7 @@ public class CheckCommand extends ZuulCommand
                     }
 
                 case "note":
+                    // check if player has item in inventory
                     for (int i = 0; i < zuul.player.inventory.size(); i++)
                     {
                         if (zuul.player.inventory.get(i).getDescription().equals(item))

@@ -1,31 +1,30 @@
 /**
- * Write a description of class HelpCommand here.
+ * This class displays the items that a player
+ * has picked up and added to their inventory
  *
  * @author Liam Smith
- * @version 27/12/21
+ * @version 30/12/21
  */
 public class InventoryCommand extends ZuulCommand
 {
+    public String output = "";
+
     public InventoryCommand(Game zuul)
     {
         super(zuul);
     }
 
     /**
-     * Print out some help information.
-     * Here we print some stupid, cryptic message and
-     * a list of the command words.
+     * Print a list of items in the player's inventory
      */
     public void execute()
     {
-        String output = "";
-
         for(int i = 0; i < zuul.player.inventory.size(); i++)
         {
             output += zuul.player.inventory.get(i).getDescription() + " ";                   
         }
         System.out.println(" You are carrying:");
-        System.out.println(" " + output);
+        System.out.println(" " + output + "\n");
     }
 }
 

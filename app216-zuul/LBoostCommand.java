@@ -9,10 +9,16 @@
  * 
  * Modified and extended by Liam Smith 27/12/21
  */
-public class DeadCommand
+public class LBoostCommand extends ZuulCommand
 {   
-    public boolean execute()
+
+    public LBoostCommand(Game zuul)
     {
-        return true;
+        super(zuul);
+    }
+
+    public void execute()
+    {
+        zuul.MAP.teleport();
     }
 }

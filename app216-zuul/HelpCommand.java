@@ -1,5 +1,7 @@
 /**
- * Write a description of class HelpCommand here.
+ * This class displays a message, a list of 
+ * available command words to the player,
+ * and the players current location
  *
  * @author Liam Smith
  * @version 28/12/21

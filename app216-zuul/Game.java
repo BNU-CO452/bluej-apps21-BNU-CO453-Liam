@@ -1,6 +1,7 @@
-import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
+import java.io.*;
+import java.lang.System;
 
 /**
  *  This class is the main class of the "World of Zuul" application. 
@@ -24,10 +25,13 @@ public class Game
 {
     public final Map MAP;
     private CommandReader reader;
+    private Instant start;
+    private Instant end;
     private boolean gameOver;
     public Player player;
     private SlowString slow = new SlowString();
-    private final int escapeBonus = 1000;
+    private int escapeBonus;
+    private final String escapeLocation = " in the Street";
         
     /**
      * Create the game and initialise its internal map.
@@ -41,7 +45,6 @@ public class Game
 
     /**
      *  Main play routine.  Loops until end of play.
-     * @throws IOException
      * @throws InterruptedException
      */
     public void play() throws InterruptedException
@@ -51,7 +54,7 @@ public class Game
         String message = "";
 
         // Get time game starts
-        Instant start = Instant.now();   
+        start = Instant.now();   
 
         // Enter the main command loop.  Here we repeatedly 
         // read commands and execute them until the game is over.
@@ -63,21 +66,17 @@ public class Game
                     player.gasDamage();
                 }
 
-                gameOver = reader.getCommand();
+                checkWin();
 
+                gameOver = reader.getCommand();
+                //System.console().writer().write("clear");
         }
 
         // Get time game ends
-        Instant end = Instant.now();
+        end = Instant.now();
 
         // Calculate difference between start time and end time
         Duration timeElapsed = Duration.between(start, end); 
-
-        // Print  winning end game message
-        // if(player.isDead)
-        // {
-        //     message = (" You died.");
-        // }
 
         // time elapsed in minutes
         int minutes = timeElapsed.toMinutesPart();
@@ -93,7 +92,7 @@ public class Game
         }
 
         // calculate score
-        player.score = (timeElapsed.toSecondsPart() + player.health) * 10 ;
+        player.score = ((timeElapsed.toSecondsPart() + player.health) * 10) + escapeBonus;
         
         // Print time elapsed & score
         System.out.println("\n Time: " + minutes + ":" + zero + seconds + " | Score: " + player.score);
@@ -101,8 +100,34 @@ public class Game
         System.out.println(message + "\n Thank you for playing.  Good bye.\n");
     }
 
+    // checks if player won the game
+    private void checkWin() throws InterruptedException {
+        if (MAP.getCurrentLocation().getShortDescription().equals(escapeLocation))
+        {
+            printWinMessage();
+        }
+    }
+
+    // only print this message if player has won the game
+    private void printWinMessage() throws InterruptedException {
+        // bonus points for winning
+        escapeBonus = 1000;
+
+        slow.print("\n Well done. You survived.", 25);
+        Thread.sleep(2000);
+
+        slow.print("\n For now...\n", 130);
+        Thread.sleep(1000);
+
+        System.out.println();
+        System.out.println(" Level 1 Completed");
+        System.out.println(" Type \"quit\" and press Enter to end game.");
+
+        gameOver = true;
+    }
+
     /**
-     * Print out the opening message for the player.
+     * Print out the heading and opening message for the player.
      * @throws InterruptedException
      */
     private void printWelcome() throws InterruptedException
@@ -121,7 +146,7 @@ public class Game
         // System.out.print("\n");
         // slow.print("        \\/         \\/        \\/             \\/        \\/         \\/         \\/                 \\/ ", 3);
         // System.out.print("\n");
-        // System.out.println("                                                                              v1.0 By Liam Smith");
+        // System.out.println("                                                                               v1.0 By Liam Smith");
         // System.out.println();
         // slow.print(" Welcome to Gas Escape!", 35);
         // Thread.sleep(1000);

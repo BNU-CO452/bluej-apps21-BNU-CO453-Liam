@@ -12,6 +12,8 @@ public class UseCommand extends ZuulCommand
     String item;
     Item whatItem;
     int index;
+    String message;
+    boolean carrying = false;
     
     /**
      * Use an item
@@ -24,8 +26,6 @@ public class UseCommand extends ZuulCommand
 
     public void execute()
     {
-        String message;
-        boolean carrying = false;
 
         if(item == null) 
         {

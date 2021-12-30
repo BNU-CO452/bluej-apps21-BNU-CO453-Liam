@@ -1,8 +1,6 @@
 /**
  * This command allows the player to
- * take or pickup an item from a room
- * and carry it around to use somewhere
- * else
+ * use an item in the inventory
  *
  * @author Derek Peacock & Nicholas Day
  * @version 2021-08-23
@@ -12,10 +10,12 @@
 public class TakeCommand extends ZuulCommand
 {
     String item;
+    Item whatItem;
+    String message;
+    boolean here = false;
     
     /**
-     * Take an item from a location and add it
-     * to the player's inventory.
+     * Use an item
      */
     public TakeCommand(Game zuul, String item)
     {
@@ -26,26 +26,43 @@ public class TakeCommand extends ZuulCommand
     public void execute()
     {
         Map map = zuul.MAP;
-        String whatItem;
+        String whatItem = "";
         String message;
 
         if(item == null) 
         {
-            // if there is no second word, we don't know what to take...
+            // if there is no second word, we don't know what to use...
             message = "Take what?";
         }
+
         else
         {
-            // and add it to the player's inventory
-            whatItem = map.getCurrentLocation().getItem(item).description;
-            zuul.player.inventory.add(new Item(whatItem));
-            message = " " + whatItem + " added to inventory";
 
-            // remove the item from the current room
-            map.getCurrentLocation().removeItem(whatItem);
+            for (int i = 0; i < map.getCurrentLocation().items.size(); i++)
+            {
+                if (map.getCurrentLocation().items.get(i).description.equals(item))
+                {
+                    here = true;
+                    whatItem = map.getCurrentLocation().items.get(i).description;
+                }
+            }
+
+            if (here == true)
+            {
+                // and add it to the player's inventory
+                //whatItem = map.getCurrentLocation().getItem(item).description;
+                zuul.player.inventory.add(new Item(whatItem));
+                message = " " + whatItem + " added to inventory\n";
+
+                // remove the item from the current room
+                map.getCurrentLocation().removeItem(whatItem);
+            }
+
+            else
+            {
+                message = " this item is not here\n";
+            }
         }
-
-        // Print out a suitable message.
         System.out.println(message);
     }
 }

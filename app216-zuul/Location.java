@@ -62,7 +62,7 @@ public class Location
      */
     public String getLongDescription()
     {
-        return " You are " + description + ".\n\n" + getExitString();
+        return "\n You are " + description + ".\n\n" + getExitString();
     }
 
     /**
@@ -150,6 +150,5 @@ public class Location
         }
         return output;
     }
-
 }
 

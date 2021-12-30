@@ -14,7 +14,10 @@ import java.util.Scanner;
  * 
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
+ * 
+ * Modified and extended by Liam Smith 30/12/21
  */
+
 public class CommandReader 
 {
     private Game game;
@@ -22,6 +25,7 @@ public class CommandReader
 
     private String commandWord = null;
     private String word2 = null;
+
     /**
      * Create a parser to read from the terminal window.
      */
@@ -66,70 +70,102 @@ public class CommandReader
     }
 
     private boolean executeCommand()
-    {
+    {   
+        // if user input no data
         if(commandWord == "" || commandWord == null)
         {
             System.out.println("Type 'help' if you need help.");
         }
+
+        // if player typed "go"
         else if(commandWord.equals(CommandWords.GO.word))
         {
             GoCommand go = new GoCommand(game, word2);
             go.execute();
         }
+
+        // if player typed "take"
         else if(commandWord.equals(CommandWords.TAKE.word))
         {
             TakeCommand take = new TakeCommand(game, word2);
             take.execute();
         }
+
+        // if player typed "drop"
         else if(commandWord.equals(CommandWords.DROP.word))
         {
             DropCommand drop = new DropCommand(game, word2);
             drop.execute();
         }
+
+        // if player typed "use"
         else if(commandWord.equals(CommandWords.USE.word))
         {
             UseCommand use = new UseCommand(game, word2);
             use.execute();
         }
+
+        // if player typed "equip"
         else if(commandWord.equals(CommandWords.EQUIP.word))
         {
             EquipCommand equip = new EquipCommand(game, word2);
             equip.execute();
         }
+
+        // if player typed "check"
         else if(commandWord.equals(CommandWords.CHECK.word))
         {
             CheckCommand check = new CheckCommand(game, word2);
             check.execute();
         }
+
+        // if player typed "remove"
         else if(commandWord.equals(CommandWords.REMOVE.word))
         {
             RemoveCommand remove = new RemoveCommand(game, word2);
             remove.execute();
         }
+
+        // if player typed "status"
         else if(commandWord.equals(CommandWords.STATUS.word))
         {
             StatusCommand status = new StatusCommand(game);
             status.execute();
         }
+
+        // if player typed "inventory"
         else if(commandWord.equals(CommandWords.INVENTORY.word))
         {
             InventoryCommand inventory = new InventoryCommand(game);
             inventory.execute();
-        }  
+        }
+        
+        // if player typed "help"
         else if(commandWord.equals(CommandWords.HELP.word))
         {
             HelpCommand help = new HelpCommand(game);
             help.execute();
         }
+
+        // if player typed "quit"
         else if(commandWord.equals(CommandWords.QUIT.word))
         {
             return true;  // game over
         }
+
+        // if player typed "hboost"
         else if(commandWord.equals(HiddenCommandWords.HBOOST.word))
         {
             HBoostCommand hBoost = new HBoostCommand(game);
             hBoost.execute();
-        }   
+        }
+
+        // if player typed "lboost"
+        else if(commandWord.equals(HiddenCommandWords.LBOOST.word))
+        {
+            LBoostCommand lBoost = new LBoostCommand(game);
+            lBoost.execute();
+        }     
 
         // Return false means the game is not over
         return false;

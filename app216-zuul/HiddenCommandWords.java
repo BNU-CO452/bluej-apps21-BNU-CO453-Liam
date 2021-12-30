@@ -10,6 +10,7 @@ public enum HiddenCommandWords
 {
     HBOOST ("hboost", "reset health to 100%"),
     MBOOST ("mboost", "equip mask"),
+    LBOOST ("lboost", "teleport"),
     ABOOST ("aboost", "equip full armour");
     
     public final String word;
