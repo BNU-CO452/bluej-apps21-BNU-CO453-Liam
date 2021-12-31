@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 
 /**
  * This class is reponsible for creating and
  * linking all the Locations in the game to
  * form a 2D or 3D network
  *
- *     [Janitor Cupboard]<---->[Stairs]<---->[Ladder]<---->[Alley]
+ *     [Janitor Cupboard]<---->[Stairs]<---->[Roof]<---->[Alley]
  *                                 |
  *       [Store Room]<---->[Hospital Ward]<---->[Operating Theatre]<---->[Laboratory]
  *                                 |
@@ -20,9 +21,11 @@ public class Map
     // Need to add a list of exits
     
     private Location ward, theatre, storeRoom, lab, waitingRoom, reception, 
-    street, stairs, cupboard, roof, ladder, alley;
+    street, stairs, cupboard, roof, alley;
 
     private Location currentLocation;
+    public ArrayList<Location> locations;
+    public String message = "";
 
     /**
      * Constructor for objects of class Map
@@ -30,6 +33,19 @@ public class Map
     public Map()
     {
         createLocations();
+        locations = new ArrayList<Location>();
+
+        locations.add(ward);
+        locations.add(theatre);
+        locations.add(storeRoom);
+        locations.add(lab);
+        locations.add(waitingRoom);
+        locations.add(reception);
+        locations.add(street);
+        locations.add(stairs);
+        locations.add(cupboard);
+        locations.add(roof);
+        locations.add(alley);
     }
 
     /**
@@ -50,7 +66,6 @@ public class Map
         createStairs();
         createJanitorCupboard();
         createRoof();
-        createLadder();
         createAlley();
 
         currentLocation = ward;     // start game in hospital ward
@@ -117,6 +132,7 @@ public class Map
     {
         waitingRoom = new Location("in the waiting room");
         
+        // set room exit(s)
         waitingRoom.setExit("north", ward);
         ward.setExit("south", waitingRoom);
     }
@@ -186,18 +202,9 @@ public class Map
         roof.setExit("west", stairs);
         stairs.setExit("east", roof);
 
-    }
+        // set room item(s)
+        roof.setItem(new Item("ladder"));
 
-    /**
-     * Create the ladder and link to the roof
-     */
-    private void createLadder()
-    {
-        ladder = new Location("at the ladder");
-
-        // set room exit(s)
-        ladder.setExit("west", roof);
-        roof.setExit("east", ladder);     
     }
 
     /**
@@ -207,9 +214,9 @@ public class Map
     {
         alley = new Location("in the alley");
 
-        // set room exit(s)
-        ladder.setExit("east", alley);
-        alley.setExit("west", ladder);
+        // set room item(s)
+        alley.setItem(new Item("ladder"));
+        alley.setItem(new Item("key"));
     }
 
     /**
@@ -235,5 +242,17 @@ public class Map
     public void teleport()
     {
         enterLocation(street);
+    }
+
+    /**
+     * teleport by string
+     */
+    public void teleport(String desiredLocation)
+    {
+        for (int i = 0; i < locations.size(); i++) {
+            if (locations.get(i).getShortDescription().contains(desiredLocation)) {
+                enterLocation(locations.get(i));
+            }
+        }
     }
 }

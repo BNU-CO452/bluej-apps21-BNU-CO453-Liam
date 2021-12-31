@@ -40,7 +40,8 @@ public class TakeCommand extends ZuulCommand
 
             for (int i = 0; i < map.getCurrentLocation().items.size(); i++)
             {
-                if (map.getCurrentLocation().items.get(i).description.equals(item))
+                if (map.getCurrentLocation().items.get(i).description.equals(item) ||
+                map.getCurrentLocation().items.get(i).description.contains(item))
                 {
                     here = true;
                     whatItem = map.getCurrentLocation().items.get(i).description;
@@ -49,13 +50,20 @@ public class TakeCommand extends ZuulCommand
 
             if (here == true)
             {
-                // and add it to the player's inventory
-                //whatItem = map.getCurrentLocation().getItem(item).description;
-                zuul.player.inventory.add(new Item(whatItem));
-                message = " " + whatItem + " added to inventory\n";
+                if(whatItem == "ladder" || whatItem == "keypad")
+                {
+                    message = "this item cannot be taken\n";
+                }
 
-                // remove the item from the current room
-                map.getCurrentLocation().removeItem(whatItem);
+                else
+                {
+                    // and add it to the player's inventory
+                    zuul.player.inventory.add(new Item(whatItem));
+                    message = " " + whatItem + " added to inventory\n";
+
+                    // remove the item from the current room
+                    map.getCurrentLocation().removeItem(whatItem);
+                }
             }
 
             else

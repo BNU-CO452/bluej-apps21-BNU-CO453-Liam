@@ -1,6 +1,5 @@
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Scanner;
 import java.lang.System;
 import java.io.*;
 
@@ -28,14 +27,16 @@ public class Game
     private CommandReader reader;
     private Instant start;
     private Instant end;
+    private int minutes;
+    private int seconds;
+    private Duration timeElapsed;
     private boolean gameOver;
     public Player player;
     private SlowString slow = new SlowString();
     private int escapeBonus;
     private final String escapeLocation = " in the Street";
     private int count = 0;
-    String lastLine = "";
-    private Scanner sc;
+    public String lastLine = "";
         
     /**
      * Create the game and initialise its internal map.
@@ -45,7 +46,6 @@ public class Game
         MAP = new Map();
         reader = new CommandReader(this);
         this.player = new Player();
-        sc = new Scanner(System.in);
     }
 
     /**
@@ -55,58 +55,69 @@ public class Game
     public void play() throws InterruptedException
     {            
         printWelcome();
+
         gameOver = false;
+
         String message = "";
 
         // Get time game starts
-        start = Instant.now();   
+        getStartTime();   
 
         // Enter the main command loop.  Here we repeatedly 
-        // read commands and execute them until the game is over.
-                
+        // read commands and execute them until the game is over.     
         while (! gameOver && player.health > 0) 
         {
             count++;
 
-            if(player.checkGasMask() == false)
-            {
-                player.gasDamage();
-            }
-
-            checkWin();
-
+            // delays console clear on first loop
             if(count == 1)
             {
                 Thread.sleep(5000);
             }
 
-            try {
-                clearConsole();
-            } catch (IOException e) {
-                e.printStackTrace();
+            // clear console
+            // try {
+            //     clearConsole();
+            // } catch (IOException e) {
+            //     e.printStackTrace();
+            // }
+
+            // System.console().flush();
+
+            // if player is not wearing gas mask. inflict damage
+            if(player.checkGasMask() == false)
+            {
+                player.gasDamage();
             }
 
-            System.console().flush();
+            // show useful info
+            //showHud();
 
-            showHud();
-
-            // show last line of output
-            //lastLine = sc.nextLine().toString();
+            // check if player has won
+            checkWin();
 
             gameOver = reader.getCommand();
         }
 
         // Get time game ends
-        end = Instant.now();
+        getEndTime();
 
         // Calculate difference between start time and end time
-        Duration timeElapsed = Duration.between(start, end); 
+        calculateGameDuration(); 
 
+        String zero = formatGameTime();
+
+        calculateScore();
+        
+        printGameSummary(message, zero);
+    }
+
+    private String formatGameTime() {
         // time elapsed in minutes
-        int minutes = timeElapsed.toMinutesPart();
+        minutes = timeElapsed.toMinutesPart();
 
         // seconds remaining of time elapsed
-        int seconds = timeElapsed.toSecondsPart() % 60;
+        seconds = timeElapsed.toSecondsPart() % 60;
 
         // leading zero if required for seconds
         String zero = "";
@@ -114,14 +125,31 @@ public class Game
         {
             zero = "0";
         }
+        return zero;
+    }
 
-        // calculate score
-        player.score = ((timeElapsed.toSecondsPart() + player.health) * 10) + escapeBonus;
-        
+    private void calculateGameDuration() {
+        timeElapsed = Duration.between(start, end);
+    }
+
+    private void printGameSummary(String message, String zero) {
         // Print time elapsed & score
         System.out.println("\n Time: " + minutes + ":" + zero + seconds + " | Score: " + player.score);
 
         System.out.println(message + "\n Thank you for playing.  Good bye.\n");
+    }
+
+    private void calculateScore() {
+        // calculate score
+        player.score = ((timeElapsed.toSecondsPart() + player.health) * 10) + escapeBonus;
+    }
+
+    private void getEndTime() {
+        end = Instant.now();
+    }
+
+    private void getStartTime() {
+        start = Instant.now();
     }
 
     // checks if player won the game
@@ -187,6 +215,7 @@ public class Game
         slow.print(MAP.getCurrentLocation().getLongDescription(), 35);
     }
 
+    // show useful info to the player
     private void showHud()
     {
         System.out.println("health: " +  player.health + " | armour: " + player.armour + " | gas mask: " );
@@ -196,6 +225,7 @@ public class Game
         lastLine = "";
     }
 
+    // clear the console after each command
     private void clearConsole() throws IOException
     {
         ProcessBuilder pb = new ProcessBuilder("clear");

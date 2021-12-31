@@ -58,9 +58,10 @@ public class UseCommand extends ZuulCommand
                         message = " you opened the door";
                         break;
 
-                    case "gun":
-                        message = " you used the gun";
-                        break;
+                    // case "ladder":
+                    //     message = " you climbed the ladder";
+                    //     zuul.MAP.teleport("alley");
+                    //     break;
 
                     case "note":
                         message = " the note reads: 1445";
@@ -82,11 +83,24 @@ public class UseCommand extends ZuulCommand
                   }
             }
 
+            else if (zuul.MAP.getCurrentLocation().getShortDescription().equals("at the roof"))
+            {
+                message = " you climbed the ladder";
+                zuul.MAP.teleport("alley");
+            }
+
+            else if (zuul.MAP.getCurrentLocation().getShortDescription().equals("in the alley"))
+            {
+                message = " you climbed the ladder";
+                zuul.MAP.teleport("roof");
+            }
+
             else
             {
                 message = " you do not have this item";
             }
         }
         System.out.println(message);
+        zuul.lastLine = message;
     }
 }

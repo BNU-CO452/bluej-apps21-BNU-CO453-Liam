@@ -141,7 +141,7 @@ public class Player
             }
         };
 
-        timer.scheduleAtFixedRate(task, 1000, 10000);
+        timer.scheduleAtFixedRate(task, 1000, 10);
         System.out.println(i);
 
         return isDead;

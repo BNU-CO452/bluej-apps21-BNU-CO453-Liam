@@ -60,10 +60,6 @@ public class EquipCommand extends ZuulCommand
                         }                        
                         break;
 
-                    // case "gun":
-                    //     message = " you used the gun";
-                    //     break;
-
                     case "armour":
                         if (zuul.player.armour == false) {
                             zuul.player.equipArmour();
