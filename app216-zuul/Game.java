@@ -76,13 +76,13 @@ public class Game
             }
 
             // clear console
-            // try {
-            //     clearConsole();
-            // } catch (IOException e) {
-            //     e.printStackTrace();
-            // }
+            try {
+                clearConsole();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-            // System.console().flush();
+            System.console().flush();
 
             // if player is not wearing gas mask. inflict damage
             if(player.checkGasMask() == false)
@@ -91,7 +91,7 @@ public class Game
             }
 
             // show useful info
-            //showHud();
+            showHud();
 
             // check if player has won
             checkWin();

@@ -20,7 +20,7 @@ public class Map
 {
     // Need to add a list of exits
     
-    private Location ward, theatre, storeRoom, lab, waitingRoom, reception, 
+    private Location ward, hallway, theatre, storeRoom, lab, waitingRoom, reception, 
     street, stairs, cupboard, roof, alley;
 
     private Location currentLocation;
@@ -36,6 +36,7 @@ public class Map
         locations = new ArrayList<Location>();
 
         locations.add(ward);
+        locations.add(hallway);
         locations.add(theatre);
         locations.add(storeRoom);
         locations.add(lab);
@@ -57,6 +58,7 @@ public class Map
     private void createLocations()
     {
         createWard();
+        createHallway();
         createStoreRoom();
         createTheatre();
         createLab();
@@ -73,11 +75,23 @@ public class Map
     
     /**
      * Create the hospital ward and link it to the
-     * store room, waiting room and operating theatre
+     * store room, hallway, waiting room and operating theatre
      */
     private void createWard()
     {
         ward = new Location("in the hospital ward");
+    }
+
+    /**
+     * Create the hallway and link it to the ward and the stairs
+     */
+    private void createHallway()
+    {
+        hallway = new Location("in the hallway");
+
+        
+        hallway.setExit("south", ward);
+        ward.setExit("north", hallway);
     }
 
     /**
@@ -172,8 +186,11 @@ public class Map
         stairs = new Location("at the stairs");
 
         // set room exit(s)
-        ward.setExit("north", stairs);
-        stairs.setExit("south", ward);
+        stairs.setExit("south", hallway);
+        hallway.setExit("north", stairs);
+
+        // set room item(s)
+        stairs.setItem(new Item("map"));
     }
 
     /**
@@ -212,7 +229,7 @@ public class Map
      */
     private void createAlley()
     {
-        alley = new Location("in the alley");
+        alley = new Location("in the alley, it's too dark to see anything");
 
         // set room item(s)
         alley.setItem(new Item("ladder"));

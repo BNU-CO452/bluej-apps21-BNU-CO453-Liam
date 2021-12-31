@@ -50,7 +50,7 @@ public class TakeCommand extends ZuulCommand
 
             if (here == true)
             {
-                if(whatItem == "ladder" || whatItem == "keypad")
+                if(whatItem == "ladder" || whatItem == "keypad" || whatItem == "map")
                 {
                     message = "this item cannot be taken\n";
                 }

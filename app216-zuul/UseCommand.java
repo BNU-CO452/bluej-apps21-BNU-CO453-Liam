@@ -58,11 +58,6 @@ public class UseCommand extends ZuulCommand
                         message = " you opened the door";
                         break;
 
-                    // case "ladder":
-                    //     message = " you climbed the ladder";
-                    //     zuul.MAP.teleport("alley");
-                    //     break;
-
                     case "note":
                         message = " the note reads: 1445";
                         break;
