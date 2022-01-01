@@ -60,7 +60,7 @@ public class Game
      */
     public void play() throws InterruptedException
     {            
-        printWelcome();
+        //printWelcome();
 
         getStartTime();   
 

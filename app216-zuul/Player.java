@@ -31,7 +31,7 @@ public class Player
     // Show player status
     public void status()
     {
-        System.out.println(" Health: " + health + " | Armour: " + armour);
+        System.out.println(" Health: " + health + " | Score: " + score);
     }
 
     // get player health

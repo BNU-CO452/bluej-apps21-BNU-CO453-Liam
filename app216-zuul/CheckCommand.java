@@ -48,13 +48,13 @@ public class CheckCommand extends ZuulCommand
                     // check if player is in correct location to check this item
                     if (zuul.MAP.getCurrentLocation().getShortDescription() == "at the stairs") {
 
-                        message = "\n     [Janitor Cupboard]<---->[Stairs]<---->[Ladder]<---->[Alley]\n";
-                        message += "                                 |\n";
-                        message += "       [Store Room]<---->[Hospital Ward]<---->[Operating Theatre]<---->[Laboratory]\n";
-                        message += "                                 |\n";
-                        message += "  [Reception Office]<---->[Waiting Room]<---->[Street]\n";
-
-                        message += "\n" + zuul.MAP.getCurrentLocation().getLongDescription();
+                        System.out.println("\n     [Janitor Cupboard]<---->[Stairs]<---->[Roof]<---->[Alley]");
+                        System.out.println("                                 |");
+                        System.out.println("                             [Hallway]");
+                        System.out.println("                                 |");
+                        System.out.println("       [Store Room]<---->[Hospital Ward]<---->[Operating Theatre]<---->[Laboratory]");
+                        System.out.println("                                 |");
+                        System.out.println("  [Reception Office]<---->[Waiting Room]<---->[Street]\n");
                         break;
                     }
 

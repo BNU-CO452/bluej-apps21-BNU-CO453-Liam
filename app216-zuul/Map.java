@@ -87,7 +87,7 @@ public class Map
      */
     private void createHallway()
     {
-        hallway = new Location("the hallway", "dark");
+        hallway = new Location("the hallway", "open");
 
         
         hallway.setExit("south", ward);

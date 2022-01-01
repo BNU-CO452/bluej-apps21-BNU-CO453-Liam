@@ -111,7 +111,17 @@ public class Location
         }
 
         returnString += "\n\n Items in the area:\n ";
-        returnString += getRoomItems();
+
+        if (getRoomStatus().equals("dark"))
+        {
+            returnString += " too dark to see anything";
+        }
+        
+        else
+        {
+            returnString += getRoomItems();
+        }
+        
         returnString += "\n";
         return returnString;
     }

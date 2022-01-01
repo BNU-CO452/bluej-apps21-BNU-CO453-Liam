@@ -58,7 +58,16 @@ public class UseCommand extends ZuulCommand
                 switch(item)
                 {
                     case "torch":
-                        message = " now you can see the exit";
+                        // do we need this?
+                        zuul.MAP.setStatus("the hallway", "light");
+                        // show items in area now
+                        message += "\nItems in the area: \n ";
+                        for (int i = 0; i < zuul.MAP.getCurrentLocation().items.size(); i++) {
+                            message += zuul.MAP.getCurrentLocation().items.get(i).description + 
+                            " ";
+                        }
+
+                        message += "\n";
                         break;
 
                     case "key":
@@ -108,7 +117,7 @@ public class UseCommand extends ZuulCommand
             }
 
             // keypad
-            if (zuul.MAP.getCurrentLocation().getShortDescription().equals("the waiting room")
+            else if (zuul.MAP.getCurrentLocation().getShortDescription().equals("the waiting room")
              && item.equals("keypad"))
             {
                 slow.print(" enter code :", 50);
