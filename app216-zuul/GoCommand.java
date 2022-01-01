@@ -20,6 +20,16 @@ public class GoCommand extends ZuulCommand
 
     public void execute()
     {
+        Map map = zuul.MAP;
+        
+        // Try to leave current room.
+        Location currentLocation = map.getCurrentLocation();
+
+        // set current location
+        zuul.locationNow = currentLocation;
+
+        Location nextLocation = currentLocation.getExit(direction);
+
         if(direction == null) 
         {
             // if there is no second word, we don't know where to go...
@@ -28,24 +38,29 @@ public class GoCommand extends ZuulCommand
             return;
         }
 
-        Map map = zuul.MAP;
-        
-        // Try to leave current room.
-        Location currentLocation = map.getCurrentLocation();
-        Location nextLocation = currentLocation.getExit(direction);
-
-        if (nextLocation == null) 
+        else if (nextLocation == null) 
         {
             message = "There is no exit in this direction!";
             zuul.lastLine = message;
         }
-        
-        else 
+
+        else if (nextLocation.getRoomStatus().contains("locked"))
         {
-            map.enterLocation(nextLocation);
-            message = map.getCurrentLocation().getLongDescription();
+            message += nextLocation.getShortDescription();
+            message += nextLocation.getRoomStatus();
         }
 
-        System.out.println(message);
+        else
+        {
+            map.enterLocation(nextLocation);
+
+            // this will print twice with hud
+            //message = map.getCurrentLocation().getLongDescription();
+        }
+
+        // this will print twice with hud
+        //System.out.println(message);
+
+        zuul.lastLine = message;
     }
 }

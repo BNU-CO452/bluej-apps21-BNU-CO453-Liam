@@ -24,19 +24,25 @@ import java.io.*;
 public class Game 
 {
     public final Map MAP;
+    private final String escapeLocation = "the Street";
     private CommandReader reader;
     private Instant start;
     private Instant end;
-    private int minutes;
-    private int seconds;
     private Duration timeElapsed;
-    private boolean gameOver;
     public Player player;
     private SlowString slow = new SlowString();
+    public Location locationNow;
+    private Location locationAfter;
+
+    private int minutes;
+    private int seconds;
     private int escapeBonus;
-    private final String escapeLocation = " in the Street";
     private int count = 0;
+
     public String lastLine = "";
+    private String message = "";
+    
+    private boolean gameOver = false;
         
     /**
      * Create the game and initialise its internal map.
@@ -56,11 +62,6 @@ public class Game
     {            
         printWelcome();
 
-        gameOver = false;
-
-        String message = "";
-
-        // Get time game starts
         getStartTime();   
 
         // Enter the main command loop.  Here we repeatedly 
@@ -69,20 +70,17 @@ public class Game
         {
             count++;
 
-            // delays console clear on first loop
-            if(count == 1)
-            {
-                Thread.sleep(5000);
+            // clear console on first loop only
+            if (count < 2) {
+                try {
+                    clearConsole();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                System.console().flush();
             }
 
-            // clear console
-            try {
-                clearConsole();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            System.console().flush();
+            showHud();
 
             // if player is not wearing gas mask. inflict damage
             if(player.checkGasMask() == false)
@@ -90,19 +88,26 @@ public class Game
                 player.gasDamage();
             }
 
-            // show useful info
-            showHud();
+            // check if player location has changed
+            //checkLocationChange();
 
-            // check if player has won
-            checkWin();
+            // if player has not won, get command
+            if (checkWin() == false) {
+                gameOver = reader.getCommand();
 
-            gameOver = reader.getCommand();
+                // get location after command
+                locationAfter = MAP.getCurrentLocation();
+            }
+
+            else
+            {
+                // end game
+                gameOver = true;
+            }
         }
 
-        // Get time game ends
         getEndTime();
 
-        // Calculate difference between start time and end time
         calculateGameDuration(); 
 
         String zero = formatGameTime();
@@ -112,6 +117,13 @@ public class Game
         printGameSummary(message, zero);
     }
 
+    private void checkLocationChange() {
+    }
+
+    /**
+     * Formats the display of the game time
+     * @return // zero if required
+     */
     private String formatGameTime() {
         // time elapsed in minutes
         minutes = timeElapsed.toMinutesPart();
@@ -128,39 +140,60 @@ public class Game
         return zero;
     }
 
+    /**
+     * Calculates duration of game
+     */
     private void calculateGameDuration() {
         timeElapsed = Duration.between(start, end);
     }
 
+    /**
+     * Print game summary
+     * @param message // variable output
+     * @param zero // leading zero
+     */
     private void printGameSummary(String message, String zero) {
+
         // Print time elapsed & score
         System.out.println("\n Time: " + minutes + ":" + zero + seconds + " | Score: " + player.score);
 
         System.out.println(message + "\n Thank you for playing.  Good bye.\n");
     }
 
+    /**
+     * Calculate score
+     */
     private void calculateScore() {
-        // calculate score
         player.score = ((timeElapsed.toSecondsPart() + player.health) * 10) + escapeBonus;
     }
 
+    /**
+     * Get time the game ended
+     */
     private void getEndTime() {
         end = Instant.now();
     }
 
+    /**
+     * Get time the game started
+     */
     private void getStartTime() {
         start = Instant.now();
     }
 
-    // checks if player won the game
-    private void checkWin() throws InterruptedException {
+    // Check if player won the game
+    private boolean checkWin() throws InterruptedException {
+        boolean win = false;
         if (MAP.getCurrentLocation().getShortDescription().equals(escapeLocation))
         {
             printWinMessage();
+            win = true;
         }
+
+        return win;
     }
 
-    // only print this message if player has won the game
+    // Print winning message
     private void printWinMessage() throws InterruptedException {
         // bonus points for winning
         escapeBonus = 1000;
@@ -173,9 +206,9 @@ public class Game
 
         System.out.println();
         System.out.println(" Level 1 Completed");
-        System.out.println(" Type \"quit\" and press Enter to end game.");
 
-        gameOver = true;
+        // does game end without this?
+        //gameOver = true;
     }
 
     /**
@@ -184,48 +217,89 @@ public class Game
      */
     private void printWelcome() throws InterruptedException
     {
+        try {
+            clearConsole();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.console().flush();
         
-        // System.out.println();
-        // slow.print( "  ________    _____    _________    ___________ __________________     _____ _____________________", 3);
-        // System.out.print("\n");
-        // slow.print(" /  _____/   /  _  \\  /   _____/    \\_   _____//   _____/\\_   ___ \\   /  _  \\\\______   \\_   _____/", 3);
-        // System.out.print("\n");
-        // slow.print("/   \\  ___  /  /_\\  \\ \\_____  \\      |    __)_ \\_____  \\ /    \\  \\/  /  /_\\  \\|     ___/|    __)_ ", 3);
-        // System.out.print("\n");
-        // slow.print("\\    \\_\\  \\/    |    \\/        \\     |        \\/        \\\\     \\____/    |    \\    |    |        \\", 3);
-        // System.out.print("\n");
-        // slow.print(" \\______  /\\____|__  /_______  /    /_______  /_______  / \\______  /\\____|__  /____|   /_______  /", 3);
-        // System.out.print("\n");
-        // slow.print("        \\/         \\/        \\/             \\/        \\/         \\/         \\/                 \\/ ", 3);
-        // System.out.print("\n");
-        // System.out.println("                                                                               v1.0 By Liam Smith");
-        // System.out.println();
-        // slow.print(" Welcome to Gas Escape!", 35);
-        // Thread.sleep(1000);
-        // slow.print(" Type 'help' if you need help.\n", 35);
-        // System.out.println();
-        // Thread.sleep(1000);
+        System.out.println();
+        slow.print( "  ________    _____    _________    ___________ __________________     _____ _____________________", 3);
+        System.out.print("\n");
+        slow.print(" /  _____/   /  _  \\  /   _____/    \\_   _____//   _____/\\_   ___ \\   /  _  \\\\______   \\_   _____/", 3);
+        System.out.print("\n");
+        slow.print("/   \\  ___  /  /_\\  \\ \\_____  \\      |    __)_ \\_____  \\ /    \\  \\/  /  /_\\  \\|     ___/|    __)_ ", 3);
+        System.out.print("\n");
+        slow.print("\\    \\_\\  \\/    |    \\/        \\     |        \\/        \\\\     \\____/    |    \\    |    |        \\", 3);
+        System.out.print("\n");
+        slow.print(" \\______  /\\____|__  /_______  /    /_______  /_______  / \\______  /\\____|__  /____|   /_______  /", 3);
+        System.out.print("\n");
+        slow.print("        \\/         \\/        \\/             \\/        \\/         \\/         \\/                 \\/ ", 3);
+        System.out.print("\n");
+        slow.print("                                                                               v1.0 By Liam Smith", 4);
+        System.out.println();
 
-        // slow.print(" You have just woken up.", 35);
-        // Thread.sleep(1000);
-        // slow.print(" There is gas everywhere. ", 35);
-        // Thread.sleep(1000);
-        // slow.print("You cannot breathe.", 35);
-        // Thread.sleep(1000);
-        slow.print(MAP.getCurrentLocation().getLongDescription(), 35);
+        slow.print(" Welcome to Gas Escape!", 35);
+        Thread.sleep(1000);
+
+        slow.print(" Type 'help' if you need help.\n", 35);
+        System.out.println();
+        Thread.sleep(4000);
+
+        try {
+            clearConsole();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.console().flush();
+
+        slow.print(" You have just woken up.", 35);
+        Thread.sleep(1000);
+
+        slow.print(" There is gas everywhere. ", 35);
+        Thread.sleep(1000);
+
+        slow.print("You cannot breathe.", 35);
+        Thread.sleep(2000);
+
+        try {
+            clearConsole();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.console().flush();
     }
 
     // show useful info to the player
-    private void showHud()
+    private void showHud() throws InterruptedException
     {
-        System.out.println("health: " +  player.health + " | armour: " + player.armour + " | gas mask: " );
-        System.out.println(MAP.getCurrentLocation().getLongDescription());
+        // if player has not changed location
+        if(locationNow != locationAfter)
+        {
+            try {
+                clearConsole();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.console().flush();
 
-        System.out.println(lastLine);
+            if (! MAP.getCurrentLocation().getShortDescription().equals("the Street"))
+            {
+                slow.print(MAP.getCurrentLocation().getLongDescription(), 35);
+            }
+        }
+
+        else if(locationAfter == null)
+        {
+            slow.print(MAP.getCurrentLocation().getLongDescription(), 35);
+        }
+
+        slow.print(lastLine + "\n", 35);
         lastLine = "";
     }
 
-    // clear the console after each command
+    // clear the console
     private void clearConsole() throws IOException
     {
         ProcessBuilder pb = new ProcessBuilder("clear");

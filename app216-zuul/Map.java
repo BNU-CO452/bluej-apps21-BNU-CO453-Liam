@@ -79,7 +79,7 @@ public class Map
      */
     private void createWard()
     {
-        ward = new Location("in the hospital ward");
+        ward = new Location("the hospital ward", "open");
     }
 
     /**
@@ -87,7 +87,7 @@ public class Map
      */
     private void createHallway()
     {
-        hallway = new Location("in the hallway");
+        hallway = new Location("the hallway", "dark");
 
         
         hallway.setExit("south", ward);
@@ -99,7 +99,7 @@ public class Map
      */
     private void createStoreRoom()
     {
-        storeRoom = new Location("in the store room");
+        storeRoom = new Location("the store room", "open");
 
         // set room exit(s)
         storeRoom.setExit("east", ward);
@@ -114,7 +114,7 @@ public class Map
      */
     private void createTheatre()
     {
-        theatre = new Location("in the operating theater");
+        theatre = new Location("the operating theater", "open");
         
         // set room exit(s)
         theatre.setExit("west", ward);
@@ -129,7 +129,7 @@ public class Map
      */
     private void createLab()
     {
-        lab = new Location("in the laboratory");
+        lab = new Location("the laboratory", "open");
 
         // set room exit(s)
         lab.setExit("west", theatre);
@@ -144,11 +144,14 @@ public class Map
      */
     private void createWaitingRoom()
     {
-        waitingRoom = new Location("in the waiting room");
+        waitingRoom = new Location("the waiting room", "open");
         
         // set room exit(s)
         waitingRoom.setExit("north", ward);
         ward.setExit("south", waitingRoom);
+
+        // set room item(s)
+        waitingRoom.setItem(new Item("keypad"));
     }
 
     /**
@@ -156,7 +159,7 @@ public class Map
      */
     private void createReception()
     {
-        reception = new Location("in the reception office");
+        reception = new Location("the reception office", " is locked with a padlock");
 
         // set room exit(s)
         waitingRoom.setExit("west", reception);
@@ -171,7 +174,7 @@ public class Map
      */
     private void createStreet()
     {
-        street = new Location(" in the Street");
+        street = new Location("the Street", " is locked with a code");
 
         // set room exit(s)
         waitingRoom.setExit("east", street);
@@ -183,7 +186,7 @@ public class Map
      */
     private void createStairs()
     {
-        stairs = new Location("at the stairs");
+        stairs = new Location("at the stairs", "open");
 
         // set room exit(s)
         stairs.setExit("south", hallway);
@@ -198,7 +201,7 @@ public class Map
      */
     private void createJanitorCupboard()
     {
-        cupboard = new Location("at the janitor cupboard");
+        cupboard = new Location("at the janitor cupboard", "open");
 
         // set room exit(s)
         cupboard.setExit("east", stairs);
@@ -213,7 +216,7 @@ public class Map
      */
     private void createRoof()
     {
-        roof = new Location("at the roof");
+        roof = new Location("at the roof", "fire");
 
         // set room exit(s)
         roof.setExit("west", stairs);
@@ -229,7 +232,7 @@ public class Map
      */
     private void createAlley()
     {
-        alley = new Location("in the alley, it's too dark to see anything");
+        alley = new Location("in the alley", "dark");
 
         // set room item(s)
         alley.setItem(new Item("ladder"));
@@ -242,6 +245,18 @@ public class Map
     public Location getCurrentLocation()
     {
         return currentLocation;
+    }
+
+    /**
+     * set a specific room status
+     */
+    public void setStatus(String location, String status)
+    {
+        for (int i = 0; i < locations.size(); i++) {
+            if (locations.get(i).getShortDescription().contains(location)) {
+                locations.get(i).setRoomStatus(status);
+            }
+        }
     }
     
     /**

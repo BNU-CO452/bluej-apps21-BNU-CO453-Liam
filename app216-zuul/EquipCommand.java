@@ -26,6 +26,10 @@ public class EquipCommand extends ZuulCommand
         String message;
         boolean carrying = false;
 
+        Location currentLocation = zuul.MAP.getCurrentLocation();
+        // set current location
+        zuul.locationNow = currentLocation;
+
         if(item == null) 
         {
             // if there is no second word, we don't know what to use...

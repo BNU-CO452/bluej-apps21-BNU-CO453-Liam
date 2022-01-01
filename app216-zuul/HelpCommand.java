@@ -20,6 +20,11 @@ public class HelpCommand extends ZuulCommand
      */
     public void execute()
     {
+        Location currentLocation = zuul.MAP.getCurrentLocation();
+
+        // set current location
+        zuul.locationNow = currentLocation;
+
         System.out.println(" You are lost. You are alone. There is poisonous gas in the air " +
         "You are dying.");      
         System.out.println();

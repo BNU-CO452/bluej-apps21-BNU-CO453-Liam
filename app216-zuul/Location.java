@@ -20,6 +20,7 @@ import java.util.HashMap;
 public class Location 
 {
     private String description;
+    private String status;
     private HashMap<String, Location> exits;        // stores exits of this room.
     public ArrayList<Item> items;
 
@@ -33,6 +34,36 @@ public class Location
         this.description = description;
         exits = new HashMap<>();
         items = new ArrayList<Item>();
+    }
+
+    /**
+     * create a location with a specific status
+     * @param description
+     * @param status could be locked etc.
+     */
+    public Location(String description, String status) 
+    {
+        this.description = description;
+        this.status = status;
+        exits = new HashMap<>();
+        items = new ArrayList<Item>();
+    }
+
+    /**
+     * get room status
+     */
+    public String getRoomStatus()
+    {
+        return status;
+    }
+
+    /**
+     * set room status
+     */
+    public String setRoomStatus(String newStatus)
+    {
+        this.status = newStatus;
+        return status;
     }
 
     /**
@@ -62,7 +93,7 @@ public class Location
      */
     public String getLongDescription()
     {
-        return "\n You are " + description + ".\n\n" + getExitString();
+        return "You are in " + description + ".\n\n" + getExitString();
     }
 
     /**
@@ -148,7 +179,7 @@ public class Location
         {
             for(int i = 0; i < items.size(); i++)
             {
-            output += items.get(i).getDescription() + " ";                   
+                output += items.get(i).getDescription() + " ";                   
             }
         }
 
@@ -158,6 +189,16 @@ public class Location
 
 
         
+        return output;
+    }
+
+    /**
+     * Hide room items
+     */
+    public String hideRoomItems()
+    {
+        String output = " too dark to see anything";
+
         return output;
     }
 }

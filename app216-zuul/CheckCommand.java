@@ -27,8 +27,12 @@ public class CheckCommand extends ZuulCommand
      */
     public void execute()
     {
+        Location currentLocation = zuul.MAP.getCurrentLocation();
+        // set current location
+        zuul.locationNow = currentLocation;
+
         // message to be displayed to player
-        String message;
+        String message = "";
 
         if(item == null) 
         {
@@ -50,7 +54,7 @@ public class CheckCommand extends ZuulCommand
                         message += "                                 |\n";
                         message += "  [Reception Office]<---->[Waiting Room]<---->[Street]\n";
 
-                        message += "\n" + zuul.MAP.getCurrentLocation().getShortDescription();
+                        message += "\n" + zuul.MAP.getCurrentLocation().getLongDescription();
                         break;
                     }
 
@@ -71,7 +75,7 @@ public class CheckCommand extends ZuulCommand
                         }
                     }
                     
-                    message = " You do not have this item";               
+                    //message = " You do not have this item";               
                     break;
 
                 default:
@@ -79,7 +83,7 @@ public class CheckCommand extends ZuulCommand
                     break;
             }
         }
-        System.out.println(message);
+        //System.out.println(message);
 
         zuul.lastLine = message;
     }

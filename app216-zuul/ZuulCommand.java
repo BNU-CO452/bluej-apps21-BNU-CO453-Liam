@@ -32,5 +32,5 @@ public abstract class ZuulCommand
         zuul = game;
     }
 
-    public abstract void execute();
+    public abstract void execute() throws InterruptedException;
 }

@@ -37,8 +37,9 @@ public class CommandReader
     
     /**
      * @return The next command from the user.
+     * @throws InterruptedException
      */
-    public boolean getCommand()
+    public boolean getCommand() throws InterruptedException
     {
         String inputLine;  
         
@@ -69,7 +70,7 @@ public class CommandReader
         return executeCommand();
     }
 
-    private boolean executeCommand()
+    private boolean executeCommand() throws InterruptedException
     {   
         // if user input no data
         if(commandWord == "" || commandWord == null)

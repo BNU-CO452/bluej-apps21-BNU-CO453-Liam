@@ -29,6 +29,10 @@ public class TakeCommand extends ZuulCommand
         String whatItem = "";
         String message;
 
+        Location currentLocation = map.getCurrentLocation();
+        // set current location
+        zuul.locationNow = currentLocation;
+
         if(item == null) 
         {
             // if there is no second word, we don't know what to use...
@@ -52,7 +56,7 @@ public class TakeCommand extends ZuulCommand
             {
                 if(whatItem == "ladder" || whatItem == "keypad" || whatItem == "map")
                 {
-                    message = "this item cannot be taken\n";
+                    message = " this item cannot be taken\n";
                 }
 
                 else
@@ -71,7 +75,7 @@ public class TakeCommand extends ZuulCommand
                 message = " this item is not here\n";
             }
         }
-        System.out.println(message);
+        //System.out.println(message);
         zuul.lastLine = message;
     }
 }

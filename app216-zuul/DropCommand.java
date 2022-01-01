@@ -28,6 +28,9 @@ public class DropCommand extends ZuulCommand
 
     public void execute()
     {
+        Location currentLocation = map.getCurrentLocation();
+        // set current location
+        zuul.locationNow = currentLocation;
 
         if(item == null) 
         {

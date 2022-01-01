@@ -20,13 +20,18 @@ public class InventoryCommand extends ZuulCommand
      */
     public void execute()
     {
+        Location currentLocation = zuul.MAP.getCurrentLocation();
+        // set current location
+        zuul.locationNow = currentLocation;
+
         for(int i = 0; i < zuul.player.inventory.size(); i++)
         {
             output += zuul.player.inventory.get(i).getDescription() + " ";                   
         }
         message += " You are carrying:\n";
         message += " " + output + "\n";
-        System.out.println(message);
+
+        //System.out.println(message);
         zuul.lastLine = message;
     }
 }
