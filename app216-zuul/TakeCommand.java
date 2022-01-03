@@ -5,7 +5,7 @@
  * @author Derek Peacock & Nicholas Day
  * @version 2021-08-23
  * 
- * Modified and extended by Liam Smith 27/12/21
+ * Modified and extended by Liam Smith 3/1/22
  */
 public class TakeCommand extends ZuulCommand
 {
@@ -13,9 +13,6 @@ public class TakeCommand extends ZuulCommand
     Item whatItem;
     String message;
     boolean here = false;
-
-    //testing
-    Item newItem;
     
     /**
      * Use an item
@@ -32,8 +29,10 @@ public class TakeCommand extends ZuulCommand
         String itemDescription = "";
         String message;
 
-        Location currentLocation = map.getCurrentLocation();
         // set current location
+        Location currentLocation = map.getCurrentLocation();
+
+        // set current location in game class
         zuul.locationNow = currentLocation;
 
         if(item == null) 
@@ -52,8 +51,8 @@ public class TakeCommand extends ZuulCommand
                 {
                     here = true;
 
-                    newItem = map.getCurrentLocation().items.get(i);
-                    itemDescription = map.getCurrentLocation().items.get(i).description;               
+                    whatItem = map.getCurrentLocation().items.get(i);
+                    itemDescription = whatItem.description;               
                 }
             }
 
@@ -67,8 +66,8 @@ public class TakeCommand extends ZuulCommand
                 else
                 {
                     // and add it to the player's inventory
-                    
-                    zuul.player.inventory.add(new Item(itemDescription, newItem.value));
+
+                    zuul.player.inventory.add(new Item(itemDescription, whatItem.value));
                     message = " " + itemDescription + " added to inventory\n";
 
                     // remove the item from the current room
@@ -81,7 +80,7 @@ public class TakeCommand extends ZuulCommand
                 message = " this item is not here\n";
             }
         }
-        //System.out.println(message);
+        // set last line of game class
         zuul.lastLine = message;
     }
 }

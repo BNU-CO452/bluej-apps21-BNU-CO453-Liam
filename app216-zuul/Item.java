@@ -1,6 +1,6 @@
 
 /**
- * Description of item class
+ * This class creates items
  */
 
 public class Item {

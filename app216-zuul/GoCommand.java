@@ -25,9 +25,10 @@ public class GoCommand extends ZuulCommand
         // Try to leave current room.
         Location currentLocation = map.getCurrentLocation();
 
-        // set current location
+        // set current location in game class
         zuul.locationNow = currentLocation;
 
+        // set next location
         Location nextLocation = currentLocation.getExit(direction);
 
         if(direction == null) 
@@ -38,6 +39,7 @@ public class GoCommand extends ZuulCommand
             return;
         }
 
+        // if next location is null
         else if (nextLocation == null) 
         {
             message = "There is no exit in this direction!\n";
@@ -61,6 +63,7 @@ public class GoCommand extends ZuulCommand
             map.enterLocation(nextLocation);
         }
 
+        // set last line in game class
         zuul.lastLine = message;
     }
 }

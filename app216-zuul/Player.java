@@ -4,6 +4,9 @@ import java.util.TimerTask;
 
 /**
  * Creates a player with attributes
+ * 
+ * @author Liam Smith
+ * @version 3/1/22
  */
 
 public class Player
@@ -15,7 +18,6 @@ public class Player
     public int score;
     public int health;
 
-    //public boolean armour;
     public boolean gasMask;
     public boolean isDead;
     private SlowString slow = new SlowString();
@@ -29,7 +31,6 @@ public class Player
         this.roomsReached = new ArrayList<Location>();
         this.score = 0;
         this.health = 100;
-        //this.armour = false;
         this.gasMask = false;
         this.isDead = false;
     }
@@ -73,20 +74,6 @@ public class Player
         return gasMask;
     }
 
-    // Equip armour
-    // public boolean equipArmour()
-    // {
-    //     this.armour = true;
-    //     return armour;
-    // }
-
-    // // Remove armour
-    // public boolean removeArmour()
-    // {
-    //     this.armour = false;
-    //     return armour;
-    // }
-
     // Check if player is wearing gas mask
     public boolean checkGasMask()
     {
@@ -110,10 +97,11 @@ public class Player
                 }
 
                 else if (checkGasMask() == false && getHealth() >= 10) {
+
+                    // start damaging player
                     inflictDamage(10);
 
-                    //System.out.println(getHealth());
-
+                    // when health is at 50% print a warning message
                     if (health == 50) {
 
                         System.out.println("\nYour health is at 50%. You are coughing blood...");
@@ -123,6 +111,7 @@ public class Player
                 
                 else
                 {
+                    // if players health is 0. player is dead. print message
                     if(i == 0)
                     {
                         try {
@@ -140,7 +129,6 @@ public class Player
         };
 
         timer.scheduleAtFixedRate(task, 20000, 40000);
-        //System.out.println(i);
 
         return isDead;
     }

@@ -27,8 +27,10 @@ public class CheckCommand extends ZuulCommand
      */
     public void execute()
     {
-        Location currentLocation = zuul.MAP.getCurrentLocation();
         // set current location
+        Location currentLocation = zuul.MAP.getCurrentLocation();
+
+        // set current location in game class
         zuul.locationNow = currentLocation;
 
         // message to be displayed to player
@@ -37,7 +39,7 @@ public class CheckCommand extends ZuulCommand
         if(item == null) 
         {
             // if there is no second word, we don't know what to check...
-            message = "Check what?";
+            message = "Check what?\n";
         }
 
         else
@@ -60,7 +62,7 @@ public class CheckCommand extends ZuulCommand
 
                     else
                     {
-                       message = " You are not near a map.";
+                       message = " You are not near a map.\n";
                        break;
                     }
 
@@ -70,21 +72,20 @@ public class CheckCommand extends ZuulCommand
                     {
                         if (zuul.player.inventory.get(i).getDescription().equals(item))
                         {
-                            message = " the note reads: 1445";
+                            message = " the note reads: 1445\n";
                             break;
                         }
                     }
                     
-                    //message = " You do not have this item";               
+                    message = " You do not have this item.\n";               
                     break;
 
                 default:
-                    message = " No need to check this.";
+                    message = " No need to check this.\n";
                     break;
             }
         }
-        //System.out.println(message);
-
+        // set last line in game class
         zuul.lastLine = message;
     }
 }

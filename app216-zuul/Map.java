@@ -14,12 +14,11 @@ import java.util.ArrayList;
  * @author Derek Peacock and Nicholas Day
  * @version 2021-08-22
  * 
- * Modified and extended by Liam Smith 27/12/21
+ * Modified and extended by Liam Smith 3/1/22
  */
+
 public class Map
 {
-    // Need to add a list of exits
-    
     private Location ward, hallway, theatre, storeRoom, lab, waitingRoom, reception, 
     street, stairs, cupboard, roof, alley;
 

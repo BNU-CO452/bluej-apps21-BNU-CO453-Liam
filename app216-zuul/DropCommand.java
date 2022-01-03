@@ -75,8 +75,7 @@ public class DropCommand extends ZuulCommand
             }
         }
 
-        // Print out a suitable message.
-        //System.out.println(message);
+        // set last line in game class
         zuul.lastLine = message;
     }
 }

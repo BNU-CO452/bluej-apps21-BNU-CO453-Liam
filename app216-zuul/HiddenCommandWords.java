@@ -1,5 +1,5 @@
 /**
- * This contains cheat codes and death codes etc
+ * This contains cheat codes
  *
  * @author Liam Smith
  * @version 29/12/21

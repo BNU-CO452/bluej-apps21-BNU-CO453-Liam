@@ -31,7 +31,7 @@ public class InventoryCommand extends ZuulCommand
         message += "\n You are carrying:\n";
         message += " " + output + "\n";
 
-        //System.out.println(message);
+        // set last line of game class
         zuul.lastLine = message;
     }
 }

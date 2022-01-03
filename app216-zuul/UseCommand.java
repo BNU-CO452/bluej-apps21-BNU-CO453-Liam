@@ -9,15 +9,19 @@
  */
 public class UseCommand extends ZuulCommand
 {
-    String item;
-    Item whatItem;
-    int index;
-    String message = "";
-    boolean carrying = false;
-    SlowString slow = new SlowString();
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RED = "\u001B[31m";
+
+    
+    Item whatItem;
+
+    int index;
+    String item;
+    String message = "";
+    boolean carrying = false;
+
+    SlowString slow = new SlowString();
     
     /**
      * Use an item
@@ -30,8 +34,10 @@ public class UseCommand extends ZuulCommand
 
     public void execute() throws InterruptedException
     {
-        Location currentLocation = zuul.MAP.getCurrentLocation();
         // set current location
+        Location currentLocation = zuul.MAP.getCurrentLocation();
+
+        // set current location in game class
         zuul.locationNow = currentLocation;
 
         if(item == null) 
@@ -129,7 +135,7 @@ public class UseCommand extends ZuulCommand
 
                 // if no gas mask, player will fall down ladder
                 if (zuul.player.gasMask == false) {
-                    
+
                     //reduce player health due to fall damage
                     zuul.player.inflictDamage(20);
 
@@ -137,6 +143,7 @@ public class UseCommand extends ZuulCommand
                 }
             }
 
+            // if player is in the alley
             else if (zuul.MAP.getCurrentLocation().getShortDescription().equals("in the alley")
              && item.equals("ladder"))
             {
@@ -144,7 +151,7 @@ public class UseCommand extends ZuulCommand
                 zuul.MAP.teleport("roof");
             }
 
-            // keypad
+            // if player is in the waiting room
             else if (zuul.MAP.getCurrentLocation().getShortDescription().equals("in the waiting room")
              && item.equals("keypad"))
             {
@@ -172,7 +179,7 @@ public class UseCommand extends ZuulCommand
                 message = " you do not have this item\n";
             }
         }
-        //System.out.println(message);
+        // set last line in game class
         zuul.lastLine = message;
     }
 }

@@ -61,18 +61,6 @@ public class RemoveCommand extends ZuulCommand
                         }                        
                         break;
 
-                    // case "armour":
-                    //     if (zuul.player.armour == true) {
-                    //         zuul.player.removeArmour();
-                    //         message = "armour removed";
-                    //     }
-                        
-                    //     else
-                    //     {
-                    //         message = "armour is not equipped";
-                    //     }   
-                    //     break;
-
                     default:
                         message = "";
                         break;
@@ -84,6 +72,7 @@ public class RemoveCommand extends ZuulCommand
                 message = " you do not have this item equipped";
             }
         }
-        System.out.println(message);
+        // set last line of game class
+        zuul.lastLine = message;
     }
 }

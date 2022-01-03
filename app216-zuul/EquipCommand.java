@@ -26,8 +26,10 @@ public class EquipCommand extends ZuulCommand
         String message;
         boolean carrying = false;
 
-        Location currentLocation = zuul.MAP.getCurrentLocation();
         // set current location
+        Location currentLocation = zuul.MAP.getCurrentLocation();
+
+        // set current location in game class
         zuul.locationNow = currentLocation;
 
         if(item == null) 
@@ -38,7 +40,7 @@ public class EquipCommand extends ZuulCommand
 
         else
         {
-
+            // checks if the player has the item in their inventory
             for (int i = 0; i < zuul.player.inventory.size(); i++)
             {
                 if (zuul.player.inventory.get(i).getDescription().equals(item))
@@ -48,6 +50,7 @@ public class EquipCommand extends ZuulCommand
                 }
             }
 
+            // if the player has the item in their inventory
             if (carrying == true)
             {
                 switch(item)
@@ -64,24 +67,6 @@ public class EquipCommand extends ZuulCommand
                         }                        
                         break;
 
-                    // case "armour":
-                    //     if (zuul.player.armour == false) {
-                    //         zuul.player.equipArmour();
-                    //         message = " armour equipped\n Now you can take extra damage";
-                    //     }
-
-                    //     else
-                    //     {
-                    //         message = " armour already equipped";
-                    //     }   
-
-                    //     // //increase player health
-                    //     // zuul.player.armour += 50;
-
-                    //     // //remove from inventory
-                    //     // zuul.player.inventory.remove(whatItem);
-                    //     break;
-
                     default:
                         message = "";
                         break;
@@ -93,8 +78,7 @@ public class EquipCommand extends ZuulCommand
                 message = " you do not have this item";
             }
         }
-        //System.out.println(message);
-        
+        // set last line of game class
         zuul.lastLine = message;
     }
 }
