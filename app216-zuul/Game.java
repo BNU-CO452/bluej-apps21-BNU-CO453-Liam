@@ -4,16 +4,11 @@ import java.lang.System;
 import java.io.*;
 
 /**
- *  This class is the main class of the "World of Zuul" application. 
- *  "World of Zuul" is a very simple, text based adventure game.  Users 
- *  can walk around some scenery. That's all. It should really be extended 
- *  to make it more interesting!
- * 
  *  To play this game, create an instance of this class and call the "play"
  *  method.
  * 
- *  This main class creates and initialises all the others: it creates all
- *  locations, creates the CommandReader and starts the game.  
+ *  This Game class creates and initialises all the others: it creates all
+ *  locations, creates the CommandReader, displays a HUD and calculates the player score.
  * 
  * @author  Michael Kölling and David J. Barnes
  * @version 2016.02.29
@@ -45,7 +40,8 @@ public class Game
     private String message = "";
     
     private boolean gameOver = false;
-        
+    boolean win = false;
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -62,13 +58,13 @@ public class Game
      */
     public void play() throws InterruptedException
     {            
-        //printWelcome();
+        printWelcome();
 
         getStartTime();   
 
         // Enter the main command loop.  Here we repeatedly 
         // read commands and execute them until the game is over.     
-        while (! gameOver && player.health > 0) 
+        while (! gameOver) 
         {
             count++;
 
@@ -92,6 +88,9 @@ public class Game
         calculateScore();
         
         printGameSummary(message, zero);
+
+        // close program
+        System.exit(0);
     }
 
     /**
@@ -206,9 +205,14 @@ public class Game
      * Print game summary
      * @param message // variable output
      * @param zero // leading zero
+     * @throws InterruptedException
      */
-    private void printGameSummary(String message, String zero)
+    private void printGameSummary(String message, String zero) throws InterruptedException
     {
+        // if player won, print additional message
+        if (win) {
+            printWinMessage();
+        }
 
         // Print time elapsed & score
         System.out.println("\n Time: " + minutes + ":" + zero + seconds + " | Score: " + player.score);
@@ -258,11 +262,11 @@ public class Game
     // Check if player won the game
     private boolean checkWin() throws InterruptedException
     {
-        boolean win = false;
 
         if (MAP.getCurrentLocation().getShortDescription().equals(escapeLocation))
         {
-            printWinMessage();
+            // do we need to print here?
+            //printWinMessage();
             win = true;
         }
 

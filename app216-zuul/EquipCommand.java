@@ -58,12 +58,12 @@ public class EquipCommand extends ZuulCommand
                     case "gasmask":
                         if (zuul.player.gasMask == false) {
                             zuul.player.equipGasMask();
-                            message = " gas mask equipped\n Now you can breathe";
+                            message = " gas mask equipped\n Now you can breathe\n";
                         }
                         
                         else
                         {
-                            message = " gas mask already equipped";
+                            message = " gas mask already equipped\n";
                         }                        
                         break;
 
@@ -75,7 +75,7 @@ public class EquipCommand extends ZuulCommand
 
             else
             {
-                message = " you do not have this item";
+                message = " you do not have this item\n";
             }
         }
         // set last line of game class

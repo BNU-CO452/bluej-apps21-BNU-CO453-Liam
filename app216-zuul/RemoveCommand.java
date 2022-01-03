@@ -52,12 +52,12 @@ public class RemoveCommand extends ZuulCommand
                     case "gasmask":
                         if (zuul.player.gasMask == true) {
                             zuul.player.removeGasMask();
-                            message = "gas mask removed";
+                            message = "gas mask removed\n";
                         }
                         
                         else
                         {
-                            message = "gas mask is not equipped";
+                            message = "gas mask is not equipped\n";
                         }                        
                         break;
 
@@ -69,7 +69,7 @@ public class RemoveCommand extends ZuulCommand
 
             else
             {
-                message = " you do not have this item equipped";
+                message = " you do not have this item equipped\n";
             }
         }
         // set last line of game class

@@ -74,7 +74,7 @@ public class CommandReader
     {   
         // if player is dead and types a command
         if (game.player.isDead) {
-            System.out.print("");
+            return true; // game over
         }
 
         // if user input no data

@@ -112,7 +112,7 @@ public class UseCommand extends ZuulCommand
 
                     case "medkit":
                         // player heal method
-                        message = " you have healed " + whatItem.value + "%\n";
+                        message = " health restored " + whatItem.value + "%\n";
 
                         zuul.player.healPlayer(whatItem.value);
 
