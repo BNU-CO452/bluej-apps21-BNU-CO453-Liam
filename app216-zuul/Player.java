@@ -9,22 +9,28 @@ import java.util.TimerTask;
 public class Player
 {
     public ArrayList<Item> inventory;
+    public ArrayList<Item> itemsCollected;
+    public ArrayList<Location> roomsReached;
+
     public int score;
     public int health;
-    public boolean armour;
+
+    //public boolean armour;
     public boolean gasMask;
     public boolean isDead;
-    //private SlowString slow = new SlowString();
+    private SlowString slow = new SlowString();
     public int i = 0;
 
     // Constructor
     public Player()
     {
         this.inventory = new ArrayList<Item>();
+        this.itemsCollected = new ArrayList<Item>();
+        this.roomsReached = new ArrayList<Location>();
         this.score = 0;
         this.health = 100;
-        this.armour = false;
-        this.gasMask = true;
+        //this.armour = false;
+        this.gasMask = false;
         this.isDead = false;
     }
 
@@ -68,18 +74,18 @@ public class Player
     }
 
     // Equip armour
-    public boolean equipArmour()
-    {
-        this.armour = true;
-        return armour;
-    }
+    // public boolean equipArmour()
+    // {
+    //     this.armour = true;
+    //     return armour;
+    // }
 
-    // Remove armour
-    public boolean removeArmour()
-    {
-        this.armour = false;
-        return armour;
-    }
+    // // Remove armour
+    // public boolean removeArmour()
+    // {
+    //     this.armour = false;
+    //     return armour;
+    // }
 
     // Check if player is wearing gas mask
     public boolean checkGasMask()
@@ -100,22 +106,17 @@ public class Player
 
                 if (checkGasMask() == true)
                 {
-                    // if(i == 1)
-                    // {
-                    //     System.out.println("\nNow you can breathe.");
-                    //     System.out.print(" > ");
-                    //     i++;
-                    // }
                     timer.cancel();
                 }
 
                 else if (checkGasMask() == false && getHealth() >= 10) {
                     inflictDamage(10);
-                    System.out.println(getHealth());
+
+                    //System.out.println(getHealth());
 
                     if (health == 50) {
 
-                        System.out.println("Your health is at 50%. You are coughing blood...");
+                        System.out.println("\nYour health is at 50%. You are coughing blood...");
                         System.out.print(" > ");              
                     }
                 }
@@ -124,25 +125,22 @@ public class Player
                 {
                     if(i == 0)
                     {
-                        // try {
-                            System.out.println("You are dead. Type \"quit\" and press Enter to end game.");
+                        try {
+                            slow.print("You are dead. press Enter to end game.", 50);
                             i++;
-                        // } catch (InterruptedException e) {
-                        //     //e.printStackTrace();
-                        // }
-                        System.out.print(" > "); 
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     } 
                     
                     isDead = true;
                     timer.cancel();
-                    // add lose game here
-
                 }
             }
         };
 
-        timer.scheduleAtFixedRate(task, 1000, 10);
-        System.out.println(i);
+        timer.scheduleAtFixedRate(task, 20000, 40000);
+        //System.out.println(i);
 
         return isDead;
     }

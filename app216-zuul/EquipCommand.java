@@ -64,23 +64,23 @@ public class EquipCommand extends ZuulCommand
                         }                        
                         break;
 
-                    case "armour":
-                        if (zuul.player.armour == false) {
-                            zuul.player.equipArmour();
-                            message = " armour equipped\n Now you can take extra damage";
-                        }
+                    // case "armour":
+                    //     if (zuul.player.armour == false) {
+                    //         zuul.player.equipArmour();
+                    //         message = " armour equipped\n Now you can take extra damage";
+                    //     }
 
-                        else
-                        {
-                            message = " armour already equipped";
-                        }   
+                    //     else
+                    //     {
+                    //         message = " armour already equipped";
+                    //     }   
 
-                        // //increase player health
-                        // zuul.player.armour += 50;
+                    //     // //increase player health
+                    //     // zuul.player.armour += 50;
 
-                        // //remove from inventory
-                        // zuul.player.inventory.remove(whatItem);
-                        break;
+                    //     // //remove from inventory
+                    //     // zuul.player.inventory.remove(whatItem);
+                    //     break;
 
                     default:
                         message = "";
@@ -93,7 +93,9 @@ public class EquipCommand extends ZuulCommand
                 message = " you do not have this item";
             }
         }
-        System.out.println(message);
+        //System.out.println(message);
+        
+        zuul.lastLine = message;
     }
 }
 

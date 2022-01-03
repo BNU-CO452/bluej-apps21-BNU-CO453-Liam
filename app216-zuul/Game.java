@@ -25,6 +25,7 @@ public class Game
 {
     public final Map MAP;
     private final String escapeLocation = "the Street";
+
     private CommandReader reader;
     private Instant start;
     private Instant end;
@@ -40,6 +41,7 @@ public class Game
     private int count = 0;
 
     public String lastLine = "";
+    public String alert = "";
     private String message = "";
     
     private boolean gameOver = false;
@@ -70,40 +72,15 @@ public class Game
         {
             count++;
 
-            // clear console on first loop only
-            if (count < 2) {
-                try {
-                    clearConsole();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                System.console().flush();
-            }
+            setup();
+
+            checkRoomsReached();
 
             showHud();
 
-            // if player is not wearing gas mask. inflict damage
-            if(player.checkGasMask() == false)
-            {
-                player.gasDamage();
-            }
+            startGasDamage();
 
-            // check if player location has changed
-            //checkLocationChange();
-
-            // if player has not won, get command
-            if (checkWin() == false) {
-                gameOver = reader.getCommand();
-
-                // get location after command
-                locationAfter = MAP.getCurrentLocation();
-            }
-
-            else
-            {
-                // end game
-                gameOver = true;
-            }
+            gameOver = decideContinue();
         }
 
         getEndTime();
@@ -117,14 +94,91 @@ public class Game
         printGameSummary(message, zero);
     }
 
-    private void checkLocationChange() {
+    /**
+     * 
+     * @throws InterruptedException
+     */
+    private boolean decideContinue() throws InterruptedException {
+        // if player has not won, get command
+        if (checkWin() == false) {
+            gameOver = reader.getCommand();
+
+            // get location after command
+            locationAfter = MAP.getCurrentLocation();
+        }
+
+        else
+        {
+            // end game
+            gameOver = true;
+        }
+
+        return gameOver;
+    }
+
+    /**
+     * start gas damage if gas mask is not on
+     */
+    private void startGasDamage() {
+        if(player.checkGasMask() == false)
+        {
+            player.gasDamage();
+        }
+    }
+
+    /**
+     * executes on first loop only
+     * clears console
+     * sets location
+     * adds location to player array 
+     */
+    private void setup() {
+        if (count < 2) {
+            try {
+                clearConsole();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            System.console().flush();
+
+            locationNow = MAP.getCurrentLocation();
+
+            player.roomsReached.add(locationNow);
+        }
+    }
+
+    /**
+     * checks the rooms a player has reached and adds them 
+     * to an array
+     */
+    private void checkRoomsReached() {
+
+        int match = 0;
+
+        if (match < 1 && locationAfter != null)
+        {
+            for (int i = 0; i < player.roomsReached.size(); i++)
+            {
+                if (player.roomsReached.get(i) == locationAfter)
+                {
+                    match++;
+                }
+            }
+        }
+
+        // add if not, and update score
+        if (match < 1  && locationAfter != null) {
+            player.roomsReached.add(locationAfter);
+            player.score += 100;
+        }
     }
 
     /**
      * Formats the display of the game time
      * @return // zero if required
      */
-    private String formatGameTime() {
+    private String formatGameTime()
+    {
         // time elapsed in minutes
         minutes = timeElapsed.toMinutesPart();
 
@@ -143,7 +197,8 @@ public class Game
     /**
      * Calculates duration of game
      */
-    private void calculateGameDuration() {
+    private void calculateGameDuration()
+    {
         timeElapsed = Duration.between(start, end);
     }
 
@@ -152,7 +207,8 @@ public class Game
      * @param message // variable output
      * @param zero // leading zero
      */
-    private void printGameSummary(String message, String zero) {
+    private void printGameSummary(String message, String zero)
+    {
 
         // Print time elapsed & score
         System.out.println("\n Time: " + minutes + ":" + zero + seconds + " | Score: " + player.score);
@@ -162,28 +218,48 @@ public class Game
 
     /**
      * Calculate score
+     * @throws InterruptedException
      */
-    private void calculateScore() {
-        player.score = ((timeElapsed.toSecondsPart() + player.health) * 10) + escapeBonus;
+    private void calculateScore() throws InterruptedException
+    {
+
+        if (checkWin() == true) {
+            // player remaining health
+            for (int i = 0; i < player.health; i++)
+            {
+                player.score += 10;
+            }
+        }
+
+        // // how many rooms did a player reach
+        for (int i = 1; i < player.roomsReached.size(); i++) {
+            player.score += 100;
+        }
+
+        player.score += escapeBonus;
     }
 
     /**
      * Get time the game ended
      */
-    private void getEndTime() {
+    private void getEndTime()
+    {
         end = Instant.now();
     }
 
     /**
      * Get time the game started
      */
-    private void getStartTime() {
+    private void getStartTime()
+    {
         start = Instant.now();
     }
 
     // Check if player won the game
-    private boolean checkWin() throws InterruptedException {
+    private boolean checkWin() throws InterruptedException
+    {
         boolean win = false;
+
         if (MAP.getCurrentLocation().getShortDescription().equals(escapeLocation))
         {
             printWinMessage();
@@ -194,7 +270,8 @@ public class Game
     }
 
     // Print winning message
-    private void printWinMessage() throws InterruptedException {
+    private void printWinMessage() throws InterruptedException
+    {
         // bonus points for winning
         escapeBonus = 1000;
 
@@ -206,9 +283,6 @@ public class Game
 
         System.out.println();
         System.out.println(" Level 1 Completed");
-
-        // does game end without this?
-        //gameOver = true;
     }
 
     /**
@@ -274,8 +348,8 @@ public class Game
     // show useful info to the player
     private void showHud() throws InterruptedException
     {
-        // if player has not changed location
-        if(locationNow != locationAfter)
+        // if player has not changed location and not dead
+        if(locationNow != locationAfter && player.isDead == false)
         {
             try {
                 clearConsole();
@@ -284,9 +358,12 @@ public class Game
             }
             System.console().flush();
 
+            // if player is not at the winning location
             if (! MAP.getCurrentLocation().getShortDescription().equals("the Street"))
             {
+                slow.print(alert + "\n\n", 35);
                 slow.print(MAP.getCurrentLocation().getLongDescription(), 35);
+                alert = "";
             }
         }
 

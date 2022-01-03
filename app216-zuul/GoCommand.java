@@ -33,33 +33,33 @@ public class GoCommand extends ZuulCommand
         if(direction == null) 
         {
             // if there is no second word, we don't know where to go...
-            message = "Go where?";
+            message = "Go where?\n";
             zuul.lastLine = message;
             return;
         }
 
         else if (nextLocation == null) 
         {
-            message = "There is no exit in this direction!";
+            message = "There is no exit in this direction!\n";
             zuul.lastLine = message;
         }
 
         else if (nextLocation.getRoomStatus().contains("locked"))
         {
-            message += nextLocation.getShortDescription();
+            message += nextLocation.getShortDescription().substring(3);
+            message += nextLocation.getRoomStatus();
+        }
+
+        else if (nextLocation.getRoomStatus().contains("fire"))
+        {
+            message += nextLocation.getShortDescription().substring(3);
             message += nextLocation.getRoomStatus();
         }
 
         else
         {
             map.enterLocation(nextLocation);
-
-            // this will print twice with hud
-            //message = map.getCurrentLocation().getLongDescription();
         }
-
-        // this will print twice with hud
-        //System.out.println(message);
 
         zuul.lastLine = message;
     }

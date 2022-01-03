@@ -13,6 +13,9 @@ public class TakeCommand extends ZuulCommand
     Item whatItem;
     String message;
     boolean here = false;
+
+    //testing
+    Item newItem;
     
     /**
      * Use an item
@@ -26,7 +29,7 @@ public class TakeCommand extends ZuulCommand
     public void execute()
     {
         Map map = zuul.MAP;
-        String whatItem = "";
+        String itemDescription = "";
         String message;
 
         Location currentLocation = map.getCurrentLocation();
@@ -48,13 +51,15 @@ public class TakeCommand extends ZuulCommand
                 map.getCurrentLocation().items.get(i).description.contains(item))
                 {
                     here = true;
-                    whatItem = map.getCurrentLocation().items.get(i).description;
+
+                    newItem = map.getCurrentLocation().items.get(i);
+                    itemDescription = map.getCurrentLocation().items.get(i).description;               
                 }
             }
 
             if (here == true)
             {
-                if(whatItem == "ladder" || whatItem == "keypad" || whatItem == "map")
+                if(itemDescription == "ladder" || itemDescription == "keypad" || itemDescription == "map")
                 {
                     message = " this item cannot be taken\n";
                 }
@@ -62,11 +67,12 @@ public class TakeCommand extends ZuulCommand
                 else
                 {
                     // and add it to the player's inventory
-                    zuul.player.inventory.add(new Item(whatItem));
-                    message = " " + whatItem + " added to inventory\n";
+                    
+                    zuul.player.inventory.add(new Item(itemDescription, newItem.value));
+                    message = " " + itemDescription + " added to inventory\n";
 
                     // remove the item from the current room
-                    map.getCurrentLocation().removeItem(whatItem);
+                    map.getCurrentLocation().removeItem(itemDescription);
                 }
             }
 

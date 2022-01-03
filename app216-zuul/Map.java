@@ -79,7 +79,7 @@ public class Map
      */
     private void createWard()
     {
-        ward = new Location("the hospital ward", "open");
+        ward = new Location("in the hospital ward", "open");
     }
 
     /**
@@ -87,7 +87,7 @@ public class Map
      */
     private void createHallway()
     {
-        hallway = new Location("the hallway", "open");
+        hallway = new Location("in the hallway", "open");
 
         
         hallway.setExit("south", ward);
@@ -99,7 +99,7 @@ public class Map
      */
     private void createStoreRoom()
     {
-        storeRoom = new Location("the store room", "open");
+        storeRoom = new Location("in the store room", "open");
 
         // set room exit(s)
         storeRoom.setExit("east", ward);
@@ -114,7 +114,7 @@ public class Map
      */
     private void createTheatre()
     {
-        theatre = new Location("the operating theater", "open");
+        theatre = new Location("in the operating theater", "open");
         
         // set room exit(s)
         theatre.setExit("west", ward);
@@ -129,7 +129,7 @@ public class Map
      */
     private void createLab()
     {
-        lab = new Location("the laboratory", "open");
+        lab = new Location("in the laboratory", "open");
 
         // set room exit(s)
         lab.setExit("west", theatre);
@@ -144,7 +144,7 @@ public class Map
      */
     private void createWaitingRoom()
     {
-        waitingRoom = new Location("the waiting room", "open");
+        waitingRoom = new Location("in the waiting room", "open");
         
         // set room exit(s)
         waitingRoom.setExit("north", ward);
@@ -159,7 +159,7 @@ public class Map
      */
     private void createReception()
     {
-        reception = new Location("the reception office", " is locked with a padlock");
+        reception = new Location("in the reception office", " is locked with a padlock\n");
 
         // set room exit(s)
         waitingRoom.setExit("west", reception);
@@ -174,7 +174,7 @@ public class Map
      */
     private void createStreet()
     {
-        street = new Location("the Street", " is locked with a code");
+        street = new Location("the Street", " is locked with a code\n");
 
         // set room exit(s)
         waitingRoom.setExit("east", street);
@@ -216,7 +216,7 @@ public class Map
      */
     private void createRoof()
     {
-        roof = new Location("at the roof", "fire");
+        roof = new Location("at the roof", " is blocked by fire\n");
 
         // set room exit(s)
         roof.setExit("west", stairs);

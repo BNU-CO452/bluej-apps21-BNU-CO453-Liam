@@ -72,11 +72,16 @@ public class CommandReader
 
     private boolean executeCommand() throws InterruptedException
     {   
-        // if user input no data
-        if(commandWord == "" || commandWord == null)
-        {
-            System.out.println("Type 'help' if you need help.");
+        // if player is dead and types a command
+        if (game.player.isDead) {
+            System.out.print("");
         }
+
+        // if user input no data
+        else if(commandWord == "" || commandWord == null)
+            {
+                System.out.println("Type 'help' if you need help.");
+            }
 
         // if player typed "go"
         else if(commandWord.equals(CommandWords.GO.word))

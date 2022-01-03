@@ -45,7 +45,8 @@ public class RemoveCommand extends ZuulCommand
             }
 
             if (carrying == true)
-            {
+            {   
+                // switch used in case additional items are added later
                 switch(item)
                 {
                     case "gasmask":
@@ -60,17 +61,17 @@ public class RemoveCommand extends ZuulCommand
                         }                        
                         break;
 
-                    case "armour":
-                        if (zuul.player.armour == true) {
-                            zuul.player.removeArmour();
-                            message = "armour removed";
-                        }
+                    // case "armour":
+                    //     if (zuul.player.armour == true) {
+                    //         zuul.player.removeArmour();
+                    //         message = "armour removed";
+                    //     }
                         
-                        else
-                        {
-                            message = "armour is not equipped";
-                        }   
-                        break;
+                    //     else
+                    //     {
+                    //         message = "armour is not equipped";
+                    //     }   
+                    //     break;
 
                     default:
                         message = "";

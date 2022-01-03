@@ -28,7 +28,7 @@ public class InventoryCommand extends ZuulCommand
         {
             output += zuul.player.inventory.get(i).getDescription() + " ";                   
         }
-        message += " You are carrying:\n";
+        message += "\n You are carrying:\n";
         message += " " + output + "\n";
 
         //System.out.println(message);

@@ -93,7 +93,7 @@ public class Location
      */
     public String getLongDescription()
     {
-        return "You are in " + description + ".\n\n" + getExitString();
+        return "You are " + description + ".\n\n" + getExitString();
     }
 
     /**

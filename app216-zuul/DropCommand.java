@@ -35,7 +35,7 @@ public class DropCommand extends ZuulCommand
         if(item == null) 
         {
             // if there is no second word, we don't know what to drop...
-            message = "Drop what?";
+            message = "Drop what?\n";
         }
 
         else
@@ -58,17 +58,26 @@ public class DropCommand extends ZuulCommand
 
                 // set message
                 message = " ";
-                message += item + " dropped";
+                message += item + " dropped\n";
+                message += "\nItems in the area: \n ";
+                
+                for (int i = 0; i < zuul.MAP.getCurrentLocation().items.size(); i++) {
+                    message += zuul.MAP.getCurrentLocation().items.get(i).description + 
+                    " ";
+                }
+
+                message += "\n";
             }
 
             else
             {
-                message = " you do not have this item";
+                message = " you do not have this item\n";
             }
         }
 
         // Print out a suitable message.
-        System.out.println(message);
+        //System.out.println(message);
+        zuul.lastLine = message;
     }
 }
 
