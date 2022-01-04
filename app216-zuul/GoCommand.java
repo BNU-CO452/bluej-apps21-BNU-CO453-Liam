@@ -9,8 +9,8 @@
  */
 public class GoCommand extends ZuulCommand
 {
-    String direction;
-    String message = "";
+    String direction; // direction argument
+    String message = ""; // output message
     
     public GoCommand(Game zuul, String direction)
     {
@@ -20,7 +20,7 @@ public class GoCommand extends ZuulCommand
 
     public void execute()
     {
-        Map map = zuul.MAP;
+        Map map = zuul.MAP; // instance of map
         
         // Try to leave current room.
         Location currentLocation = map.getCurrentLocation();

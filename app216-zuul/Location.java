@@ -20,7 +20,7 @@ import java.util.HashMap;
 public class Location 
 {
     private String description;
-    private String status;
+    private String status; // eg. open, locked
     private HashMap<String, Location> exits;        // stores exits of this room.
     public ArrayList<Item> items;
 

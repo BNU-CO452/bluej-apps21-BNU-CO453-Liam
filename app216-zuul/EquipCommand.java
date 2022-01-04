@@ -9,8 +9,8 @@
  */
 public class EquipCommand extends ZuulCommand
 {
-    String item;
-    Item whatItem;
+    String item; // item argument
+    Item whatItem; // item to action
     
     /**
      * Use an item
@@ -23,8 +23,8 @@ public class EquipCommand extends ZuulCommand
 
     public void execute()
     {
-        String message;
-        boolean carrying = false;
+        String message; // output to be displayed
+        boolean carrying = false; // does the player have the item
 
         // set current location
         Location currentLocation = zuul.MAP.getCurrentLocation();

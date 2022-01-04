@@ -18,29 +18,29 @@ import java.io.*;
 
 public class Game 
 {
-    public final Map MAP;
-    private final String escapeLocation = "the Street";
+    public final Map MAP; // instance of map
+    private final String escapeLocation = "the Street"; // final location
 
-    private CommandReader reader;
-    private Instant start;
-    private Instant end;
-    private Duration timeElapsed;
-    public Player player;
-    private SlowString slow = new SlowString();
-    public Location locationNow;
-    private Location locationAfter;
+    private CommandReader reader; // console input
+    private Instant start; // start time
+    private Instant end; // end time
+    private Duration timeElapsed; // duration of game
+    public Player player; // instance of player
+    private SlowString slow = new SlowString(); // utility
+    public Location locationNow; // location before execute
+    private Location locationAfter; // location after execute
 
     private int minutes;
     private int seconds;
-    private int escapeBonus;
-    private int count = 0;
+    private int escapeBonus; // extra points
+    private int count = 0; // loop count
 
-    public String lastLine = "";
-    public String alert = "";
-    private String message = "";
+    public String lastLine = ""; // last line of message
+    public String alert = ""; // alert if needed
+    private String message = ""; // full message output
     
-    private boolean gameOver = false;
-    boolean win = false;
+    private boolean gameOver = false; // is game over
+    boolean win = false; // has player won
 
     /**
      * Create the game and initialise its internal map.

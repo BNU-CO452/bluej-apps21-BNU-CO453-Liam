@@ -10,8 +10,8 @@
  */
 public class CheckCommand extends ZuulCommand
 {
-    String item;
-    Item whatItem;
+    String item; // item argument
+    Item whatItem; // item to action
     
     /**
      * Constructor

@@ -20,11 +20,11 @@ import java.util.Scanner;
 
 public class CommandReader 
 {
-    private Game game;
+    private Game game; // current instance of game
     private Scanner reader; // source of command input
 
-    private String commandWord = null;
-    private String word2 = null;
+    private String commandWord = null; // first word
+    private String word2 = null; // second word
 
     /**
      * Create a parser to read from the terminal window.

@@ -7,8 +7,8 @@
  */
 public class InventoryCommand extends ZuulCommand
 {
-    public String output = "";
-    public String message = "";
+    public String output = ""; // items carrying
+    public String message = ""; // full message
 
     public InventoryCommand(Game zuul)
     {

@@ -9,12 +9,12 @@
  */
 public class DropCommand extends ZuulCommand
 {
-    Map map = zuul.MAP;
-    Item whatItem;
-    String item;
-    String message;
-    int index;
-    boolean carrying = false;
+    Map map = zuul.MAP; // this instance of game map
+    Item whatItem; // item to action
+    String item; // item argument
+    String message; // output to be displayed
+    int index; // index of item
+    boolean carrying = false; // does player have the item
     
     /**
      * Take an item from a location and add it
