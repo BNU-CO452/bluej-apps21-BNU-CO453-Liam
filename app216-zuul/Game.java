@@ -265,8 +265,6 @@ public class Game
 
         if (MAP.getCurrentLocation().getShortDescription().equals(escapeLocation))
         {
-            // do we need to print here?
-            //printWinMessage();
             win = true;
         }
 
