@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * This command allows the player to
  * use an item in the inventory
@@ -13,6 +15,7 @@ public class UseCommand extends ZuulCommand
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_RED = "\u001B[31m";
 
+    Scanner sc = new Scanner(System.in);
     
     Item whatItem;
 
@@ -112,7 +115,7 @@ public class UseCommand extends ZuulCommand
 
                     case "medkit":
                         // player heal method
-                        message = " health restored " + whatItem.value + "%\n";
+                        message = " health increased by " + whatItem.value + " points\n";
 
                         zuul.player.healPlayer(whatItem.value);
 
@@ -156,7 +159,11 @@ public class UseCommand extends ZuulCommand
              && item.equals("keypad"))
             {
                 slow.print("\n enter code :", 50);
-                if (System.console().readLine().equals("1445")) {
+                
+                // only for blue j
+                String code = sc.nextLine();
+                
+                if (code.equals("1445")) {
 
                     System.out.print(ANSI_GREEN);
                     slow.print("\n code accepted. door opened\n", 50);

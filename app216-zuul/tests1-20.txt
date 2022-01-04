@@ -1,0 +1,325 @@
+Game game1 = new Game();
+game1.play();
+
+  ________    _____    _________    ___________ __________________     _____ _____________________
+ /  _____/   /  _  \  /   _____/    \_   _____//   _____/\_   ___ \   /  _  \\______   \_   _____/
+/   \  ___  /  /_\  \ \_____  \      |    __)_ \_____  \ /    \  \/  /  /_\  \|     ___/|    __)_ 
+\    \_\  \/    |    \/        \     |        \/        \\     \____/    |    \    |    |        \
+ \______  /\____|__  /_______  /    /_______  /_______  / \______  /\____|__  /____|   /_______  /
+        \/         \/        \/             \/        \/         \/         \/                 \/ 
+                                                                               v1.0 By Liam Smith
+ Welcome to Gas Escape! Type 'help' if you need help.
+
+ You have just woken up. There is gas everywhere. You cannot breathe.
+
+You are in the hospital ward.
+
+ Exits: east south north west
+
+ Items in the area:
+  no items
+
+ > go east
+
+
+You are in the operating theater.
+
+ Exits: east west
+
+ Items in the area:
+ medkit 
+
+ > take medkit
+ medkit added to inventory
+
+ > go east
+
+
+You are in the laboratory.
+
+ Exits: west
+
+ Items in the area:
+ gasmask 
+
+ > take gasmask
+ gasmask added to inventory
+
+ > equip gasmask
+ gas mask equipped
+ Now you can breathe
+
+ > equip gasmask
+ gas mask already equipped
+
+ > remove gasmask
+gas mask removed
+
+ > remove gasmask
+gas mask is not equipped
+
+ > equip gasmask
+ gas mask equipped
+ Now you can breathe
+
+ > use medkit
+ health increased by 50points
+
+ > use money
+ you do not have this item
+
+ > use ladder
+ you do not have this item
+
+ > take torch
+ this item is not here
+
+ > status
+ Health: 130 | Score: 200
+
+ > go east
+There is no exit in this direction!
+
+ > go west
+
+
+You are in the operating theater.
+
+ Exits: east west
+
+ Items in the area:
+  no items
+
+ > go
+Go where?
+
+ > go west
+
+
+You are in the hospital ward.
+
+ Exits: east south north west
+
+ Items in the area:
+  no items
+
+ > go north
+
+
+You are in the hallway.
+
+ Exits: south north
+
+ Items in the area:
+  no items
+
+ > go north
+
+
+You are at the stairs.
+
+ Exits: east south west
+
+ Items in the area:
+ map 
+
+  > check map
+
+     [Janitor Cupboard]<---->[Stairs]<---->[Roof]<---->[Alley]
+                                 |
+                             [Hallway]
+                                 |
+       [Store Room]<---->[Hospital Ward]<---->[Operating Theatre]<---->[Laboratory]
+                                 |
+  [Reception Office]<---->[Waiting Room]<---->[Street]
+
+
+ > go east
+the roof is blocked by fire
+
+ > go west
+
+
+You are at the janitor cupboard.
+
+ Exits: east
+
+ Items in the area:
+ fire extinguisher 
+
+ > take fire extinguisher
+ fire extinguisher added to inventory
+
+ > go east
+
+
+You are at the stairs.
+
+ Exits: east south west
+
+ Items in the area:
+ map 
+
+ > use fire extinguisher
+ the roof is now safe to access
+
+ > go south
+
+
+You are in the hallway.
+
+ Exits: south north
+
+ Items in the area:
+  no items
+
+ > go south
+
+
+You are in the hospital ward.
+
+ Exits: east south north west
+
+ Items in the area:
+  no items
+
+ > go west
+
+
+You are in the store room.
+
+ Exits: east
+
+ Items in the area:
+ torch 
+
+ > take torch
+ torch added to inventory
+
+ > go east
+
+
+You are in the hospital ward.
+
+ Exits: east south north west
+
+ Items in the area:
+  no items
+
+ > go north
+
+
+You are in the hallway.
+
+ Exits: south north
+
+ Items in the area:
+  no items
+
+ > go north
+
+
+You are at the stairs.
+
+ Exits: east south west
+
+ Items in the area:
+ map 
+
+ > go east
+
+
+You are at the roof.
+
+ Exits: west
+
+ Items in the area:
+ ladder 
+
+ > take ladder
+ this item cannot be taken
+
+ > use ladder
+
+
+You are in the alley.
+
+ Exits:
+
+ Items in the area:
+  too dark to see anything
+
+ > use torch
+
+Items in the area: 
+ ladder key 
+
+ > take key
+ key added to inventory
+
+ > use ladder
+
+
+You are at the roof.
+
+ Exits: west
+
+ Items in the area:
+ ladder 
+
+ > go west
+
+
+You are at the stairs.
+
+ Exits: east south west
+
+ Items in the area:
+ map 
+
+ > go south
+
+
+You are in the hallway.
+
+ Exits: south north
+
+ Items in the area:
+  no items
+
+ > go south
+
+
+You are in the hospital ward.
+
+ Exits: east south north west
+
+ Items in the area:
+  no items
+
+ > go south
+
+
+You are in the waiting room.
+
+ Exits: east north west
+
+ Items in the area:
+ keypad 
+
+ > go west
+the reception office is locked with a padlock
+
+ > use key
+ the reception office is open
+
+ > go east
+ Street is locked with a code
+
+ > use keypad
+
+ enter code :1212
+[31m
+ incorrect
+[0m
+ > 

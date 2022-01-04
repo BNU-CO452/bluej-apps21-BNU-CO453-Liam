@@ -138,7 +138,6 @@ public class Game
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.console().flush();
 
             locationNow = MAP.getCurrentLocation();
 
@@ -298,7 +297,6 @@ public class Game
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.console().flush();
         
         System.out.println();
         slow.print( "  ________    _____    _________    ___________ __________________     _____ _____________________", 3);
@@ -328,7 +326,6 @@ public class Game
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.console().flush();
 
         slow.print(" You have just woken up.", 35);
         Thread.sleep(1000);
@@ -344,7 +341,6 @@ public class Game
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.console().flush();
     }
 
     // show useful info to the player
@@ -358,7 +354,6 @@ public class Game
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.console().flush();
 
             // if player is not at the winning location
             if (! MAP.getCurrentLocation().getShortDescription().equals("the Street"))
