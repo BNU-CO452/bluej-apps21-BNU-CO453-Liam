@@ -73,11 +73,13 @@ public class CheckCommand extends ZuulCommand
                         if (zuul.player.inventory.get(i).getDescription().equals(item))
                         {
                             message = " the note reads: 1445\n";
-                            break;
                         }
-                    }
-                    
-                    message = " You do not have this item.\n";               
+
+                        else
+                        {
+                            message = " You do not have this item.\n";
+                        }
+                    }       
                     break;
 
                 default:
