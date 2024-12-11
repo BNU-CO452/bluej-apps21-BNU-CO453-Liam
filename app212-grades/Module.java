@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * Modules form part of a course and contain
  * credits that students achieve when they
@@ -11,8 +13,8 @@ public class Module
     // Most modules are worth 15 credits
     public static final int CREDIT = 15;
     
-    private String code;
-    private String title;
+    public String code;
+    protected String title;
 
     /**
      * Constructor for objects of class Module 
@@ -23,7 +25,6 @@ public class Module
         this.code = code;
         this.title = title;
     }
-
    
     public String getCode()
     {

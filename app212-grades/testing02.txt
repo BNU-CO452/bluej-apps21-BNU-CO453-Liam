@@ -1,0 +1,58 @@
+Student student1 = new Student();
+Course course1 = new Course();
+student1.enrol(course1);
+Module module1 = new Module("CO450", "Computer Architectures");
+Module module2 = new Module("CO452", "Programming Concepts");
+Module module3 = new Module("CO454", "Digital Technologies");
+Module module4 = new Module("CO456", "Web Development");
+course1.addModule(module1);
+course1.addModule(module2);
+course1.addModule(module3);
+course1.addModule(module4);
+course1.print();
+
+ Course Code: MT1CYS1
+ Title: BSc Cyber Security
+
+ Module 1: CO450: Computer Architectures
+ Module 2: CO452: Programming Concepts
+ Module 3: CO454: Digital Technologies
+ Module 4: CO456: Web Development
+ModuleMark moduleMa1 = new ModuleMark(module1);
+ModuleMark moduleMa2 = new ModuleMark(module2);
+ModuleMark moduleMa3 = new ModuleMark(module3);
+ModuleMark moduleMa4 = new ModuleMark(module4);
+student1.addMark(moduleMa1);
+student1.addMark(moduleMa2);
+student1.addMark(moduleMa3);
+student1.addMark(moduleMa4);
+student1.awardTestMarks(moduleMa1, 60);
+student1.awardTestMarks(moduleMa2, 70);
+student1.awardTestMarks(moduleMa3, 80);
+student1.awardTestMarks(moduleMa4, 90);
+student1.printTranscript();
+ ------------------------------------
+ App21-02: Exam Board Transcript 2021
+        by student name
+ ------------------------------------
+ Student ID: 22011764, Liam
+
+ Course Code: MT1CYS1
+ Title: BSc Cyber Security
+
+ Module 1: CO450: Computer Architectures
+ Module 2: CO452: Programming Concepts
+ Module 3: CO454: Digital Technologies
+ Module 4: CO456: Web Development
+
+
+ ---- 	 -------------------- 	 ------	 ---- 	 -----
+ Code 	 Module 		 Credit  Mark 	 Grade
+ ---- 	 -------------------- 	 ------	 ---- 	 -----
+ CO450 	 Computer Architectures	 15 	 60 	 B
+ CO452 	 Programming Concepts	 15 	 70 	 A
+ CO454 	 Digital Technologies	 15 	 80 	 A
+ CO456 	 Web Development	 15 	 90 	 A
+
+
+ Final Course Grade = A

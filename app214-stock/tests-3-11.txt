@@ -1,0 +1,216 @@
+StockApp stockApp1 = new StockApp();
+ Purchased: 5 X Sony Playstation 5
+ Purchased: 6 X Apple iPhone 13
+ Purchased: 7 X Microsoft Xbox Series X
+ Purchased: 8 X Apple iMac
+ Purchased: 9 X Optoma UHD42
+ Purchased: 3 X Korg Prologue
+ Purchased: 4 X Korg Minilogue XD
+ Purchased: 1 X Samsung G95T
+ Purchased: 2 X Microsoft Xbox Series S
+ Purchased: 5 X Microsoft Flight Simulator
+Demo products added
+
+stockApp1.run();
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > add
+Enter ID of product > 110
+Enter name of product > Apple iGlass
+
+Product added:  ID 110: Apple iGlass stock level: 0
+
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > add
+Enter ID of product > 110
+Enter name of product > some product
+
+ Error: A product with ID: 110 already exists!
+ Error: Cannot add this product
+
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > remove
+Enter ID of product > 110
+
+ Product with ID 110 has been removed
+
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > remove
+Enter ID of product > 99
+
+ No product match found
+
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > buy
+Enter ID of product > 100
+Enter quantity of product > 4
+ Purchased: 4 X Sony Playstation 5
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > sell
+Enter ID of product > 100
+Enter quantity of product > 4
+
+ Sold: 4X Sony Playstation 5
+
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > search
+Enter name of product > kor
+
+ID: 105	Korg Prologue
+ID: 106	Korg Minilogue XD
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > low stock
+
+ Low stock items:
+
+ ID 105: Korg Prologue stock level: 3
+ ID 106: Korg Minilogue XD stock level: 4
+ ID 107: Samsung G95T stock level: 1
+ ID 108: Microsoft Xbox Series S stock level: 2
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > re-stock
+Enter minimum quantity > 1
+
+ Purchased: 1 X Sony Playstation 5
+
+********************************
+  App21-04: Stock Application 
+      by Liam Smith
+********************************
+
+    Add:        Add a new product
+    Remove:     Remove an old product
+    Buy:        Buy a product
+    Sell:       Sell a product
+    Search:     Search for a product
+    Low Stock:  Show low stock products
+    Re-stock:   Re stock all products to a specific quantity
+    Print:      Print all products
+    Quit:       Quit the program
+
+Please enter your choice > quit

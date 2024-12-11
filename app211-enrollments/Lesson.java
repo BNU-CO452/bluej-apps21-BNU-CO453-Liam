@@ -4,8 +4,8 @@
  *  scheduled in a room with a tutor on
  *  a particular day and time
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Liam Smith
+ * @version 1.0 06/10/2021
  */
 public class Lesson
 {

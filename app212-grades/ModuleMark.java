@@ -4,11 +4,15 @@
  *
  * @author Derek Peacock and Nicholas Day
  * @version 2021-08-18
+ * 
+ * Modified by Liam Smith
+ * version 1.1 17/10/2021
  */
 public class ModuleMark
 {
-    private int mark;
-    private Module module;
+    protected int mark;
+    protected Module module;
+    protected String id;
     
     /**
      * Constructor for objects of class ModuleMark
@@ -17,6 +21,7 @@ public class ModuleMark
     {
         mark = 0;
         this.module = module;
+        
     }
     
     public int getValue()

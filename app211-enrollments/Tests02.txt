@@ -1,0 +1,25 @@
+Course course1 = new Course("MT1CYS1", "Cyber Security");
+Course computing = new Course("MT1CYS1", "Cyber Security");
+Module module1 = new Module("CO452", "Programming Concepts");
+module1.printModuleInfo();
+
+ Module Code: CO452
+ Title: Programming Concepts
+ Credit Value: 0
+
+module1.setCreditValue(15);
+module1.printModuleInfo();
+
+ Module Code: CO452
+ Title: Programming Concepts
+ Credit Value: 15
+
+computing.printModuleInfo();
+    Exception occurred.
+computing.addModule(module1);
+computing.printModuleInfo();
+
+ Module Code: CO452
+ Title: Programming Concepts
+ Credit Value: 15
+

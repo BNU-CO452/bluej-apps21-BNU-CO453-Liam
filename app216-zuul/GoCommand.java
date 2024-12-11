@@ -9,7 +9,8 @@
  */
 public class GoCommand extends ZuulCommand
 {
-    String direction;
+    String direction; // direction argument
+    String message = ""; // output message
     
     public GoCommand(Game zuul, String direction)
     {
@@ -19,27 +20,50 @@ public class GoCommand extends ZuulCommand
 
     public void execute()
     {
-        if(direction == null) 
-        {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        Map map = zuul.MAP;
+        Map map = zuul.MAP; // instance of map
         
         // Try to leave current room.
         Location currentLocation = map.getCurrentLocation();
+
+        // set current location in game class
+        zuul.locationNow = currentLocation;
+
+        // set next location
         Location nextLocation = currentLocation.getExit(direction);
 
-        if (nextLocation == null) 
+        if(direction == null) 
         {
-            System.out.println("There is no exit in this direction!");
+            // if there is no second word, we don't know where to go...
+            message = "Go where?\n";
+            zuul.lastLine = message;
+            return;
         }
-        else 
+
+        // if next location is null
+        else if (nextLocation == null) 
+        {
+            message = "There is no exit in this direction!\n";
+            zuul.lastLine = message;
+        }
+
+        else if (nextLocation.getRoomStatus().contains("locked"))
+        {
+            message += nextLocation.getShortDescription().substring(3);
+            message += nextLocation.getRoomStatus();
+        }
+
+        else if (nextLocation.getRoomStatus().contains("fire"))
+        {
+            message += nextLocation.getShortDescription().substring(3);
+            message += nextLocation.getRoomStatus();
+        }
+
+        else
         {
             map.enterLocation(nextLocation);
-            System.out.println(map.getCurrentLocation().getLongDescription());
         }
+
+        // set last line in game class
+        zuul.lastLine = message;
     }
 }

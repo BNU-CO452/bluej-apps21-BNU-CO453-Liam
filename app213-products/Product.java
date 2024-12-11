@@ -3,15 +3,18 @@
  * 
  * @author David J. Barnes and Michael Kölling.
  * @version 2016.02.29
+ * 
+ * Modified by Liam Smith
+ * version 26.10.21
  */
 public class Product
 {
     // An identifying number for this product.
-    private int id;
+    public int id;
     // The name of this product.
-    private String name;
+    public String name;
     // The quantity of this product in stock.
-    private int quantity;
+    public int quantity;
 
     /**
      * Constructor for objects of class Product.
@@ -26,7 +29,7 @@ public class Product
         
         quantity = 0;
     }
-
+    
     /**
      * @return The product's id.
      */
@@ -51,16 +54,28 @@ public class Product
         return quantity;
     }
 
+    /**
+     * Set the quantity of a product.
+     * @param quantity The desired quantity.
+     */
     public void setQuantity(int quantity)
     {
         this.quantity = quantity;
     }
     
+    /**
+     * Increase the quantity of a product.
+     * @param amount The desired amount.
+     */
     public void increaseQuantity(int amount)
     {
         quantity = quantity + amount;
     }
     
+    /**
+     * Decrease the quantity of a product.
+     * @param amount The desired amount.
+     */
     public void decreaseQuantity(int amount)
     {
         if(quantity >= amount)
@@ -75,7 +90,9 @@ public class Product
         return " ID " + id + ": " +  name + " stock level: " + quantity;
     }
 
-    
+    /**
+     * print the product details.
+     */
     public void print()
     {
         System.out.println(toString());

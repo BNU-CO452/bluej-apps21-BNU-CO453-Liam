@@ -4,19 +4,29 @@ import java.util.*;
  * It holds the student details relevant in our context.
  * 
  * @author Michael Kölling and David Barnes
- * Modified by Derek Peacock & Nicholas Day
- * @version 2021-08-18
+ * Modified by Liam Smith
+ * @version 1.1 16/10/2021
  */
 public class Student
 {
     // the student ID
-    private int id;
+    public int id;
     // the student's full name
-    private String name;
+    public String name;
     // The course the student is enrolled on
-    private Course course;
+    public Course course;
     // The marks awarded for the modules on the course
-    private ArrayList<ModuleMark> marks;
+    protected ArrayList<ModuleMark> marks;
+    // the code of a module
+    public String moduleCode;
+    // the title of a module
+    public String moduleTitle;
+    // value used to set a mark for a module
+    public int value;
+    // used for searching modules of this type
+    public Module module;
+    // used for ammending module marks of this type
+    public ModuleMark moduleMark;
     
     /**
      * This constructor creates a new student with a
@@ -24,7 +34,7 @@ public class Student
      */
     public Student()
     {
-        this("Derek", 12345678);
+        this("Liam", 22011764);
     }
     
     /**
@@ -35,12 +45,13 @@ public class Student
         this.name = name;
         this.id = id;
         
+        // creates a marks array
         marks = new ArrayList<ModuleMark>();
     }
 
     public void addMark(ModuleMark mark)
     {
-        marks.add(mark);
+        this.marks.add(mark);
     }
     
     /**
@@ -49,7 +60,33 @@ public class Student
      */
     public void awardMark(String moduleCode, int value)
     {
+        //Find the module in course.models array
+        // get the code of the module
+        // get the title of the module
+        for(int i=0; i < course.modules.size(); i++){
+            if(moduleCode.equals(course.modules.get(i).code)){
+                
+                this.module = course.modules.get(i);
+                
+                this.moduleTitle = course.modules.get(i).title;
+                
+                // find the title of the module associated with the module mark
+                // remove the original mark
+                // set the value of the module mark
+                for(int k=0; k < marks.size(); k++){
+                    if(marks.get(k).module.title.equals(this.module.title)){
 
+                        this.moduleMark = marks.get(k);
+                        
+                        marks.remove(marks.get(k));
+                        
+                        moduleMark.setMark(value);
+                        
+                        addMark(this.moduleMark);
+                    }
+                }
+            }
+        }
     }
     
     /**
@@ -58,18 +95,34 @@ public class Student
     public void enrol(Course course)
     {
         this.course = course;
-        awardTestMarks();
+        //awardTestMarks();
     }
     
     /**
      * Award a different pass mark for each of the
      * modules on the enrolled course
      */
-    public void awardTestMarks()
+    public void awardTestMarks(ModuleMark module, int value)
     {
+        this.moduleMark = null;
         
+        if(marks.size() == 0){
+                System.out.println();
+                System.out.println(" No marks have been added for this course");
+        }
+            
+        for(int i = 0; i < marks.size(); i++){
+                
+            if(marks.get(i).equals(module)){  
+                    
+            this.moduleMark = marks.get(i);
+
+            moduleMark.setMark(value);
+                
+            }
+        }   
     }
-    
+      
     /**
      * Return the full name of this student.
      */
@@ -98,15 +151,44 @@ public class Student
     
     public void printCourse()
     {
-        this.print();
-        course.print();
+        if(course == null){
+            System.out.println(" The Student is not enrolled on a course");
+        }
+        
+        else {
+            this.print();
+            course.print();
+        }
     }
     
-    private void printModules()
+    /**
+     * Prints a list of modules for the course that the student has been enrolled on
+     */
+    public void printModules()
     {
-
+        // checks that the student has been enrolled on a course
+        if(course == null){
+            System.out.println(" The Student is not enrolled on a course");
+        }
+        
+        // checks if a student has been enrolled on a course but no modules have been added
+        if(course != null && course.modules.size() == 0){
+            System.out.println(" There are no modules added for this course");
+        }
+        
+        else {
+            int j=1;
+            for(int i=0; i < course.modules.size(); i++){
+            System.out.println(" Module " + j + ": " + course.modules.get(i).code
+            + ": " + course.modules.get(i).title);
+            j++;
+            }
+        }
     }
     
+    /**
+     * Prints a transcript of the students information: course, modules, marks etc
+     */
     public void printTranscript()
     {
         System.out.println(" ------------------------------------");
@@ -119,22 +201,37 @@ public class Student
         System.out.println();
         System.out.println();
         System.out.println(" ---- \t -------------------- \t ------\t ---- \t -----");
-        System.out.println(" Code \t Module \t\tCredit\t Mark \t Grade");
+        System.out.println(" Code \t Module \t\t Credit  Mark \t Grade");
         System.out.println(" ---- \t -------------------- \t ------\t ---- \t -----");
         
-       
-        Grades finalGrade = course.calculateGrade(marks);
-        
-        System.out.println();
-        System.out.println();
-        
-        if(finalGrade == Grades.NS)
-        {
-            System.out.println(" No Final Course Grade Yet!");
+        // checks if the student is enrolled on a course or if the course has modules added
+        if(course == null || course.modules.size() == 0){
+            System.out.println(" There are no modules to display");
         }
-        else
-        {
-            System.out.println(" Final Course Grade = " + finalGrade);
+        
+        // checks if the marks array is not empty
+        if(marks.size() == 0){
+            System.out.println(" There are no marks to display");
         }
+         
+        else {
+            for(int i=0; i < course.modules.size(); i++){
+                System.out.println(" " + course.modules.get(i).code + " \t " + course.modules.get(i).title + 
+                "\t " + marks.get(i).getCredit() + " \t " + marks.get(i).mark + " \t " +
+                course.convertToGrade(marks.get(i).mark));  
+            }
+            
+            Grades finalGrade = course.calculateGrade(marks);
+        
+            System.out.println();
+            System.out.println();
+        
+            if(finalGrade == Grades.NS){
+                System.out.println(" No Final Course Grade Yet!");
+            }
+            else{
+                System.out.println(" Final Course Grade = " + finalGrade);
+            }
+        }      
     }
 }

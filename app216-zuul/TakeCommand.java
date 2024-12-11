@@ -1,20 +1,21 @@
-
 /**
  * This command allows the player to
- * take or pickup an item from a room
- * and carry it around to use somewhere
- * else
+ * use an item in the inventory
  *
  * @author Derek Peacock & Nicholas Day
  * @version 2021-08-23
+ * 
+ * Modified and extended by Liam Smith 3/1/22
  */
 public class TakeCommand extends ZuulCommand
 {
     String item;
+    Item whatItem;
+    String message;
+    boolean here = false;
     
     /**
-     * Take an item from a location and add it
-     * to the player's inventory.
+     * Use an item
      */
     public TakeCommand(Game zuul, String item)
     {
@@ -24,16 +25,62 @@ public class TakeCommand extends ZuulCommand
 
     public void execute()
     {
+        Map map = zuul.MAP;
+        String itemDescription = "";
+        String message;
+
+        // set current location
+        Location currentLocation = map.getCurrentLocation();
+
+        // set current location in game class
+        zuul.locationNow = currentLocation;
+
         if(item == null) 
         {
-            // if there is no second word, we don't know what to take...
-            System.out.println("Take what?");
-            return;
+            // if there is no second word, we don't know what to use...
+            message = "Take what?";
         }
 
-        Map map = zuul.MAP;
-        // remove the item from the current room
-        // and add it to the player's inventory
-        // Print out a suitable message.
+        else
+        {
+
+            for (int i = 0; i < map.getCurrentLocation().items.size(); i++)
+            {
+                if (map.getCurrentLocation().items.get(i).description.equals(item) ||
+                map.getCurrentLocation().items.get(i).description.contains(item))
+                {
+                    here = true;
+
+                    whatItem = map.getCurrentLocation().items.get(i);
+                    itemDescription = whatItem.description;               
+                }
+            }
+
+            if (here == true)
+            {
+                if(itemDescription == "ladder" || itemDescription == "keypad" || itemDescription == "map")
+                {
+                    message = " this item cannot be taken\n";
+                }
+
+                else
+                {
+                    // and add it to the player's inventory
+
+                    zuul.player.inventory.add(new Item(itemDescription, whatItem.value));
+                    message = " " + itemDescription + " added to inventory\n";
+
+                    // remove the item from the current room
+                    map.getCurrentLocation().removeItem(itemDescription);
+                }
+            }
+
+            else
+            {
+                message = " this item is not here\n";
+            }
+        }
+        // set last line of game class
+        zuul.lastLine = message;
     }
 }

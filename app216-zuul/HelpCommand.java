@@ -1,9 +1,10 @@
-import java.util.ArrayList;
 /**
- * Write a description of class HelpCommand here.
+ * This class displays a message, a list of 
+ * available command words to the player,
+ * and the players current location
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @author Liam Smith
+ * @version 28/12/21
  */
 public class HelpCommand extends ZuulCommand
 {
@@ -19,8 +20,13 @@ public class HelpCommand extends ZuulCommand
      */
     public void execute()
     {
-        System.out.println(" You are lost. You are alone. You wander");
-        System.out.println(" around at the university.");        
+        Location currentLocation = zuul.MAP.getCurrentLocation();
+
+        // set current location
+        zuul.locationNow = currentLocation;
+
+        System.out.println(" You are lost. You are alone. There is poisonous gas in the air " +
+        "You are dying.");      
         System.out.println();
         System.out.println(" Your command words are:");
         System.out.println();
@@ -31,7 +37,7 @@ public class HelpCommand extends ZuulCommand
                                "\t  : " + command.description);                        
         }   
         System.out.println();
-        System.out.println(" e.g. go west, take gold");
+        System.out.println(" e.g. go west, take key");
         System.out.println();
         System.out.println(zuul.MAP.getCurrentLocation().getLongDescription());
     }
